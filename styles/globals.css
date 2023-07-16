@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer components{
+
+  .forMobile{
+    @apply
+    lg:hidden
+    inline-flex
+  }
+ 
+  .forDesktop{
+    @apply
+    lg:inline-flex
+    hidden
+  }
+
+  .headerTitle{
+    @apply
+    font-fira-sans
+    font-normal
+    lg:text-xl
+    text-lg
+    text-amber-500
+    -inset-full
+    -skew-x-6
+    hover:border-b-2
+    hover:border-amber-500
+    transform
+    transition-all
+    duration-200
+    ease-in-out
+    cursor-pointer
+  }
+
+  .headerTitleForDev{
+    @apply
+    font-fira-sans
+    font-normal
+    lg:text-xl
+    text-lg
+    text-amber-500
+    -inset-full
+    -skew-x-6
+    hover:border-x-2
+    hover:border-b-2
+    px-3
+    py-2
+    rounded-lg
+    hover:border-amber-500
+    transform
+    transition-all
+    duration-200
+    ease-in-out
+    cursor-pointer
+  }
+
+  
+
+@keyframes fade {
+  0% { background-color: rgb(72, 40, 40); }
+  25% { background-color: rgb(57, 9, 57); }
+  50% {background-color: rgb(64, 71, 71);}
+  75% {background-color: rgb(44, 39, 80);}
+  100% { background-color: rgb(79, 14, 54); }
+}
+
+}
+
+.animationTest{
+  animation: fade 15s infinite;
+}
