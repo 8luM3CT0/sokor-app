@@ -1,9 +1,13 @@
-import React from 'react'
-import { AiFillMessage, AiOutlineCode } from 'react-icons/ai'
+import React, { useState } from 'react'
+import { AiFillMessage, AiOutlineCode, AiOutlineMenu } from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
+import {Sidebar} from './'
 
 function Header() {
+    const [openSidebar, setOpenSidebar] = useState(false)
+    
   return (
+    <>
     <header className='
     top-0
     sticky
@@ -25,15 +29,11 @@ function Header() {
             color: 'orange'
         }}
         />
-        <div className="
-        flex
-        items-center
-        space-x-7
-        ">
+        <div className="headerDiv">
             <h2 className="headerTitle">
                 About
             </h2>
-            <span className="headerTitle flex items-center space-x-2">
+            <span className="headerTitleForChat flex items-center space-x-2">
                 <AiFillMessage 
                 style={{
                     fontSize: '1.5em',
@@ -52,7 +52,33 @@ function Header() {
                 <h1>Developer</h1>
             </span>
         </div>
+        <div 
+        onClick={() => setOpenSidebar(true)}
+        className="
+        forMobile
+        cursor-pointer
+        hover:shadow-lg
+        hover:shadow-slate-900
+        transform
+        transition-all
+        duration-300
+        ease-in-out
+        rounded-lg
+        px-3
+        py-2
+        ">
+            <AiOutlineMenu 
+            style={{
+                fontSize: '1.5em',
+                color: 'orange'
+            }}
+            />
+        </div>
     </header>
+    {openSidebar == true && (
+        <Sidebar />
+    )}
+    </>
   )
 }
 

@@ -18,3 +18,4 @@ export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome} from 'react-icons/ai'
 //local components
 export {default as Header} from './Header'
+export {default as Sidebar} from './Sidebar'

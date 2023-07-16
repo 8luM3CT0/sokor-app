@@ -42,11 +42,16 @@ module.exports = {
           "100%": {left: "125%"},
         },
       },
+      gridTemplateColumns: {
+        sidebar: "300px auto"
+      },
+      gridTemplateRows: {
+        header: "64px auto"
+      }
     },
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
-    require('@tailwindcss/line-clamp'),
     require('tailwind-scrollbar'),
     require('@tailwindcss/typography')
   ]

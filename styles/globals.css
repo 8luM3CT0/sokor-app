@@ -17,6 +17,14 @@
     hidden
   }
 
+  .headerDiv{
+    @apply
+    lg:flex
+    items-center
+    space-x-7
+    hidden
+  }
+
   .headerTitle{
     @apply
     font-fira-sans
@@ -27,6 +35,28 @@
     -inset-full
     -skew-x-6
     hover:border-b-2
+    hover:border-amber-500
+    transform
+    transition-all
+    duration-200
+    ease-in-out
+    cursor-pointer
+  }
+  
+
+  .headerTitleForChat{
+    @apply
+    font-fira-sans
+    font-normal
+    lg:text-xl
+    text-lg
+    text-amber-500
+    -inset-full
+    -skew-x-6
+    hover:border-x-2
+    px-3
+    py-2
+    rounded-lg
     hover:border-amber-500
     transform
     transition-all
