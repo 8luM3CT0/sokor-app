@@ -17,5 +17,6 @@ export {FaConnectdevelop} from 'react-icons/fa'
 export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome} from 'react-icons/ai'
 //local components
-export {default as Header} from './Header'
-export {default as Sidebar} from './Sidebar'
+export {default as Header} from './header/Header'
+export {default as Sidebar} from './header/Sidebar'
+export {default as Post} from './body/post/Post'

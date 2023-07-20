@@ -87,6 +87,20 @@
     cursor-pointer
   }
 
+  .postDiv{
+    @apply
+    lg:h-[40%]
+    md:h-[50%]
+    h-[60%]
+    w-[90%]
+    mx-auto
+    rounded-lg
+    bg-slate-500
+    flex
+    flex-col
+    space-y-2
+  }
+
   
 
 @keyframes fade {
