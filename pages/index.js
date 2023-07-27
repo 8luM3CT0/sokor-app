@@ -7,59 +7,52 @@ import {
   Post
 } from '../components/'
 //back-end
-import { supabase } from '../backend/supabase'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-
+import { creds, store } from '../backend/firebase'
+import {useAuthState} from 'react-firebase-hooks/auth'
+import {useCollection} from 'react-firebase-hooks/firestore'
+import firebase from 'firebase'
 
 export default function Home () {
 
   const [postText, setPostText] = useState('')
   const [postTitle, setPostTitle] = useState('')
+  const [user] = useAuthState(creds)
 
-  const [posts, setPosts] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const router = useRouter()
-
-  const addToPost = async(data) => {
-    const {data: insertedData, error} = await supabase
-    .from('neutral_posts')
-    .insert(data)
-
-    if(error){
-      console.error('Error in adding data to table >>>', error?.message)
-      return null
-    }
-    return insertedData
-  }
-
-  const handleSubmit = async(e) => {
+  const addPostToDb = e => {
     e.preventDefault()
 
-    const postData = {title: postTitle, post: postText}
+    if(!postTitle) return
 
-    const insertedData = await addToPost(postData)
-
-    if(insertedData){
-      console.log('Post added successfully >>', insertedData)
-
+    if(!user){
+      store.collection('neutral_posts').add({
+        title: postText,
+        text: postText,
+        addedOn: firebase.firestore.FieldValue.serverTimestamp()
+      })
+    } else if(user){
+      store.collection('user_posts').add({
+        title: postTitle,
+        text: postText,
+        addedBy: user?.displayName,
+        addedPic: user?.photoURL,
+        addedOn: firebase.firestore.FieldValue.serverTimestamp()
+      })
     }
 
     setPostTitle('')
-    setPostText('')
+    if(postText) setPostText('')
+
   }
 
-  const revalidate = 0;
-  
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const {data} = await supabase.from('neutral_posts').select();
-      setPosts(data)
-      setIsLoading(false)
-    }
-    fetchPosts()
-  }, [])
+  const [neutralPosts] = useCollection(
+    store.collection('neutral_posts').orderBy('addedOn', 'asc')
+  )
+
+  const [userPosts] = useCollection(
+    store.collection('user_posts').orderBy('addedOn', 'asc')
+  )
 
 
   return (
@@ -89,7 +82,7 @@ export default function Home () {
       space-y-4
       py-4
       ">
-        <form onSubmit={handleSubmit} className="
+        <div className="
         w-[90%]
         h-[30%]
         bg-slate-800
@@ -146,7 +139,7 @@ export default function Home () {
           outline-none
           "></textarea>
           <button
-          type='submit'
+          onClick={addPostToDb}
           className='
           w-[60%]
           mx-auto
@@ -174,7 +167,7 @@ export default function Home () {
           >
             Post
           </button>
-        </form>
+        </div>
         <div className="
         h-[60%]
         overflow-y-scroll
@@ -185,22 +178,12 @@ export default function Home () {
         w-full
         space-y-12
         ">
-          {isLoading ? (
-            <p className="
-            text-xl
-            place-self-center
-            text-slate-300
-            font-montserr
-            font-semibold
-            -skew-x-8
-            ">
-              Loading...
-            </p>
-          ): (posts?.map(post => (
-            <Post
-            post={post}
-            />
-          )))}
+          {neutralPosts !== null && neutralPosts?.docs.map(post => (
+            <Post post={post} />
+          ))}
+          {(user && userPosts !== null) && userPosts?.docs.map(post => (
+            <Post post={post} />
+          ))}
         </div>
       </main>
           </div>

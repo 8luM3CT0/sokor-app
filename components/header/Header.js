@@ -2,9 +2,32 @@ import React, { useState } from 'react'
 import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 import Sidebar from './Sidebar'
+//back-end
+import { creds, store, provider } from '../../backend/firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useEffect } from 'react'
 
 function Header() {
+    const [user] = useAuthState(creds)
     const [openSidebar, setOpenSidebar] = useState(false)
+    
+    const signIn = () => {
+        creds.signInWithPopup(provider).catch(alert)
+    }
+    
+    const signOut = () => {
+        creds.signOut()
+    }
+
+    useEffect(() => {
+        if(user){
+            store.collection('blog_users').add({
+                displayName: user?.displayName,
+                email: user?.email,
+                photoURL: user?.photoURL
+            })
+        }
+      }, [user])
 
   return (
     <>
@@ -30,9 +53,19 @@ function Header() {
         }}
         />
         <div className="headerDiv">
-            <h2 className="headerTitle">
-                About
+            {user ? (
+                <h2 
+                onClick={signOut}
+                className="headerTitle">
+                {user?.displayName}
             </h2>
+            ): (
+                <h2 
+                onClick={signIn}
+                className="headerTitle">
+                Sign in
+            </h2>
+            )}
             <span className="headerTitleForChat flex items-center space-x-2">
                 <AiFillMessage 
                 style={{

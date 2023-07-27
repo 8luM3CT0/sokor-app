@@ -5,9 +5,6 @@ import {GoogleFonts} from 'next-google-fonts'
 //back-end
 import Router from 'next/router'
 import ProgressBar from '@badrap/bar-of-progress'
-import {supabase} from '../backend/supabase'
-import { useState } from 'react'
-import { useEffect } from 'react'
 
 const progress = new ProgressBar({
   size: 3,
@@ -21,14 +18,6 @@ Router.events.on('routeChangeComplete', progress.finish)
 Router.events.on('routeChangeError', progress.finish)
 
 export default function App ({ Component, pageProps }) {
-  const [currentSession, setCurrentSession] = useState(null)
-
-  useEffect(() => {
-    setCurrentSession(supabase.auth.getSession());
-    supabase.auth.onAuthStateChange((_event, currentSession) => {
-      setCurrentSession(currentSession)
-    })
-  }, [])
   
   return (
     <>
