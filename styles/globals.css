@@ -122,7 +122,7 @@
     @apply
     md:inline-flex
         hidden
-        h-[60%]
+        h-[80%]
         w-full
         rounded-lg
         bg-slate-600
@@ -139,11 +139,32 @@
     @apply
     w-[90%]
     h-[10%]
-    mx-auto
     flex
     items-center
-    place-items-end
     px-3
+    justify-between
+  }
+
+  .neutralPostButton{
+    @apply
+    lg:w-[40%]
+    md:w-[60%]
+    w-[90%]
+    font-path-ex
+    font-normal
+    text-lg
+    text-slate-50
+    bg-amber-500
+    border-0
+    outline-none
+    hover:bg-slate-700
+    hover:text-amber-600
+    hover:-skew-x-12
+    transform
+    rounded-lg
+    transition
+    duration-200
+    ease-in-out
   }
 
   

@@ -3,10 +3,24 @@ import React, { useEffect, useState } from 'react'
 import {GrSettingsOption} from 'react-icons/gr'
 import {RxUpdate} from 'react-icons/rx'
 import {Modal, ModalHeader, ModalBody, ModalFooter} from '../../'
+import { BsFillTrashFill } from 'react-icons/bs'
 //back-end
+import { creds,store} from '../../../backend/firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 
 function Post({post}) {
+    const [user] = useAuthState(creds)
+
+    const deletePost = e => {
+        e.preventDefault()
+
+        if(!user) return
+
+        if(user?.displayName == 'Reaper Iff' || user?.email == 'rumlowb@gmail.com'){
+            store.collection('neutral_posts').doc(post?.id).delete()
+        }
+    }
 
   return (
     <>
@@ -32,31 +46,26 @@ function Post({post}) {
         </h1>
     </div>
     {/**text of post here for desktop; otherwise hidden */}
-    <div className="postText">
+    {post?.data()?.text && (
+        <div className="postText">
         {post?.data()?.text}
     </div>
+    )}
     {/**button here for read more */}
     <div className="
     neutralPostFooter
     ">
-        <button className="
-        w-[90%]
-        mx-auto
-        font-path-ex
-        font-normal
-        text-lg
-        text-slate-50
-        bg-amber-500
-        border-0
-        outline-none
-        hover:bg-slate-700
-        hover:text-amber-600
-        hover:-skew-x-12
-        transform
-        rounded-lg
-        transition
-        duration-200
-        ease-in-out
+        <button 
+        onClick={deletePost}
+        className="forDesktop">
+            <BsFillTrashFill
+            style={{
+                fontSize: '1.4em',
+                color: 'orange'
+            }}
+            />
+        </button>
+        <button className="neutralPostButton
         ">
             Read more
         </button>
