@@ -4,15 +4,18 @@ import {GrSettingsOption} from 'react-icons/gr'
 import {RxUpdate} from 'react-icons/rx'
 import {Modal, ModalHeader, ModalBody, ModalFooter} from '../../'
 import { BsFillTrashFill } from 'react-icons/bs'
+import {MdAutoFixNormal} from 'react-icons/md'
+import {GiCancel} from 'react-icons/gi'
 //back-end
 import { creds,store} from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { GiCancel } from 'react-icons/gi'
 
 
-function Post({post}) {
+function UserPost({post}) {
     const [user] = useAuthState(creds)
+    const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
+
 
     const deletePost = e => {
         e.preventDefault()
@@ -20,7 +23,7 @@ function Post({post}) {
         if(!user) return
 
         if(user?.displayName == 'Reaper Iff' || user?.email == 'rumlowb@gmail.com'){
-            store.collection('neutral_posts').doc(post?.id).delete()
+            store.collection('user_posts').doc(post?.id).delete()
         }
 
         setDeleteModal(false)
@@ -45,9 +48,23 @@ function Post({post}) {
         duration-150
         delay-100
         ease-in-out
-        
         ">
             {post?.data()?.title}
+        </h1>
+        <h1 className="
+        text-lg
+        font-fira-sans
+        font-normal
+        text-slate-100
+        group-hover:font-semibold
+        group-hover:text-amber-400
+        transform
+        transition
+        duration-150
+        delay-100
+        ease-in-out
+        ">
+            {post?.data()?.addedBy}
         </h1>
     </div>
     {/**text of post here for desktop; otherwise hidden */}
@@ -60,7 +77,23 @@ function Post({post}) {
     <div className="
     neutralPostFooter
     ">
-        <button 
+        <span className="
+        flex items-center justify-between
+        w-[15%]
+        ">
+                    <button 
+        className="forDesktop
+        outline-none
+        border-0
+        ">
+            <MdAutoFixNormal
+            style={{
+                fontSize: '1.4em',
+                color: 'orange'
+            }}
+            />
+        </button>
+                    <button 
         onClick={() => setDeleteModal(true)}
         className="forDesktop
         outline-none
@@ -73,6 +106,8 @@ function Post({post}) {
             }}
             />
         </button>
+        
+        </span>
         <button className="neutralPostButton
         ">
             Read more
@@ -126,7 +161,7 @@ function Post({post}) {
                 h-full
                 ">
                     This act is irreversible. If you proceed,
-                    the assumption is you have informed whoever posted this.
+                    the assumption is you have informed {post?.data()?.addedBy}.
            
                 </h2>
                 <h1 className="
@@ -187,4 +222,4 @@ function Post({post}) {
   )
 }
 
-export default Post
+export default UserPost

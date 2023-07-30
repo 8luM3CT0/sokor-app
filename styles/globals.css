@@ -113,8 +113,12 @@
     @apply
     w-[90%]
     h-[10%]
-    flex
-    items-center
+    md:flex
+    md:items-center
+    grid
+    md:space-y-0
+    space-y-2
+    justify-between
     px-3
   }
 

@@ -4,7 +4,8 @@ import {
   Button,
   Icon,
   Header,
-  Post
+  Post,
+  UserPost
 } from '../components/'
 //back-end
 import { useEffect, useState } from 'react'
@@ -27,10 +28,12 @@ export default function Home () {
 
     if(!user){
       store.collection('neutral_posts').add({
-        title: postText,
+        title: postTitle,
         text: postText,
         addedOn: firebase.firestore.FieldValue.serverTimestamp()
       })
+      setPostTitle('')
+    if(postText) setPostText('')
     } else if(user){
       store.collection('user_posts').add({
         title: postTitle,
@@ -39,10 +42,9 @@ export default function Home () {
         addedPic: user?.photoURL,
         addedOn: firebase.firestore.FieldValue.serverTimestamp()
       })
-    }
-
-    setPostTitle('')
+      setPostTitle('')
     if(postText) setPostText('')
+    }
 
   }
 
@@ -182,7 +184,7 @@ export default function Home () {
             <Post post={post} />
           ))}
           {(user && userPosts !== null) && userPosts?.docs.map(post => (
-            <Post post={post} />
+            <UserPost post={post} />
           ))}
         </div>
       </main>
