@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Dropdown, DropdownItem, DropdownLink} from '../'
 import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 import Sidebar from './Sidebar'
@@ -85,7 +86,8 @@ function Header() {
                 <h1>Developer</h1>
             </span>
         </div>
-        {openSidebar == false ? (
+        {/**
+         * {openSidebar == false ? (
                     <div 
                     onClick={() => setOpenSidebar(true)}
                     className="
@@ -132,10 +134,91 @@ function Header() {
                 />
             </div>
         )}
-    </header>
-    {openSidebar == true && (
-        <Sidebar />
+         * 
+         */}
+                    <div 
+                    className="
+                    forMobile
+                    ">
+                        <Dropdown
+                        buttonType='link'
+                        color='orange'
+                        >
+                            <div className="
+                            bg-slate-600
+                            h-[210px]
+                            w-[260px]
+                            overflow-y-scroll
+                            scrollbar-hide
+                            place-items-center
+                            grid
+                            ">
+<div className="
+        py-2 
+        flex 
+        flex-col 
+        gap-4 
+        space-y-5 
+        place-items-center 
+        w-full">    
+<span className="
+            headerTitleForChat 
+            w-[40%]
+            justify-evenly 
+            flex 
+            items-center 
+            space-x-2">
+            <AiFillMessage 
+                style={{
+                    fontSize: '1.5em',
+                    color: 'orange'
+                }}
+                />
+                <h1>Chat</h1>
+            </span>
+            <span className="
+            headerTitleForDev 
+            w-[40%]
+            justify-evenly
+            flex 
+            space-x-2 
+            items-center
+            ">
+                  <AiOutlineCode
+                style={{
+                    fontSize: '1.5em',
+                    color: 'orange'
+                }}
+                />
+                <h1>Developer</h1>
+            </span>
+        </div>
+        {user ? (
+        <h1 
+        onClick={signOut}
+        className="
+        headerTitleForChat
+        
+        mx-auto
+
+        ">
+            {user?.displayName}
+        </h1>
+    ): (
+        <h1 
+        onClick={signIn}
+        className="
+        headerTitleForChat
+        mx-auto
+        
+        ">
+            Sign in
+        </h1>
     )}
+                            </div>
+                        </Dropdown>
+                    </div>
+    </header>
     </>
   )
 }
