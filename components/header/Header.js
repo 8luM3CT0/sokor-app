@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Dropdown, DropdownItem, DropdownLink} from '../'
+import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody} from '../'
 import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 import Sidebar from './Sidebar'
@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 function Header() {
     const [user] = useAuthState(creds)
     const [openSidebar, setOpenSidebar] = useState(false)
+    const [signOutModal, setSOModal] = useState(false)
     
     const signIn = () => {
         creds.signInWithPopup(provider).catch(alert)
@@ -18,6 +19,10 @@ function Header() {
     
     const signOut = () => {
         creds.signOut()
+
+        if(signOutModal){
+            setSOModal(false)
+        }
     }
 
     useEffect(() => {
@@ -56,7 +61,7 @@ function Header() {
         <div className="headerDiv">
             {user ? (
                 <h2 
-                onClick={signOut}
+                onClick={() => setSOModal(true)}
                 className="headerTitle">
                 {user?.displayName}
             </h2>
@@ -141,6 +146,7 @@ function Header() {
                     forMobile
                     ">
                         <Dropdown
+                        size='regular'
                         buttonType='link'
                         color='orange'
                         >
@@ -151,6 +157,8 @@ function Header() {
                             overflow-y-scroll
                             scrollbar-hide
                             place-items-center
+                            space-y-6
+                            py-4
                             grid
                             ">
 <div className="
@@ -177,8 +185,7 @@ function Header() {
                 <h1>Chat</h1>
             </span>
             <span className="
-            headerTitleForDev 
-            w-[40%]
+            headerTitleForDev
             justify-evenly
             flex 
             space-x-2 
@@ -194,16 +201,40 @@ function Header() {
             </span>
         </div>
         {user ? (
-        <h1 
-        onClick={signOut}
-        className="
+        <>
+        <span className="
         headerTitleForChat
-        
-        mx-auto
-
+        group
         ">
+        <h1>
             {user?.displayName}
         </h1>
+        <button         
+        onClick={signOut}
+        className='
+        font-fira-sans
+        font-normal
+        text-lg
+        text-amber-500
+        -inset-full
+        -skew-x-6
+        border-0
+        outline-none
+        px-3
+        py-2
+        group-hover:border-2
+        group-hover:border-amber-500
+        rounded-lg
+        transform
+        transition-all
+        duration-200
+        ease-in-out
+        '
+        >
+            sign out
+        </button>
+        </span>
+        </>
     ): (
         <h1 
         onClick={signIn}
@@ -219,6 +250,62 @@ function Header() {
                         </Dropdown>
                     </div>
     </header>
+    <Modal
+    size='regular'
+    active={signOutModal}
+    toggler={() => setSOModal(false)}
+    >
+        <ModalBody>
+            <div className="
+            flex
+            flex-col
+            justify-center
+            space-y-4
+            place-items-center
+            h-[40vh]
+            w-[20vw]
+            ">
+                <h1 className="
+                text-2xl
+                underline
+                font-path-ex
+                text-orange-400
+                font-semibold
+                ">
+                    {user?.displayName}
+                </h1>
+                <h1 className="
+                text-lg
+                underline
+                font-path-ex
+                text-orange-400
+                font-light
+                ">
+                    {user?.email}
+                </h1>
+                <button
+                onClick={signOut}
+                className='
+                w-[60%]
+                h-[40px]
+                bg-orange-600
+                text-slate-50
+                font-montserr
+                font-semibold
+                hover:-skew-x-6
+                hover:bg-orange-700
+                active:bg-orange-500
+                transform
+                transition
+                duration-200
+                ease-in-out
+                '
+                >
+                    Sign out
+                </button>
+            </div>
+        </ModalBody>
+    </Modal>
     </>
   )
 }

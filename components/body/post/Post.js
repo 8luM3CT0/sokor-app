@@ -60,19 +60,21 @@ function Post({post}) {
     <div className="
     neutralPostFooter
     ">
-        <button 
-        onClick={() => setDeleteModal(true)}
-        className="forDesktop
-        outline-none
-        border-0
-        ">
-            <BsFillTrashFill
-            style={{
-                fontSize: '1.4em',
-                color: 'orange'
-            }}
-            />
-        </button>
+        {user && (
+            <button 
+            onClick={() => setDeleteModal(true)}
+            className="forDesktop
+            outline-none
+            border-0
+            ">
+                <BsFillTrashFill
+                style={{
+                    fontSize: '1.4em',
+                    color: 'orange'
+                }}
+                />
+            </button>
+        )}
         <button className="neutralPostButton
         ">
             Read more

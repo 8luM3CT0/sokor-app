@@ -145,7 +145,7 @@ export default function Home () {
           className='
           w-[60%]
           mx-auto
-          h-[10%]
+          h-[35px]
           rounded-lg
           bg-amber-700
           font-fira-sans
@@ -179,7 +179,7 @@ export default function Home () {
         bg-slate-800
         w-full
         space-y-12
-        ">
+         ">
           {neutralPosts !== null && neutralPosts?.docs.map(post => (
             <Post post={post} />
           ))}
