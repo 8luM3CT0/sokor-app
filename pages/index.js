@@ -103,7 +103,7 @@ export default function Home () {
           value={postTitle}
           onChange={e => setPostTitle(e.target.value)}
           className="
-          h-[10%]
+          h-[40px]
           rounded-lg
           w-[95%]
           mx-auto

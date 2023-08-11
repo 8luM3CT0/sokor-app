@@ -4,6 +4,7 @@ import {GrSettingsOption} from 'react-icons/gr'
 import {RxUpdate} from 'react-icons/rx'
 import {Modal, ModalHeader, ModalBody, ModalFooter} from '../../'
 import { BsFillTrashFill } from 'react-icons/bs'
+import { AiFillRead } from 'react-icons/ai'
 //back-end
 import { creds,store} from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -78,6 +79,15 @@ function Post({post}) {
         <button className="neutralPostButton
         ">
             Read more
+        </button>
+        <button className="neutralPostMobBtn">
+            <AiFillRead 
+            style={{
+                color: 'white',
+                fontSize: '1.2em'
+            }}
+            Read
+            />
         </button>
     </div>
     </div>

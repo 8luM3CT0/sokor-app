@@ -6,6 +6,7 @@ import {Modal, ModalHeader, ModalBody, ModalFooter, AiOutlineClose} from '../../
 import { BsFillTrashFill } from 'react-icons/bs'
 import {MdAutoFixNormal} from 'react-icons/md'
 import {GiCancel} from 'react-icons/gi'
+import { AiFillRead } from 'react-icons/ai'
 //back-end
 import { creds,store} from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -150,6 +151,15 @@ function UserPost({post}) {
         <button className="neutralPostButton
         ">
             Read more
+        </button>
+        <button className="neutralPostMobBtn">
+            <AiFillRead 
+            style={{
+                fontSize: '1.2em',
+                color: 'white'
+            }}
+            />
+            Read
         </button>
     </div>
     </div>
