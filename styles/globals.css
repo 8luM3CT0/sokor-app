@@ -144,7 +144,7 @@
   .neutralPostFooter{
     @apply
     w-[90%]
-    h-[10%]
+    h-[20%]
     flex
     items-center
     px-3
@@ -172,6 +172,36 @@
     transition
     duration-200
     ease-in-out
+  }
+
+  .editModalMainDiv{
+    @apply
+    flex 
+    h-screen
+    w-screen 
+    rounded-lg
+    justify-center 
+    items-center  
+    fixed 
+    inset-0 
+    z-50 
+    outline-none   
+  }
+
+  .editModalDiv{
+    @apply
+    flex
+    flex-col
+    lg:h-[40vh]
+    md:h-[50vh]
+    h-[60vh]
+    lg:w-[40vw]
+    md:w-[50vw]
+    w-[60vw]
+    bg-slate-600
+    rounded-lg
+    items-center
+    overflow-hidden
   }
 
   
