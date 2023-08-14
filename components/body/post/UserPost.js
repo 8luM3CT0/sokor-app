@@ -307,6 +307,136 @@ function UserPost({post}) {
                         />
                     </header>
                     {/**end of header for editModal */}
+                    <div className="
+                    h-full
+                    w-[95%]
+                    mx-auto
+                    flex
+                    flex-col
+                    items-start
+                    space-y-4
+                    px-3
+                    py-5
+                    ">
+                        <h2 className="
+                        font-path-ex
+                        font-semibold
+                        text-lg
+                        text-amber-500
+                        place-self-start
+                        ">
+                            Edit title
+                        </h2>
+                        <input 
+                        value={edittedTitle}
+                        onChange={e => setEdittedTitle(e.target.value)}
+                        placeholder={`updated title here, ${user?.displayName}`}
+                        type="text" 
+                        className='
+                        bg-slate-700
+                        px-4
+                        py-3
+                        w-full
+                        h-[40px]
+                        rounded-lg
+                        font-fira-sans
+                        font-normal
+                        text-amber-600
+                        text-xl
+                        ' />
+                        <h2 className="
+                        font-path-ex
+                        font-semibold
+                        text-lg
+                        text-amber-500
+                        place-self-start
+                        ">
+                            Edit text
+                        </h2>
+                        <textarea 
+                        value={edittedText}
+                        onChange={e => setEdittedText(e.target.value)}
+                        placeholder={`updated text here, ${user?.displayName}`}
+                        type="text" 
+                        className='
+                        bg-slate-700
+                        px-4
+                        py-3
+                        w-full
+                        h-[95%]
+                        rounded-lg
+                        font-fira-sans
+                        font-normal
+                        text-amber-600
+                        text-xl
+                        ' />
+                    </div>
+                    <footer
+                    className='
+                    bottom-0
+                    h-[20%]
+                    z-50
+                    sticky
+                    flex
+                    items-center
+                    justify-end
+                    space-x-4
+                    px-6
+                    py-2
+                    w-full
+                    border-t
+                    border-amber-600
+                    '
+                    >
+                    <button
+                    onClick={cancelEdit}
+                    className='
+                    w-[35%]
+                    h-[45px]
+                    rounded-md
+                    bg-transparent
+                    text-red-400
+                    text-lg
+                    font-path-ex
+                    font-semibold
+                    border
+                    border-red-500
+                    hover:border-red-600
+                    focus:border-red-400
+                    focus:outline-none
+                    transform
+                    transition
+                    duration-200
+                    ease-in-out
+                    '
+                    >
+                        Cancel
+                    </button>
+                    <button
+                    onClick={editPost}
+                    className='
+                    w-[35%]
+                    h-[45px]
+                    rounded-md
+                    bg-transparent
+                    text-amber-400
+                    text-lg
+                    font-path-ex
+                    font-semibold
+                    border
+                    border-amber-500
+                    hover:border-amber-600
+                    focus:border-amber-400
+                    focus:outline-none
+                    transform
+                    transition
+                    duration-200
+                    ease-in-out
+                    '
+                    >
+                        Edit
+                    </button>
+                    </footer>
                 </div>
                 {/**end of input container */}
              </div>
