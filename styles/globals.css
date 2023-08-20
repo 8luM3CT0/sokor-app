@@ -232,6 +232,53 @@
     overflow-hidden
   }
 
+  .readMoreDiv{
+    @apply
+    inset-0
+    z-50
+    fixed
+    h-screen
+    w-screen
+    overflow-hidden
+    outline-none
+    bg-slate-800
+    bg-opacity-60
+    grid
+    place-items-center
+  }
+
+  .rmCenterDiv{
+    @apply
+    place-self-center
+    lg:h-[70vh]
+    md:h-[80vh]
+    h-[85vh]
+    lg:w-[75vw]
+    md:w-[85vw]
+    w-[90vw]
+    rounded-md
+    flex
+    flex-col
+    overflow-hidden
+    bg-slate-700
+    bg-opacity-95
+  }
+
+  .readMoreTextDiv{
+    @apply
+    h-full
+    w-full
+    px-5
+    py-3
+    overflow-y-scroll
+    scrollbar-thin
+    scrollbar-track-slate-600
+    scrollbar-thumb-amber-700
+    font-normal
+    font-fira-sans
+    text-amber-400
+  }
+
   
 
 @keyframes fade {

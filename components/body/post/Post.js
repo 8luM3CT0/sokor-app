@@ -14,6 +14,7 @@ import { GiCancel } from 'react-icons/gi'
 function Post({post}) {
     const [user] = useAuthState(creds)
     const [deleteModal, setDeleteModal] = useState(false)
+    const [readMore, setReadMore] = useState(false)
 
     const deletePost = e => {
         e.preventDefault()
@@ -76,7 +77,9 @@ function Post({post}) {
                 />
             </button>
         )}
-        <button className="neutralPostButton
+        <button 
+        onClick={() => setReadMore(true)}
+        className="neutralPostButton
         ">
             Read more
         </button>
@@ -195,6 +198,75 @@ function Post({post}) {
             </div>
         </ModalBody>
     </Modal>
+    {readMore && (
+        <div className="readMoreDiv">
+            <div className="rmCenterDiv">
+                <header className="
+                top-0
+                sticky
+                z-50
+                flex
+                items-center
+                justify-between
+                bg-transparent
+                border-b-2
+                border-amber-400
+                h-[45px]
+                py-3
+                px-4
+                ">
+                    <h1 className="
+                    font-path-ex
+                    text-xl
+                    text-amber-600
+                    font-semibold
+                    ">
+                        Post by an anonymous person
+                    </h1>
+                    <button 
+                    onClick={() => setReadMore(false)}
+                    className="
+                    p-3
+                    rounded-3xl
+                    hover:shadow-lg
+                    transform
+                    transition
+                    delay-150
+                    ease-in-out
+                    ">
+                        <GiCancel 
+                        style={{
+                            fontSize: "1.2em",
+                            color: "orange"
+                        }}
+                        />
+                        </button>
+                </header>
+                <div className="
+                h-[80%]
+                w-full
+                flex
+                flex-col
+                space-y-3
+                ">
+                    <h1 className="font-montserr
+                    font-bold
+                    text-amber-400
+                    text-2xl
+                    place-self-start
+                    px-4
+                    ">
+                        {post?.data()?.title}
+                    </h1>
+                <div className="
+                readMoreTextDiv
+                ">
+                    {post?.data()?.text}
+                </div>
+                </div>
+            </div>
+        </div>
+    )}
     </>
   )
 }

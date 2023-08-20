@@ -19,6 +19,9 @@ function UserPost({post}) {
     //for editting text && title
     const [edittedText, setEdittedText] = useState('')
     const [edittedTitle, setEdittedTitle] = useState('')
+    //for read more 
+    //also no [id].js for this one. easier access and too much page routings
+    const [readMore, setReadMore] = useState(false)
 
     const cancelEdit = () => {
         setEditModal(false)
@@ -148,7 +151,9 @@ function UserPost({post}) {
                       
           )}
         </span>
-        <button className="neutralPostButton
+        <button 
+        onClick={() => setReadMore(true)}
+        className="neutralPostButton
         ">
             Read more
         </button>
@@ -440,6 +445,115 @@ function UserPost({post}) {
                 </div>
                 {/**end of input container */}
              </div>
+    )}
+    {readMore && (
+        <div className="readMoreDiv">
+            <div className="rmCenterDiv">
+                <header className="
+                top-0
+                sticky
+                z-50
+                flex
+                items-center
+                justify-between
+                bg-transparent
+                border-b-2
+                border-amber-400
+                h-[45px]
+                py-3
+                px-4
+                ">
+                    <h1 className="
+                    font-path-ex
+                    text-xl
+                    text-amber-600
+                    font-semibold
+                    ">
+                        Post by {post?.data()?.addedBy} 
+                    </h1>
+                    <button 
+                    onClick={() => setReadMore(false)}
+                    className="
+                    p-3
+                    rounded-3xl
+                    hover:shadow-lg
+                    transform
+                    transition
+                    delay-150
+                    ease-in-out
+                    ">
+                        <GiCancel 
+                        style={{
+                            fontSize: "1.2em",
+                            color: "orange"
+                        }}
+                        />
+                    </button>
+                </header>
+                {/**main post div */}
+                <div className="
+                h-[50%]
+                w-full
+                flex
+                flex-col
+                space-y-3
+                py-3
+                ">
+                    <h1 className="font-montserr
+                    font-bold
+                    text-amber-400
+                    text-2xl
+                    place-self-start
+                    px-4
+                    ">
+                        {post?.data()?.title}
+                    </h1>
+                {/**text div here */}
+                <div className="
+                readMoreTextDiv
+                ">
+                    {post?.data()?.text}
+                </div>
+                {/**end of text div here */}
+                </div>
+                {/**end of main post div */}
+                {/**comment section */}
+                <div className="
+                h-[50%]
+                w-full
+                flex
+                flex-col
+                px-2
+                py-1
+                ">
+                    {/**comment form */}
+                    <div className="
+                    h-[40%]
+                    w-full
+                    rounded-lg
+                    border
+                    border-amber-500
+                    hover:border-amber-600
+                    transform
+                    transition
+                    duration-300
+                    ease-in-out
+                    "></div>
+                    {/**end of comment forn */}
+                    {/**comments */}
+                    <div className="
+                    h-full 
+                    w-full 
+                    overflow-y-scroll
+                    scrollbar-thin
+                    scrollbar-track-slate-800
+                    scrollbar-thumb-amber-600
+                    "></div>
+                    {/**end of comments */}
+                </div>
+                {/**comment section end */}
+            </div>
+        </div>
     )}
     </>
   )
