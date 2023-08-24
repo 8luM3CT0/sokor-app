@@ -69,6 +69,21 @@ function UserPost({post}) {
         setDeleteModal(false)
     }
 
+    const addComment = e => {
+        e.preventDefault()
+
+        {!comment && (alert('Add a comment!'))}
+
+            store.collection('user_posts').doc(post?.id).collection('comments').add({
+                comment,    
+                commenter: user?.displayName
+            },
+            {
+                merge: true
+            })
+            setComment('')
+    }
+
   return (
     <>
     <div 
@@ -495,6 +510,9 @@ function UserPost({post}) {
                 {/**main post div */}
                 <div className="
                 h-[50%]
+                rounded-md
+                bg-slate-800
+                bg-opacity-20
                 w-full
                 flex
                 flex-col
@@ -542,6 +560,8 @@ function UserPost({post}) {
                     flex-col
                     ">
                         <textarea 
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
                         placeholder='Comment your thoughts...'
                         className='
                         h-[75%]
@@ -550,14 +570,16 @@ function UserPost({post}) {
                         py-3
                         mx-auto
                         bg-slate-900
+                        text-amber-500
                         bg-opacity-75
                         placeholder-slate-600
                         font-fira-sans
                         font-normal
                         text-lg
-                        text-slate-700
-                        '></textarea>
-                        <button className="
+                        ' />
+                        <button 
+                        onClick={addComment}
+                        className="
                         h-[25%]
                         place-self-end
                         mx-3
@@ -587,6 +609,8 @@ function UserPost({post}) {
                     <div className="
                     h-full 
                     w-full 
+                    bg-slate-800
+                    bg-opacity-20
                     overflow-y-scroll
                     scrollbar-thin
                     scrollbar-track-slate-800

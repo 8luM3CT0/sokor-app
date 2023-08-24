@@ -15,6 +15,7 @@ function Post({post}) {
     const [user] = useAuthState(creds)
     const [deleteModal, setDeleteModal] = useState(false)
     const [readMore, setReadMore] = useState(false)
+    const [comment, setComment] = useState('')
 
     const deletePost = e => {
         e.preventDefault()
@@ -26,6 +27,31 @@ function Post({post}) {
         }
 
         setDeleteModal(false)
+    }
+
+    const addComment = e => {
+        e.preventDefault()
+
+        {!comment && (alert('Add a comment!'))}
+
+            if(user?.displayName){
+                store.collection('neutral_posts').doc(post?.id).collection('comments').add({
+                    comment,    
+                    commenter: user?.displayName
+                },
+                {
+                    merge: true
+                })
+                setComment('')
+            } else {
+                store.collection('neutral_posts').doc(post?.id).collection('comments').add({
+                    comment  
+                },
+                {
+                    merge: true
+                })
+                setComment('')
+            }
     }
 
   return (
@@ -243,7 +269,10 @@ function Post({post}) {
                         </button>
                 </header>
                 <div className="
-                h-[80%]
+                h-[50%]
+                rounded-md
+                bg-slate-800
+                bg-opacity-20
                 w-full
                 flex
                 flex-col
@@ -264,6 +293,89 @@ function Post({post}) {
                     {post?.data()?.text}
                 </div>
                 </div>
+                {/**comment section */}
+                <div className="
+                h-[50%]
+                w-full
+                flex
+                flex-col
+                px-2
+                py-1
+                ">
+                    {/**comment form */}
+                    <div className="
+                    h-[60%]
+                    w-full
+                    rounded-lg
+                    transform
+                    transition
+                    duration-300
+                    ease-in-out
+                    space-y-2
+                    flex
+                    flex-col
+                    ">
+                        <textarea 
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
+                        placeholder='Comment your thoughts...'
+                        className='
+                        h-[75%]
+                        w-[90%]
+                        px-4
+                        py-3
+                        mx-auto
+                        bg-slate-900
+                        text-amber-500
+                        bg-opacity-75
+                        placeholder-slate-600
+                        font-fira-sans
+                        font-normal
+                        text-lg
+                        ' />
+                        <button 
+                        onClick={addComment}
+                        className="
+                        h-[25%]
+                        place-self-end
+                        mx-3
+                        w-[20%]
+                        rounded-lg
+                        bg-orange-600
+                        text-slate-50
+                        text-lg
+                        font-path-ex
+                        font-semibold
+                        outline-none
+                        hover:bg-orange-700
+                        hover:text-slate-100
+                        focus:bg-slate-900
+                        focus:text-orange-500
+                        focus:outline-none
+                        transform
+                        transition
+                        duration-200
+                        ease-in-out
+                        ">
+                            Comment
+                        </button>
+                    </div>
+                    {/**end of comment forn */}
+                    {/**comments */}
+                    <div className="
+                    h-full 
+                    w-full 
+                    bg-slate-800
+                    bg-opacity-20
+                    overflow-y-scroll
+                    scrollbar-thin
+                    scrollbar-track-slate-800
+                    scrollbar-thumb-amber-600
+                    rounded-md
+                    "></div>
+                    {/**end of comments */}
+                </div>
+                {/**comment section end */}
             </div>
         </div>
     )}
