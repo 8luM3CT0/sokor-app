@@ -19,6 +19,8 @@ function UserPost({post}) {
     //for editting text && title
     const [edittedText, setEdittedText] = useState('')
     const [edittedTitle, setEdittedTitle] = useState('')
+    //for comments
+    const [comment, setComment] = useState('')
     //for read more 
     //also no [id].js for this one. easier access and too much page routings
     const [readMore, setReadMore] = useState(false)
@@ -528,17 +530,58 @@ function UserPost({post}) {
                 ">
                     {/**comment form */}
                     <div className="
-                    h-[40%]
+                    h-[60%]
                     w-full
                     rounded-lg
-                    border
-                    border-amber-500
-                    hover:border-amber-600
                     transform
                     transition
                     duration-300
                     ease-in-out
-                    "></div>
+                    space-y-2
+                    flex
+                    flex-col
+                    ">
+                        <textarea 
+                        placeholder='Comment your thoughts...'
+                        className='
+                        h-[75%]
+                        w-[90%]
+                        px-4
+                        py-3
+                        mx-auto
+                        bg-slate-900
+                        bg-opacity-75
+                        placeholder-slate-600
+                        font-fira-sans
+                        font-normal
+                        text-lg
+                        text-slate-700
+                        '></textarea>
+                        <button className="
+                        h-[25%]
+                        place-self-end
+                        mx-3
+                        w-[20%]
+                        rounded-lg
+                        bg-orange-600
+                        text-slate-50
+                        text-lg
+                        font-path-ex
+                        font-semibold
+                        outline-none
+                        hover:bg-orange-700
+                        hover:text-slate-100
+                        focus:bg-slate-900
+                        focus:text-orange-500
+                        focus:outline-none
+                        transform
+                        transition
+                        duration-200
+                        ease-in-out
+                        ">
+                            Comment
+                        </button>
+                    </div>
                     {/**end of comment forn */}
                     {/**comments */}
                     <div className="
@@ -548,6 +591,7 @@ function UserPost({post}) {
                     scrollbar-thin
                     scrollbar-track-slate-800
                     scrollbar-thumb-amber-600
+                    rounded-md
                     "></div>
                     {/**end of comments */}
                 </div>
