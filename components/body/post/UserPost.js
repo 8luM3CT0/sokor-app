@@ -177,7 +177,9 @@ function UserPost({post}) {
         ">
             Read more
         </button>
-        <button className="neutralPostMobBtn">
+        <button 
+        onClick={() => setReadMore(true)}
+        className="neutralPostMobBtn">
             <AiFillRead 
             style={{
                 fontSize: '1.2em',
