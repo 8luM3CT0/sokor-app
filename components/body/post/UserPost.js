@@ -133,7 +133,9 @@ function UserPost({post}) {
     neutralPostFooter
     ">
         <span className="
-        flex items-center justify-between
+        flex 
+        items-center 
+        justify-between
         w-[15%]
         ">
         {user?.displayName == post?.data()?.addedBy && (
@@ -142,6 +144,7 @@ function UserPost({post}) {
    className="
    outline-none
    border-0
+   mx-4
    ">
        <MdAutoFixNormal
        style={{
