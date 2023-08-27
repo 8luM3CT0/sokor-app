@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import {GrSettingsOption} from 'react-icons/gr'
 import {RxUpdate} from 'react-icons/rx'
-import {Modal, ModalHeader, ModalBody, ModalFooter, AiOutlineClose} from '../../'
+import {Modal, ModalHeader, ModalBody, ModalFooter, AiOutlineClose, Comment} from '../../'
 import { BsFillTrashFill } from 'react-icons/bs'
 import {MdAutoFixNormal} from 'react-icons/md'
 import {GiCancel} from 'react-icons/gi'
@@ -10,6 +10,7 @@ import { AiFillRead } from 'react-icons/ai'
 //back-end
 import { creds,store} from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 
 function UserPost({post}) {
@@ -83,6 +84,10 @@ function UserPost({post}) {
             })
             setComment('')
     }
+
+    const [commentDisplay] = useCollection(
+        store.collection('user_posts').doc(post?.id).collection('comments')
+    )
 
   return (
     <>
@@ -612,7 +617,7 @@ function UserPost({post}) {
                     {/**end of comment forn */}
                     {/**comments */}
                     <div className="
-                    h-full 
+                    h-[75%] 
                     w-full 
                     bg-slate-800
                     bg-opacity-20
@@ -621,7 +626,14 @@ function UserPost({post}) {
                     scrollbar-track-slate-800
                     scrollbar-thumb-amber-600
                     rounded-md
-                    "></div>
+                    ">
+                        {commentDisplay && commentDisplay?.docs.map(doc => {
+                            <Comment 
+                            parentId={post?.id}
+                            doc={doc}
+                            />
+                        })}
+                    </div>
                     {/**end of comments */}
                 </div>
                 {/**comment section end */}

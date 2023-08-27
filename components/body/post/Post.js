@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import {GrSettingsOption} from 'react-icons/gr'
 import {RxUpdate} from 'react-icons/rx'
-import {Modal, ModalHeader, ModalBody, ModalFooter} from '../../'
+import {Modal, ModalHeader, ModalBody, ModalFooter, CommentNeutral} from '../../'
 import { BsFillTrashFill } from 'react-icons/bs'
 import { AiFillRead } from 'react-icons/ai'
 //back-end
 import { creds,store} from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { GiCancel } from 'react-icons/gi'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 
 function Post({post}) {
@@ -53,6 +54,10 @@ function Post({post}) {
                 setComment('')
             }
     }
+
+    const [commentDisplay] = useCollection(
+        store.collection('neutral_posts').doc(post?.id).collection('comments')
+    )
 
   return (
     <>
@@ -372,7 +377,14 @@ function Post({post}) {
                     scrollbar-track-slate-800
                     scrollbar-thumb-amber-600
                     rounded-md
-                    "></div>
+                    ">
+                        {commentDisplay && commentDisplay?.docs.map(doc => {
+                            <CommentNeutral 
+                            parentId={post?.id}
+                            doc={doc}
+                            />
+                        })}
+                    </div>
                     {/**end of comments */}
                 </div>
                 {/**comment section end */}

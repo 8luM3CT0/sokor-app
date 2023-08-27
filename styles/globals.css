@@ -252,16 +252,17 @@
   .rmCenterDiv{
     @apply
     place-self-center
-    lg:h-[70vh]
-    md:h-[80vh]
-    h-[85vh]
+    lg:h-[60vh]
+    md:h-[70vh]
+    h-[75vh]
     lg:w-[75vw]
     md:w-[85vw]
     w-[90vw]
     rounded-md
     flex
     flex-col
-    overflow-hidden
+    overflow-y-scroll
+    scrollbar-hide
     bg-slate-700
     bg-opacity-95
   }
@@ -279,6 +280,15 @@
     font-normal
     font-fira-sans
     text-amber-400
+  }
+
+  .commenterName{
+    @apply
+    lg:text-3xl
+    text-xl
+    font-path-ex
+    font-semibold
+    text-amber-500
   }
 
   
