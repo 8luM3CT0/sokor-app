@@ -86,7 +86,7 @@ function UserPost({post}) {
     }
 
     const [commentDisplay] = useCollection(
-        store.collection('user_posts').doc(post?.id).collection('comments')
+        store.doc(`user_posts/${post?.id}`).collection('comments')
     )
 
   return (
@@ -620,6 +620,8 @@ function UserPost({post}) {
                     h-[75%] 
                     w-full 
                     bg-slate-800
+                    space-y-5
+                    py-3
                     bg-opacity-20
                     overflow-y-scroll
                     scrollbar-thin
@@ -627,12 +629,13 @@ function UserPost({post}) {
                     scrollbar-thumb-amber-600
                     rounded-md
                     ">
-                        {commentDisplay && commentDisplay?.docs.map(doc => {
+                        {commentDisplay && commentDisplay.docs.map(doc => (
                             <Comment 
                             parentId={post?.id}
                             doc={doc}
+                            postUser={post?.data()?.addedBy}
                             />
-                        })}
+                        ))}
                     </div>
                     {/**end of comments */}
                 </div>

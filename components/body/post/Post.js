@@ -114,7 +114,9 @@ function Post({post}) {
         ">
             Read more
         </button>
-        <button className="neutralPostMobBtn">
+        <button 
+        onClick={() => setReadMore(true)}
+        className="neutralPostMobBtn">
             <AiFillRead 
             style={{
                 color: 'white',
@@ -370,6 +372,8 @@ function Post({post}) {
                     <div className="
                     h-full 
                     w-full 
+                    py-2
+                    space-y-4
                     bg-slate-800
                     bg-opacity-20
                     overflow-y-scroll
@@ -378,12 +382,12 @@ function Post({post}) {
                     scrollbar-thumb-amber-600
                     rounded-md
                     ">
-                        {commentDisplay && commentDisplay?.docs.map(doc => {
+                        {commentDisplay && commentDisplay?.docs.map(doc => (
                             <CommentNeutral 
                             parentId={post?.id}
                             doc={doc}
                             />
-                        })}
+                        ))}
                     </div>
                     {/**end of comments */}
                 </div>

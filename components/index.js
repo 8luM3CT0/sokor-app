@@ -21,9 +21,12 @@ export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome, AiOutlineClose, AiOutlineEdit} from 'react-icons/ai'
 export {GiCancel} from 'react-icons/gi'
 //local components
+//index.js components
 export {default as Header} from './header/Header'
 export {default as Sidebar} from './header/Sidebar'
 export {default as Post} from './body/post/Post'
 export {default as UserPost} from './body/post/UserPost'
 export {default as Comment} from './body/post/comment/Comment'
 export {default as CommentNeutral} from './body/post/comment/CommentNeutral'
+//chat.js components
+export {default as ChatHeader} from './header/chat-header/ChatHeader'

@@ -1,19 +1,20 @@
+//front-end
 import React, { useState } from 'react'
-import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody} from '../'
+import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody} from '../../'
 import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 //back-end
-import { creds, store, provider } from '../../backend/firebase'
+import { creds, store, provider } from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-function Header() {
+function ChatHeader() {
     const [user] = useAuthState(creds)
     const [openSidebar, setOpenSidebar] = useState(false)
     const [signOutModal, setSOModal] = useState(false)
     const router = useRouter()
-    
+
     const signIn = () => {
         creds.signInWithPopup(provider).catch(alert)
     }
@@ -26,19 +27,9 @@ function Header() {
         }
     }
 
-    useEffect(() => {
-        if(user){
-            store.collection('blog_users').add({
-                displayName: user?.displayName,
-                email: user?.email,
-                photoURL: user?.photoURL
-            })
-        }
-      }, [user])
-
   return (
-    <>
-    <header className='
+    <header
+    className='
     top-0
     sticky
     z-50
@@ -52,17 +43,17 @@ function Header() {
     flex
     items-center
     justify-evenly
-    '>
-        <FaBlog 
+    '
+    >
+        <AiFillMessage 
         style={{
             fontSize: '1.9em',
             color: 'orange'
         }}
         />
         <div className="headerDiv">
-            {user ? (
+        {user ? (
                 <h2 
-                onClick={() => setSOModal(true)}
                 className="headerTitle">
                 {user?.displayName}
             </h2>
@@ -74,15 +65,15 @@ function Header() {
             </h2>
             )}
             <span 
-            onClick={() => router.push('/chat')}
+            onClick={() => router.push('/')}
             className="headerTitleForChat flex items-center space-x-2">
-                <AiFillMessage 
+                <FaBlog
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Chat</h1>
+                <h1>Blog</h1>
             </span>
             <span className="headerTitleForDev flex space-x-2 items-center">
                 <AiOutlineCode 
@@ -123,7 +114,7 @@ function Header() {
         place-items-center 
         w-full">    
 <span 
-            onClick={() => router.push('/chat')}
+            onClick={() => router.push('/')}
 className="
             headerTitleForChat 
             w-[40%]
@@ -131,13 +122,13 @@ className="
             flex 
             items-center 
             space-x-2">
-            <AiFillMessage 
+            <FaBlog 
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Chat</h1>
+                <h1>Blog</h1>
             </span>
             <span className="
             headerTitleForDev
@@ -165,7 +156,6 @@ className="
             {user?.displayName}
         </h1>
         <button         
-        onClick={signOut}
         className='
         font-fira-sans
         font-normal
@@ -205,64 +195,7 @@ className="
                         </Dropdown>
                     </div>
     </header>
-    <Modal
-    size='regular'
-    active={signOutModal}
-    toggler={() => setSOModal(false)}
-    >
-        <ModalBody>
-            <div className="
-            flex
-            flex-col
-            justify-center
-            space-y-4
-            place-items-center
-            h-[40vh]
-            w-[20vw]
-            ">
-                <h1 className="
-                text-2xl
-                underline
-                font-path-ex
-                text-orange-400
-                font-semibold
-                ">
-                    {user?.displayName}
-                </h1>
-                <h1 className="
-                text-lg
-                underline
-                font-path-ex
-                text-orange-400
-                font-light
-                ">
-                    {user?.email}
-                </h1>
-                <button
-                onClick={signOut}
-                className='
-                w-[60%]
-                h-[40px]
-                bg-orange-600
-                text-slate-50
-                font-montserr
-                font-semibold
-                hover:-skew-x-6
-                hover:bg-orange-700
-                active:bg-orange-500
-                transform
-                transition
-                duration-200
-                ease-in-out
-                '
-                >
-                    Sign out
-                </button>
-            </div>
-        </ModalBody>
-    </Modal>
-    </>
   )
 }
 
-export default Header
+export default ChatHeader

@@ -284,11 +284,20 @@
 
   .commenterName{
     @apply
-    lg:text-3xl
+    lg:text-2xl
     text-xl
     font-path-ex
     font-semibold
     text-amber-500
+  }
+
+  .commentP{
+    @apply
+    font-normal
+    lg:text-xl
+    text-lg
+    font-fira-sans
+    text-amber-600
   }
 
   
