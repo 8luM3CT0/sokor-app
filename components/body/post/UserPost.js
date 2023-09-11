@@ -423,47 +423,14 @@ function UserPost({post}) {
                     <button
                     onClick={cancelEdit}
                     className='
-                    w-[35%]
-                    h-[45px]
-                    rounded-md
-                    bg-transparent
-                    text-red-400
-                    text-lg
-                    font-path-ex
-                    font-semibold
-                    border
-                    border-red-500
-                    hover:border-red-600
-                    focus:border-red-400
-                    focus:outline-none
-                    transform
-                    transition
-                    duration-200
-                    ease-in-out
+                    cancelPostBtn
                     '
                     >
                         Cancel
                     </button>
                     <button
                     onClick={editPost}
-                    className='
-                    w-[35%]
-                    h-[45px]
-                    rounded-md
-                    bg-transparent
-                    text-amber-400
-                    text-lg
-                    font-path-ex
-                    font-semibold
-                    border
-                    border-amber-500
-                    hover:border-amber-600
-                    focus:border-amber-400
-                    focus:outline-none
-                    transform
-                    transition
-                    duration-200
-                    ease-in-out
+                    className='editPostBtn
                     '
                     >
                         Edit
@@ -590,26 +557,7 @@ function UserPost({post}) {
                         <button 
                         onClick={addComment}
                         className="
-                        h-[25%]
-                        place-self-end
-                        mx-3
-                        w-[20%]
-                        rounded-lg
-                        bg-orange-600
-                        text-slate-50
-                        text-lg
-                        font-path-ex
-                        font-semibold
-                        outline-none
-                        hover:bg-orange-700
-                        hover:text-slate-100
-                        focus:bg-slate-900
-                        focus:text-orange-500
-                        focus:outline-none
-                        transform
-                        transition
-                        duration-200
-                        ease-in-out
+                        addCommentBtn
                         ">
                             Comment
                         </button>

@@ -342,27 +342,7 @@ function Post({post}) {
                         ' />
                         <button 
                         onClick={addComment}
-                        className="
-                        h-[25%]
-                        place-self-end
-                        mx-3
-                        w-[20%]
-                        rounded-lg
-                        bg-orange-600
-                        text-slate-50
-                        text-lg
-                        font-path-ex
-                        font-semibold
-                        outline-none
-                        hover:bg-orange-700
-                        hover:text-slate-100
-                        focus:bg-slate-900
-                        focus:text-orange-500
-                        focus:outline-none
-                        transform
-                        transition
-                        duration-200
-                        ease-in-out
+                        className="addCommentBtn
                         ">
                             Comment
                         </button>
