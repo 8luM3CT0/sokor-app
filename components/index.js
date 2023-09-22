@@ -20,6 +20,8 @@ export {FaConnectdevelop} from 'react-icons/fa'
 export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome, AiOutlineClose, AiOutlineEdit} from 'react-icons/ai'
 export {GiCancel} from 'react-icons/gi'
+export {CiMoneyBill as MoneyIcon} from 'react-icons/ci'
+export {MdMeetingRoom as RoomIcon} from 'react-icons/md'
 //local components
 //index.js components
 export {default as Header} from './header/Header'
@@ -30,3 +32,5 @@ export {default as Comment} from './body/post/comment/Comment'
 export {default as CommentNeutral} from './body/post/comment/CommentNeutral'
 //chat.js components
 export {default as ChatHeader} from './header/chat-header/ChatHeader'
+//rooms.js components
+export {default as RoomsHeader} from './header/rooms-header/RoomsHeader'

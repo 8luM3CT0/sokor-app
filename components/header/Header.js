@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody} from '../'
+import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody, MoneyIcon, RoomIcon} from '../'
 import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 //back-end
@@ -73,7 +73,9 @@ function Header() {
                 Sign in
             </h2>
             )}
-            <span 
+            {user && (
+                <>
+                    <span 
             onClick={() => router.push('/chat')}
             className="headerTitleForChat flex items-center space-x-2">
                 <AiFillMessage 
@@ -84,15 +86,19 @@ function Header() {
                 />
                 <h1>Chat</h1>
             </span>
-            <span className="headerTitleForDev flex space-x-2 items-center">
-                <AiOutlineCode 
+            <span 
+            onClick={() => router.push('/rooms')}
+            className="headerTitleForDev flex space-x-2 items-center">
+                <RoomIcon 
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Developer</h1>
+                <h1>Rooms</h1>
             </span>
+                </>
+            )}
         </div>
         <div 
                     className="
@@ -139,20 +145,22 @@ className="
                 />
                 <h1>Chat</h1>
             </span>
-            <span className="
+            <span 
+            onClick={() => router.push('/rooms')}
+            className="
             headerTitleForDev
             justify-evenly
             flex 
             space-x-2 
             items-center
             ">
-                  <AiOutlineCode
+                  <RoomIcon
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Developer</h1>
+                <h1>Rooms</h1>
             </span>
         </div>
         {user ? (
