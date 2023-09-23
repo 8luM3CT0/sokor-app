@@ -21,7 +21,7 @@ export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome, AiOutlineClose, AiOutlineEdit} from 'react-icons/ai'
 export {GiCancel} from 'react-icons/gi'
 export {CiMoneyBill as MoneyIcon} from 'react-icons/ci'
-export {MdMeetingRoom as RoomIcon} from 'react-icons/md'
+export {MdMeetingRoom as RoomIcon, MdRoomPreferences as AltRoomIcon} from 'react-icons/md'
 //local components
 //index.js components
 export {default as Header} from './header/Header'
