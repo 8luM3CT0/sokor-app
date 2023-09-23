@@ -86,17 +86,19 @@ function Header() {
                 />
                 <h1>Chat</h1>
             </span>
-            <span 
-            onClick={() => router.push('/rooms')}
-            className="headerTitleForDev flex space-x-2 items-center">
-                <RoomIcon 
-                style={{
-                    fontSize: '1.5em',
-                    color: 'orange'
-                }}
-                />
-                <h1>Rooms</h1>
-            </span>
+            {user && (
+                            <span 
+                            onClick={() => router.push('/rooms')}
+                            className="headerTitleForDev flex space-x-2 items-center">
+                                <RoomIcon 
+                                style={{
+                                    fontSize: '1.5em',
+                                    color: 'orange'
+                                }}
+                                />
+                                <h1>Rooms</h1>
+                            </span>
+            )}
                 </>
             )}
         </div>
@@ -128,7 +130,8 @@ function Header() {
         space-y-5 
         place-items-center 
         w-full">    
-<span 
+        {user && (
+            <span 
             onClick={() => router.push('/chat')}
 className="
             headerTitleForChat 
@@ -145,23 +148,27 @@ className="
                 />
                 <h1>Chat</h1>
             </span>
-            <span 
-            onClick={() => router.push('/rooms')}
-            className="
-            headerTitleForDev
-            justify-evenly
-            flex 
-            space-x-2 
-            items-center
-            ">
-                  <RoomIcon
-                style={{
-                    fontSize: '1.5em',
-                    color: 'orange'
-                }}
-                />
-                <h1>Rooms</h1>
-            </span>
+
+        )}
+            {user && (
+                            <span 
+                            onClick={() => router.push('/rooms')}
+                            className="
+                            headerTitleForDev
+                            justify-evenly
+                            flex 
+                            space-x-2 
+                            items-center
+                            ">
+                                  <RoomIcon
+                                style={{
+                                    fontSize: '1.5em',
+                                    color: 'orange'
+                                }}
+                                />
+                                <h1>Rooms</h1>
+                            </span>
+            )}
         </div>
         {user ? (
         <>

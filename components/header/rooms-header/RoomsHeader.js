@@ -40,7 +40,6 @@ function RoomsHeader() {
         <div className="headerDiv">
             
                 <h2 
-                onClick={() => setSOModal(true)}
                 className="headerTitle">
                 {user?.displayName}
             </h2>

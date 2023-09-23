@@ -10,6 +10,7 @@ import { creds, store } from '../backend/firebase'
 
 function RoomsPage() {
   const [user] = useAuthState(creds)
+  const [addRoomsModal, setARModal] = useState(false)
   const [roomsSnap] = useCollection(
     store.collection('rooms')
   )
@@ -76,7 +77,7 @@ function RoomsPage() {
           hover:-skew-x-6
           hover:border-2
           hover:border-amber-500
-          focus:border-amber-800
+          focus:border-amber-800  
           delay-100
           ease-in-out
           transform
