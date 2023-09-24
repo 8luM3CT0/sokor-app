@@ -1,7 +1,7 @@
 //front-end
 import React from 'react'
 import Head from 'next/head'
-import { AltRoomIcon, RoomsHeader } from '../components'
+import { AltRoomIcon, RoomsHeader, RoomsModal } from '../components'
 //back-end
 import {useState, useEffect} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -16,6 +16,7 @@ function RoomsPage() {
   )
 
   return (
+    <>
     <div className='
     bg-slate-800
     h-screen
@@ -67,7 +68,9 @@ function RoomsPage() {
           ">
             This place seems empty. Wanna change that ?
           </h2>
-          <button className="
+          <button 
+          onClick={() => setARModal(true)}
+          className="
           w-[40%]
           h-[50px]
           rounded-md
@@ -110,6 +113,12 @@ function RoomsPage() {
        </div>
     </main>
     </div>
+    {addRoomsModal && (
+      <RoomsModal 
+      buttonAction={() => setARModal(false)}
+      />
+    )}
+    </>
   )
 }
 

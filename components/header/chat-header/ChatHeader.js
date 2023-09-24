@@ -1,7 +1,7 @@
 //front-end
 import React, { useState } from 'react'
-import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody} from '../../'
-import { AiFillMessage, AiOutlineCode, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
+import {Dropdown, DropdownItem, DropdownLink, Modal, ModalBody, RoomIcon} from '../../'
+import { AiFillMessage, AiOutlineCode, AiOutlineHome, AiOutlineMenu, AiOutlineMenuFold} from 'react-icons/ai'
 import { FaBlog } from 'react-icons/fa'
 //back-end
 import { creds, store, provider } from '../../../backend/firebase'
@@ -67,23 +67,27 @@ function ChatHeader() {
             <span 
             onClick={() => router.push('/')}
             className="headerTitleForChat flex items-center space-x-2">
-                <FaBlog
+                <AiOutlineHome
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Blog</h1>
+                <h1>Home</h1>
             </span>
-            <span className="headerTitleForDev flex space-x-2 items-center">
-                <AiOutlineCode 
-                style={{
-                    fontSize: '1.5em',
-                    color: 'orange'
-                }}
-                />
-                <h1>Developer</h1>
-            </span>
+            {user && (
+                            <span 
+                            onClick={() => router.push('/rooms')}
+                            className="headerTitleForDev flex space-x-2 items-center">
+                                <RoomIcon 
+                                style={{
+                                    fontSize: '1.5em',
+                                    color: 'orange'
+                                }}
+                                />
+                                <h1>Rooms</h1>
+                            </span>
+            )}
         </div>
         <div 
                     className="
@@ -122,29 +126,27 @@ className="
             flex 
             items-center 
             space-x-2">
-            <FaBlog 
+            <AiOutlineHome 
                 style={{
                     fontSize: '1.5em',
                     color: 'orange'
                 }}
                 />
-                <h1>Blog</h1>
+                <h1>Home</h1>
             </span>
-            <span className="
-            headerTitleForDev
-            justify-evenly
-            flex 
-            space-x-2 
-            items-center
-            ">
-                  <AiOutlineCode
-                style={{
-                    fontSize: '1.5em',
-                    color: 'orange'
-                }}
-                />
-                <h1>Developer</h1>
-            </span>
+            {user && (
+                            <span 
+                            onClick={() => router.push('/rooms')}
+                            className="headerTitleForDev flex space-x-2 items-center">
+                                <RoomIcon 
+                                style={{
+                                    fontSize: '1.5em',
+                                    color: 'orange'
+                                }}
+                                />
+                                <h1>Rooms</h1>
+                            </span>
+            )}
         </div>
         {user ? (
         <>

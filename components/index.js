@@ -34,3 +34,4 @@ export {default as CommentNeutral} from './body/post/comment/CommentNeutral'
 export {default as ChatHeader} from './header/chat-header/ChatHeader'
 //rooms.js components
 export {default as RoomsHeader} from './header/rooms-header/RoomsHeader'
+export {default as RoomsModal} from './body/rooms/RoomsModal'
