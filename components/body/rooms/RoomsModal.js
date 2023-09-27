@@ -1,15 +1,54 @@
 //front-end
-import React from 'react'
+import React, { useState } from 'react'
 //back-end
 import { creds, store } from '../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import firebase from 'firebase'
 
 function RoomsModal({buttonAction}) {
     const [user] = useAuthState(creds)
+    const [roomName, setRoomName] = useState('')
+    const [roomDesc, setRoomDesc] = useState('')
+
+    const cancelAddRoom = e => {
+        e.preventDefault()
+
+        (roomName && roomDesc ? (
+            setRoomName(''),
+            setRoomDesc('')
+        ): (
+            setRoomName('')
+        ))
+    }
+
+    const addNewRoom = e => {
+        e.preventDefault()
+
+        if(!roomName) return
+
+        {(roomName && roomDesc) ? (
+            store.collection('rooms').add({
+                roomName,
+                roomDesc,
+                creator: user?.displayName,
+                createdOn: firebase.firestore.FieldValue.serverTimestamp()
+            })
+        ): (roomName && !roomDesc) && (
+            store.collection('rooms').add({
+                roomName,
+                creator: user?.displayName,
+                createdOn: firebase.firestore.FieldValue.serverTimestamp()
+            })
+        )}
+
+        setRoomName('')
+        {roomDesc ? setRoomDesc('') : ''}
+        buttonAction()
+    }
+
     return (
     <div 
-    onClick={buttonAction}
     className='
     h-screen
     w-screen
@@ -59,6 +98,8 @@ function RoomsModal({buttonAction}) {
                 font-fira-sans
                 font-black
                 text-amber-600
+                border
+                border-amber-700
                 px-3
                 py-1
                 rounded-3xl
@@ -71,10 +112,68 @@ function RoomsModal({buttonAction}) {
             w-full
             px-4
             py-3
-            grid
-            place-items-center
+            flex
+            flex-col
+            items-start
             space-y-4
-            "></div>
+            ">
+                <h1 className="
+                font-path-ex
+                font-bold
+                text-lg
+                text-amber-500
+                ">
+                    Room title:
+                </h1>
+                <input 
+                value={roomName}
+                onChange={e => setRoomName(e.target.value)}
+                placeholder={`Name of your new room, ${user?.displayName}`}
+                type="text" 
+                className="
+                w-full
+                px-3
+                py-2
+                h-[60px]
+                rounded-md
+                bg-slate-800
+                text-amber-600
+                text-xl
+                font-fira-sans
+                font-semibold
+                outline-none
+                border-0
+                " />
+                            <h1 className="
+                font-path-ex
+                font-bold
+                text-lg
+                text-amber-500
+                ">
+                    Description (optional):
+                </h1>
+                <textarea 
+                value={roomDesc}
+                onChange={e => setRoomDesc(e.target.value)}
+                placeholder={`what's your room about, ${user?.displayName}`} 
+                className="
+                h-[85%]
+                w-full
+                px-4
+                py-3
+                border-0
+                outline-none
+                text-lg
+                font-bold
+                font-fira-sans
+                text-amber-600
+                bg-slate-800
+                overflow-y-scroll
+                scrollbar-thin
+                scrollbar-track-slate-900
+                scrollbar-thumb-amber-600
+                "></textarea>
+            </div>
             <footer className="
             bottom-0
             sticky
@@ -89,7 +188,50 @@ function RoomsModal({buttonAction}) {
             border-t
             border-amber-700
             ">
-
+            <button 
+            onClick={cancelAddRoom}
+            className="
+            rounded-md
+            w-[40%]
+            h-[55px]
+            font-path-ex
+            font-semibold
+            text-lg
+            text-red-600
+            border
+            border-red-700
+            hover:border-red-600
+            hover:text-red-500
+            hover:-skew-x-6
+            transform
+            transition
+            delay-100
+            ease-in-out
+            ">
+                Cancel
+            </button>
+            <button 
+            onClick={addNewRoom}
+            className="
+            rounded-md
+            w-[40%]
+            h-[55px]
+            font-path-ex
+            font-semibold
+            text-lg
+            text-amber-600
+            border
+            border-amber-700
+            hover:border-amber-600
+            hover:text-amber-500
+            hover:-skew-x-6
+            transform
+            transition
+            delay-100
+            ease-in-out
+            ">
+                Add
+            </button>
             </footer>
         </div>
     </div>

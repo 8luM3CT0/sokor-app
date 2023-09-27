@@ -96,6 +96,24 @@ function RoomsHeader() {
         space-y-5 
         place-items-center 
         w-full">    
+                    <span 
+            onClick={() => router.push('/')}
+            className="
+            headerTitleForDev
+            justify-evenly
+            flex 
+            space-x-2 
+            items-center
+            ">
+                  <AiOutlineHome
+                style={{
+                    fontSize: '1.5em',
+                    color: 'orange'
+                }}
+                />
+                <h1>Home</h1>
+            </span>
+
 <span 
             onClick={() => router.push('/chat')}
 className="
@@ -112,23 +130,6 @@ className="
                 }}
                 />
                 <h1>Chat</h1>
-            </span>
-            <span 
-            onClick={() => router.push('/rooms')}
-            className="
-            headerTitleForDev
-            justify-evenly
-            flex 
-            space-x-2 
-            items-center
-            ">
-                  <RoomIcon
-                style={{
-                    fontSize: '1.5em',
-                    color: 'orange'
-                }}
-                />
-                <h1>Rooms</h1>
             </span>
         </div>
         <span className="

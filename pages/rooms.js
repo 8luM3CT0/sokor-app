@@ -8,9 +8,12 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { creds, store } from '../backend/firebase'
 
+
 function RoomsPage() {
   const [user] = useAuthState(creds)
   const [addRoomsModal, setARModal] = useState(false)
+  
+  
   const [roomsSnap] = useCollection(
     store.collection('rooms')
   )
@@ -51,7 +54,62 @@ function RoomsPage() {
         * --> separate component; will be in the /body folder
         */}
         {roomsSnap?.docs?.[0] ? (
-          <></>
+          <div className='
+          grid
+          place-items-center
+          h-full
+          w-full
+          space-y-4
+          '>
+            <h2 className="
+            text-fira-sans
+            font-semibold
+            text-amber-500
+            text-xl
+            ">
+              There are some rooms available, but would you like to add one ?
+            </h2>
+            <button 
+            onClick={() => setARModal(true)}
+            className="
+                      w-[40%]
+                      h-[50px]
+                      rounded-md
+                      bg-slate-800
+                      border
+                      border-amber-600
+                      hover:-skew-x-6
+                      hover:border-2
+                      hover:border-amber-500
+                      focus:border-amber-800  
+                      delay-100
+                      ease-in-out
+                      transform
+                      transition
+                      flex
+                      items-center
+                      justify-center
+                      space-x-4
+                      text-amber-500
+                      outline-none
+                      hover:outline-none
+                      focus:outline-none
+            ">
+              <AltRoomIcon 
+              style={{
+                fontSize: '1.4em',
+                color: 'orange'
+              }}
+              />
+              <p className="
+              font-fira-sans
+              font-normal
+              text-lg
+              ">
+                New room
+              </p>
+            </button>
+          </div>
         ): (
           <div className='
           grid
@@ -85,9 +143,6 @@ function RoomsPage() {
           ease-in-out
           transform
           transition
-          flex
-          items-center
-          justify-center
           space-x-4
           text-amber-500
           outline-none
