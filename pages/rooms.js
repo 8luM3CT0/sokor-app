@@ -1,7 +1,7 @@
 //front-end
 import React from 'react'
 import Head from 'next/head'
-import { AltRoomIcon, RoomsHeader, RoomsModal } from '../components'
+import { AltRoomIcon, RoomsDisplay, RoomsHeader, RoomsModal } from '../components'
 //back-end
 import {useState, useEffect} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -15,8 +15,10 @@ function RoomsPage() {
   
   
   const [roomsSnap] = useCollection(
-    store.collection('rooms')
+    store.collection('rooms').orderBy('createdOn', 'asc')
   )
+
+  console.log('Testing log console here >>>', roomsSnap?.docs?.[0]?.data()?.roomName)
 
   return (
     <>
@@ -32,6 +34,9 @@ function RoomsPage() {
     <main className="
     h-full  
     w-[75%]
+    flex
+    flex-col
+    space-y-2
     mx-auto
     bg-slate-700
     bg-opacity-30
@@ -69,9 +74,10 @@ function RoomsPage() {
             ">
               There are some rooms available, but would you like to add one ?
             </h2>
-            <button 
+            <div
             onClick={() => setARModal(true)}
             className="
+            cursor-pointer
                       w-[40%]
                       h-[50px]
                       rounded-md
@@ -86,16 +92,20 @@ function RoomsPage() {
                       ease-in-out
                       transform
                       transition
-                      flex
-                      items-center
-                      justify-center
-                      space-x-4
+                      grid
+                      place-items-center
                       text-amber-500
                       outline-none
                       hover:outline-none
                       focus:outline-none
             ">
-              <AltRoomIcon 
+              <span className="
+              mx-auto
+              flex
+              items-center
+              space-x-4
+              ">
+                <AltRoomIcon 
               style={{
                 fontSize: '1.4em',
                 color: 'orange'
@@ -108,7 +118,8 @@ function RoomsPage() {
               ">
                 New room
               </p>
-            </button>
+              </span>
+            </div>
           </div>
         ): (
           <div className='
@@ -165,6 +176,25 @@ function RoomsPage() {
           </button>
           </div>
         )}
+       </div>
+       <div className="
+       h-[70vh]
+       w--full
+       overflow-y-scroll
+       scrollbar-thin
+       scrollbar-track-slate-800
+       scrollbar-thumb-amber-600
+       flex
+       flex-col
+       space-y-7
+       items-center     
+       ">
+        {roomsSnap && roomsSnap?.docs?.slice([0,4])?.map(doc => (
+          <RoomsDisplay 
+          roomId={doc?.id}
+          doc={doc?.data()}
+          />
+        ))}
        </div>
     </main>
     </div>

@@ -12,13 +12,15 @@ function RoomsModal({buttonAction}) {
     const [roomDesc, setRoomDesc] = useState('')
 
     const cancelAddRoom = e => {
-        e.preventDefault()
+
 
         (roomName && roomDesc ? (
             setRoomName(''),
             setRoomDesc('')
-        ): (
+        ): roomName ? (
             setRoomName('')
+        ): (
+            buttonAction()
         ))
     }
 

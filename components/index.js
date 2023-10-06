@@ -35,3 +35,4 @@ export {default as ChatHeader} from './header/chat-header/ChatHeader'
 //rooms.js components
 export {default as RoomsHeader} from './header/rooms-header/RoomsHeader'
 export {default as RoomsModal} from './body/rooms/RoomsModal'
+export {default as RoomsDisplay} from './body/rooms/rooms-display/RoomsDisplay'
