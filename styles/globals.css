@@ -379,6 +379,69 @@
     bg-slate-700
   }
 
+  .roomsDisplay{
+    @apply
+    lg:max-h-[320px]
+    lg:min-h-[280px]
+    md:max-h-[240px]
+    md:min-h-[200px]
+    max-h-[160px]
+    min-h-[120px]
+    w-full
+    rounded-md
+    bg-slate-800
+    border
+    border-amber-600
+    hover:border-2
+    hover:border-amber-500
+    transform
+    transition
+    duration-300
+    ease-in-out
+    flex
+    items-center
+    justify-between
+    space-x-4
+    px-3
+    py-2
+  }
+
+  .roomsDisplayDesc{
+    @apply
+    md:inline-flex
+    w-full
+        text-lg
+        text-amber-600
+        font-path-ex
+        font-semibold
+        group-hover:text-amber-700
+        group-hover:-skew-x-3
+        transform
+        transition
+        delay-100
+        hidden
+  }
+
+  .roomsDisplaySpan{
+    @apply
+    lg:w-[40%]
+    md:w-[60%]
+    w-[75%]
+    flex
+    items-center
+    justify-evenly
+  }
+
+  .roomsDisplayModalTop{
+    @apply
+    w-full
+            justify-evenly
+            md:flex
+            items-center
+            px-4
+            py-2
+            hidden
+  }
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }
