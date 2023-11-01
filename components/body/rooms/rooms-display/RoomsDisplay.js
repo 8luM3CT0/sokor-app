@@ -10,6 +10,7 @@ import { creds, store } from '../../../../backend/firebase'
 
 function RoomsDisplay({roomId, doc}) {
   const router = useRouter()
+  const [user] = useAuthState(creds)
   const [roomModal, setRoomModal] = useState(false)
   return (
     <>
@@ -183,22 +184,21 @@ function RoomsDisplay({roomId, doc}) {
           items-start
           space-y-4
           ">
-            <div className="
-            roomsDisplayModalTop
-            ">
-              <span className="
-            roomsDisplaySpan
-            ">
+                
               {/*room image here */}
             <h1 className="
             text-3xl
+            mx-auto
             text-amber-700
             font-montserr
             font-bold
             ">
               {doc.roomName}
             </h1>
-            </span>
+        
+            <div className="
+            roomsDisplayModalTop
+            ">
             <span className="
             roomsDisplaySpan
             ">
@@ -240,6 +240,141 @@ function RoomsDisplay({roomId, doc}) {
                 </h1>
               </span>
             </div>
+            {/**end of roomsDisplayTop */}
+            {/**roomsDisplay description */}
+            <span className="
+            w-full
+            space-y-4
+            grid
+            place-items-start
+            px-4
+            py-3
+            ">
+              <h2 className="
+              font-montserr
+              font-normal
+              text-xl
+              text-amber-400
+              underline
+              ">
+                Room description
+              </h2>
+              <h4 className="
+              font-montserr
+              font-bold
+              text-base
+              text-amber-600
+              ">
+                {doc?.roomDesc}
+              </h4>
+            </span>
+            {/**roomsDisplay desc end */}
+            {/**members add form */}
+            {(user?.displayName == doc?.creator || user?.email == 'rumlowb@gmail.com') && (
+              <>
+              <div className="
+              h-[25%]
+              w-full
+              rounded-md
+              border
+              border-amber-500
+              bg-slate-800
+              space-y-2
+              ">
+                <textarea 
+                placeholder={`Add members here, ${user?.displayName}`}
+                className='
+                h-[65%]
+                px-3
+                py-4
+                w-full
+                bg-inherit
+                text-amber-600
+                font-path-ex
+                font-semibold
+                placeholder-amber-500
+                placeholder-opacity-60
+                '></textarea>
+                <span className="
+                h-[35%]
+                flex
+                items-center
+                justify-between
+                px-3
+                py-3
+                w-full
+                border-t-2
+                border-amber-500
+                ">
+                  <h1></h1>
+                  <button className="
+                  bg-slate-800
+                  border
+                  border-amber-500
+                  text-amber-500
+                  font-path-ex
+                  font-semibold
+                  text-lg
+                  px-4
+                  py-2
+                  
+                  hover:border-amber-700
+                  hover:text-amber-700
+                  hover:font-bold
+                  transform
+                  transition
+                  ease-in-out
+                  delay-100
+                  hover:-skew-x-6
+                  ">
+                    Add member
+                  </button>
+                </span>
+              </div>
+              {/**membersList */}
+              <div className="
+              h-[55%]
+              w-full
+              flex
+              flex-col
+              items-start
+              bg-slate-900
+              rounded
+              ">
+                <header className="
+                top-0
+                z-50
+                sticky
+                px-3
+                py-2
+                bg-slate-700
+                border-b-2
+                border-amber-500
+                h-[10%]
+                w-full
+                ">
+                  <h3 className="
+                  font-path-ex
+                  font-semibold
+                  text-amber-500
+                  text-lg
+                  ">
+                    Members of {doc?.roomName}
+                  </h3>
+                </header>
+                <div className="
+                h-[90%]
+                w-full
+                overflow-y-scroll
+                scrollbar-thin
+                scrollbar-track-slate-700
+                scrollbar-thumb-amber-500
+                "></div>
+              </div>
+              {/**end of membersList */}
+              </>
+            )}
+            {/**members add form end */}
           </div>
         </div>
       </div>
