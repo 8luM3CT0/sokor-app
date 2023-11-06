@@ -252,12 +252,12 @@
   .rmCenterDiv{
     @apply
     place-self-center
-    lg:h-[60vh]
-    md:h-[70vh]
-    h-[75vh]
+    lg:h-[70vh]
+    md:h-[80vh]
+    h-[95vh]
     lg:w-[75vw]
     md:w-[85vw]
-    w-[90vw]
+    w-[95vw]
     rounded-md
     flex
     flex-col
@@ -265,6 +265,32 @@
     scrollbar-hide
     bg-slate-700
     bg-opacity-95
+  }
+
+  .postModalHeaderText{
+    @apply
+    font-path-ex
+    lg:text-xl
+    md:text-lg
+    text-base
+    text-amber-600
+    font-semibold
+  }
+
+  .postModalTextArea{
+    @apply
+    h-[30%]
+    w-[90%]
+    px-4
+    py-3
+    mx-auto
+    bg-slate-900
+    text-amber-500
+    bg-opacity-75
+    placeholder-slate-600
+    font-fira-sans
+    font-normal
+    text-lg
   }
 
   .readMoreTextDiv{
@@ -349,13 +375,12 @@
     h-[25%]
     place-self-end
     mx-3
-    lg:w-[25%]
-    w-[20%]
     rounded-lg
     bg-orange-600
     text-slate-50
     lg:text-lg
-    text-base
+    md:text-base
+    text-sm
     font-path-ex
     font-semibold
     outline-none

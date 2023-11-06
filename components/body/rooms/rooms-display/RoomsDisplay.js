@@ -1,17 +1,43 @@
 //front-end
 import React, { useState } from 'react'
-import { MeetingIcon, OptionsIcon } from '../../..'
+import { MeetingIcon, OptionsIcon, RoomMember } from '../../..'
 //back-end
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { creds, store } from '../../../../backend/firebase'
+import firebase from 'firebase'
 
 
 function RoomsDisplay({roomId, doc}) {
   const router = useRouter()
   const [user] = useAuthState(creds)
   const [roomModal, setRoomModal] = useState(false)
+  //for adding members
+  const [memberEmail, setMemberEmail] = useState('')
+
+  const addMember= e => {
+    e.preventDefault()
+
+    {!memberEmail && alert(`You forgot the email, ${user?.displayName}`)}
+
+    store.collection('rooms').doc(roomId).collection('members').add({
+      memberEmail,
+      addedBy: user?.displayName,
+      addedOn: firebase.firestore.FieldValue.serverTimestamp()
+    })
+
+    setMemberEmail('')
+  }
+
+  //return members list with code below
+  const [membersList] = useCollection(
+    store.collection('rooms').doc(roomId).collection('members').orderBy('addedOn', 'asc')
+  )
+
+  //a way to check if the member exists and can access the room
+
+
   return (
     <>
     <div 
@@ -273,7 +299,6 @@ function RoomsDisplay({roomId, doc}) {
             {(user?.displayName == doc?.creator || user?.email == 'rumlowb@gmail.com') && (
               <>
               <div className="
-              h-[25%]
               w-full
               rounded-md
               border
@@ -281,12 +306,14 @@ function RoomsDisplay({roomId, doc}) {
               bg-slate-800
               space-y-2
               ">
-                <textarea 
-                placeholder={`Add members here, ${user?.displayName}`}
+                <input
+                value={memberEmail}
+                onChange={e => setMemberEmail(e.target.value)} 
+                placeholder={`Add a member here, ${user?.displayName}`}
                 className='
-                h-[65%]
                 px-3
                 py-4
+                my-2
                 w-full
                 bg-inherit
                 text-amber-600
@@ -294,7 +321,8 @@ function RoomsDisplay({roomId, doc}) {
                 font-semibold
                 placeholder-amber-500
                 placeholder-opacity-60
-                '></textarea>
+                focus:outline-none
+                '></input>
                 <span className="
                 h-[35%]
                 flex
@@ -302,12 +330,15 @@ function RoomsDisplay({roomId, doc}) {
                 justify-between
                 px-3
                 py-3
+                my-2
                 w-full
                 border-t-2
                 border-amber-500
                 ">
                   <h1></h1>
-                  <button className="
+                  <button 
+                  onClick={addMember}
+                  className="
                   bg-slate-800
                   border
                   border-amber-500
@@ -317,7 +348,7 @@ function RoomsDisplay({roomId, doc}) {
                   text-lg
                   px-4
                   py-2
-                  
+                  my-2
                   hover:border-amber-700
                   hover:text-amber-700
                   hover:font-bold
@@ -369,7 +400,14 @@ function RoomsDisplay({roomId, doc}) {
                 scrollbar-thin
                 scrollbar-track-slate-700
                 scrollbar-thumb-amber-500
-                "></div>
+                ">
+                  {membersList && membersList?.docs.map(doc => (
+                    <RoomMember 
+                    userEmail={doc?.data()?.memberEmail}
+                    doc={doc?.data()}
+                    />
+                  ))}
+                </div>
               </div>
               {/**end of membersList */}
               </>

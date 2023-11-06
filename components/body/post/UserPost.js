@@ -453,7 +453,7 @@ function UserPost({post}) {
                 bg-transparent
                 border-b-2
                 border-amber-400
-                h-[45px]
+                h-[10%]
                 py-3
                 px-4
                 ">
@@ -486,7 +486,7 @@ function UserPost({post}) {
                 </header>
                 {/**main post div */}
                 <div className="
-                h-[50%]
+                h-[30%]
                 rounded-md
                 bg-slate-800
                 bg-opacity-20
@@ -525,7 +525,7 @@ function UserPost({post}) {
                 ">
                     {/**comment form */}
                     <div className="
-                    h-[60%]
+                    h-[50%]
                     w-full
                     rounded-lg
                     transform
@@ -540,19 +540,7 @@ function UserPost({post}) {
                         value={comment}
                         onChange={e => setComment(e.target.value)}
                         placeholder='Comment your thoughts...'
-                        className='
-                        h-[75%]
-                        w-[90%]
-                        px-4
-                        py-3
-                        mx-auto
-                        bg-slate-900
-                        text-amber-500
-                        bg-opacity-75
-                        placeholder-slate-600
-                        font-fira-sans
-                        font-normal
-                        text-lg
+                        className='postModalTextArea
                         ' />
                         <button 
                         onClick={addComment}
@@ -565,11 +553,11 @@ function UserPost({post}) {
                     {/**end of comment forn */}
                     {/**comments */}
                     <div className="
-                    h-[75%] 
+                    h-[65%] 
                     w-full 
                     bg-slate-800
                     space-y-5
-                    py-3
+                    py-2
                     bg-opacity-20
                     overflow-y-scroll
                     scrollbar-thin

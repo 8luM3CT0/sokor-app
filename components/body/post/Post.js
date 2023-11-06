@@ -244,23 +244,21 @@ function Post({post}) {
                 bg-transparent
                 border-b-2
                 border-amber-400
-                h-[45px]
+                h-[10%]
                 py-3
                 px-4
                 ">
                     <h1 className="
-                    font-path-ex
-                    text-xl
-                    text-amber-600
-                    font-semibold
+                    postModalHeaderText
                     ">
                         Post by an anonymous person
                     </h1>
                     <button 
                     onClick={() => setReadMore(false)}
                     className="
-                    p-3
-                    rounded-3xl
+                    px-3
+                    py-1
+                    rounded-full
                     hover:shadow-lg
                     transform
                     transition
@@ -276,7 +274,7 @@ function Post({post}) {
                         </button>
                 </header>
                 <div className="
-                h-[50%]
+                h-[30%]
                 rounded-md
                 bg-slate-800
                 bg-opacity-20
@@ -311,7 +309,7 @@ function Post({post}) {
                 ">
                     {/**comment form */}
                     <div className="
-                    h-[60%]
+                    h-[50%]
                     w-full
                     rounded-lg
                     transform
@@ -327,18 +325,7 @@ function Post({post}) {
                         onChange={e => setComment(e.target.value)}
                         placeholder='Comment your thoughts...'
                         className='
-                        h-[75%]
-                        w-[90%]
-                        px-4
-                        py-3
-                        mx-auto
-                        bg-slate-900
-                        text-amber-500
-                        bg-opacity-75
-                        placeholder-slate-600
-                        font-fira-sans
-                        font-normal
-                        text-lg
+                        postModalTextArea
                         ' />
                         <button 
                         onClick={addComment}
@@ -350,7 +337,7 @@ function Post({post}) {
                     {/**end of comment forn */}
                     {/**comments */}
                     <div className="
-                    h-full 
+                    h-[65%]
                     w-full 
                     py-2
                     space-y-4
