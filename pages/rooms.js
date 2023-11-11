@@ -30,7 +30,9 @@ function RoomsPage() {
     <Head>
         <title>This is the rooms page.</title>
     </Head>
-    <RoomsHeader />
+    {user ? (
+     <>
+       <RoomsHeader />
     <main className="
     h-full  
     w-[75%]
@@ -199,6 +201,33 @@ function RoomsPage() {
         ))}
        </div>
     </main>
+     </> 
+    ): (
+      <>
+         <RoomsHeader />
+    <main className="
+    h-full  
+    w-[75%]
+    flex
+    flex-col
+    space-y-2
+    mx-auto
+    bg-slate-700
+    bg-opacity-30
+    scrollbar-hide
+    ">
+      <h1 className="
+      place-self-center
+      font-fira-sans
+      font-bold
+      text-lg
+      text-amber-500
+      ">
+        You can't access this. Sign in first
+      </h1>
+    </main>
+      </>
+    )}
     </div>
     {addRoomsModal && (
       <RoomsModal 
