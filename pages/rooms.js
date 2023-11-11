@@ -6,7 +6,7 @@ import { AltRoomIcon, RoomsDisplay, RoomsHeader, RoomsModal } from '../component
 import {useState, useEffect} from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
-import { creds, store } from '../backend/firebase'
+import { creds, store, provider } from '../backend/firebase'
 
 
 function RoomsPage() {
@@ -17,6 +17,20 @@ function RoomsPage() {
   const [roomsSnap] = useCollection(
     store.collection('rooms').orderBy('createdOn', 'asc')
   )
+
+  const signIn = () => {
+    creds.signInWithPopup(provider).catch(alert)
+  }
+
+  useEffect(() => {
+    if(user){
+      store.collection('blog_users').add({
+        displayName: user?.displayName,
+                email: user?.email,
+                photoURL: user?.photoURL
+      })
+    }
+  }, [user])
 
   console.log('Testing log console here >>>', roomsSnap?.docs?.[0]?.data()?.roomName)
 
@@ -208,8 +222,8 @@ function RoomsPage() {
     <main className="
     h-full  
     w-[75%]
-    flex
-    flex-col
+    grid
+    place-items-center
     space-y-2
     mx-auto
     bg-slate-700
@@ -225,6 +239,22 @@ function RoomsPage() {
       ">
         You can't access this. Sign in first
       </h1>
+      <button className="
+      place-self-center
+      w-[70%]
+      rounded
+      h-[45px]
+      font-fira-sans
+      font-semibold
+      bg-slate-800
+      text-amber-500
+      border-amber-500
+      border
+      hover:border-amber-700
+      hover:border-2
+      hover:text-amber-700
+      hover:font-bold
+      "></button>
     </main>
       </>
     )}
