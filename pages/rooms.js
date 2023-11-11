@@ -222,8 +222,10 @@ function RoomsPage() {
     <main className="
     h-full  
     w-[75%]
-    grid
-    place-items-center
+    flex
+    flex-col
+    justify-center
+    items-center
     space-y-2
     mx-auto
     bg-slate-700
