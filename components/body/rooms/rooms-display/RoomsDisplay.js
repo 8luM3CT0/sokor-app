@@ -86,11 +86,7 @@ function RoomsDisplay({roomId, doc}) {
         </p>
       </span>
       <span className="
-      w-[30%]
-      flex
-      items-center
-      space-x-3
-      px-2
+      roomsDisplayBtns
       ">
         <button 
         onClick={() => setRoomModal(true)}

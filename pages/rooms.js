@@ -78,7 +78,9 @@ function RoomsPage() {
             onClick={() => setARModal(true)}
             className="
             cursor-pointer
-                      w-[40%]
+                      lg:w-[40%]
+                      md:w-[65%]
+                      w-[85%]
                       h-[50px]
                       rounded-md
                       bg-slate-800
@@ -179,7 +181,7 @@ function RoomsPage() {
        </div>
        <div className="
        h-[70vh]
-       w--full
+       w-full
        overflow-y-scroll
        scrollbar-thin
        scrollbar-track-slate-800

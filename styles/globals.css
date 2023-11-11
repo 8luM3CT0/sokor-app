@@ -467,6 +467,16 @@
             py-2
             hidden
   }
+
+  .roomsDisplayBtns{
+    @apply
+    w-[30%]
+    md:flex
+    hidden
+    items-center
+    space-x-3
+    px-2
+  }
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }
