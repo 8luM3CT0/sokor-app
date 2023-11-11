@@ -457,6 +457,21 @@
     justify-evenly
   }
 
+  .roomsDisplayImg{
+    @apply
+    rounded-full
+    p-3
+    h-[60px]
+    w-[70px]
+    bg-techie
+    bg-center
+    bg-no-repeat
+    border
+    border-amber-500
+    md:inline-flex
+    hidden
+  }
+
   .roomsDisplayModalTop{
     @apply
     w-full
@@ -486,8 +501,7 @@
   .roomsDisplayBtns{
     @apply
     w-[30%]
-    md:flex
-    hidden
+    flex
     items-center
     space-x-3
     px-2

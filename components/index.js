@@ -23,6 +23,7 @@ export {GiCancel} from 'react-icons/gi'
 export {CiMoneyBill as MoneyIcon} from 'react-icons/ci'
 export {MdMeetingRoom as RoomIcon, MdRoomPreferences as AltRoomIcon, MdOutlineMeetingRoom as MeetingIcon} from 'react-icons/md'
 export {IoMdOptions as OptionsIcon} from 'react-icons/io'
+export {FiTrash as TrashIcon} from 'react-icons/fi'
 //local components
 //index.js components
 export {default as Header} from './header/Header'

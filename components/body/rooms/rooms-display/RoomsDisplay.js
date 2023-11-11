@@ -1,6 +1,6 @@
 //front-end
 import React, { useState } from 'react'
-import { MeetingIcon, OptionsIcon, RoomMember } from '../../..'
+import { MeetingIcon, RoomMember, TrashIcon } from '../../..'
 //back-end
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router'
@@ -47,17 +47,7 @@ function RoomsDisplay({roomId, doc}) {
     group
     '>
       <div
-      className="
-      rounded-full
-      p-3
-      h-[60px]
-      w-[70px]
-      bg-techie
-      bg-center
-      bg-no-repeat
-      border
-      border-amber-500
-      " />
+      className="roomsDisplayImg" />
       <span className="
       flex
       flex-col
@@ -99,25 +89,6 @@ function RoomsDisplay({roomId, doc}) {
         }}
         />
        </button>
-       <button className="
-        rounded-3xl
-        p-3
-        border
-        border-amber-500
-        hover:border-2
-        hover:border-amber-700
-        transform
-        transition
-        duration-300
-        focus:outline-none
-       ">
-        <OptionsIcon 
-        style={{
-          color: 'whitesmoke',
-          fontSize: '1.4em'
-        }}
-        />
-       </button>
       </span>
     </div>
     {roomModal && (
@@ -135,7 +106,7 @@ function RoomsDisplay({roomId, doc}) {
         <div className="
        h-[85vh] 
        lg:w-[60vw]
-       w-[80vw]
+       w-[95vw]
        flex
        flex-col
        rounded
