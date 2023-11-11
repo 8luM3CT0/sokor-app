@@ -254,7 +254,9 @@ function RoomsPage() {
       hover:border-2
       hover:text-amber-700
       hover:font-bold
-      "></button>
+      ">
+        Sign in
+      </button>
     </main>
       </>
     )}
