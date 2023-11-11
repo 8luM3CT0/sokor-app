@@ -468,6 +468,21 @@
             hidden
   }
 
+  .roomsDisplayName{
+    @apply
+    lg:text-2xl
+    md:text-xl
+    text-lg
+    text-amber-500
+    font-fira-sans
+    font-bold
+    group-hover:text-amber-600
+    group-hover:-skew-x-3
+    transform
+    transition
+    delay-100
+  }
+
   .roomsDisplayBtns{
     @apply
     w-[30%]

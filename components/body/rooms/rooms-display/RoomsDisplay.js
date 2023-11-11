@@ -66,17 +66,7 @@ function RoomsDisplay({roomId, doc}) {
       px-3
       py-2
       ">
-        <h1 className="
-        text-2xl
-        text-amber-500
-        font-fira-sans
-        font-bold
-        group-hover:text-amber-600
-        group-hover:-skew-x-3
-        transform
-        transition
-        delay-100
-        ">
+        <h1 className="roomsDisplayName">
           {doc.roomName}
         </h1>
         <p className="
