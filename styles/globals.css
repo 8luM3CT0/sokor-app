@@ -506,6 +506,18 @@
     space-x-3
     px-2
   }
+
+.roomsDisplayDescSpan{
+  @apply
+  w-full
+  space-y-4
+  lg:grid
+  place-items-start
+  px-4
+  py-3
+  hidden
+}
+
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }

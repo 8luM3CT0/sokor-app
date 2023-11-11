@@ -225,13 +225,7 @@ function RoomsDisplay({roomId, doc}) {
             </div>
             {/**end of roomsDisplayTop */}
             {/**roomsDisplay description */}
-            <span className="
-            w-full
-            space-y-4
-            grid
-            place-items-start
-            px-4
-            py-3
+            <span className="roomsDisplayDescSpan
             ">
               <h2 className="
               font-montserr
