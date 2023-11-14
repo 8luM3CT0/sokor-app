@@ -39,3 +39,5 @@ export {default as RoomsHeader} from './header/rooms-header/RoomsHeader'
 export {default as RoomsModal} from './body/rooms/RoomsModal'
 export {default as RoomsDisplay} from './body/rooms/rooms-display/RoomsDisplay'
 export {default as RoomMember} from './body/rooms/rooms-display/RoomMember'
+//[id].js components
+export {default as IdHeader} from './header/id-header/IdHeader'

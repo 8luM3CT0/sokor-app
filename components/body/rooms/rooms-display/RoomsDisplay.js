@@ -158,7 +158,7 @@ function RoomsDisplay({roomId, doc}) {
             </button>
           </header>
           <div className="
-          h-[90%]
+          h-[70%]
           w-full
           bg-slate-700
           bg-opacity-80
@@ -365,6 +365,56 @@ function RoomsDisplay({roomId, doc}) {
             )}
             {/**members add form end */}
           </div>
+          {/**footer */}
+          <footer className="
+          h-[10%]
+          w-full
+          bottom-0
+          sticky
+          z-50
+          border-t-2
+          border-amber-600
+          flex
+          items-center
+          justify-between
+          ">
+            <span className='
+            w-[50%]
+            '></span>
+            <span className="
+            px-4
+            py-3
+            w-[50%]
+            ">
+              <button 
+              onClick={() => router.push(`/rooms/${roomId}`)}
+              className="
+              bg-slate-900
+              font-montserr
+              font-semibold
+              text-lg
+              h-[90%]
+              px-3
+              py-2
+              rounded
+              w-[70%]
+              text-amber-500
+              hover:bg-opacity-90
+              hover:text-amber-600
+              hover:border-x-4
+              hover:border-y
+              hover:border-amber-600
+              -inset-full
+              transform
+              transition
+              delay-100
+              ease-in-out
+              ">
+                To room
+              </button>
+            </span>
+          </footer>
+          {/**end of footer */}
         </div>
       </div>
     )}

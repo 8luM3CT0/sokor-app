@@ -18,11 +18,11 @@ function RoomMember({userEmail, doc}) {
     flex
     items-center
     justify-between
-    border
     rounded-md
-    border-amber-400
-    hover:border-2
+    hover:border-x-3
+    hover:border-y-2
     hover:border-amber-600
+    -inset-full
     transform
     transition
     delay-100
