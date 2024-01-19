@@ -114,7 +114,7 @@ function RoomsDisplay({roomId, doc}) {
        space-y-3
         ">
           <header className="
-          h-[10%]
+          h-[60px]
           top-0
           sticky
           z-50
@@ -158,7 +158,7 @@ function RoomsDisplay({roomId, doc}) {
             </button>
           </header>
           <div className="
-          h-[70%]
+          h-[85%]
           w-full
           bg-slate-700
           bg-opacity-80
@@ -315,7 +315,7 @@ function RoomsDisplay({roomId, doc}) {
               </div>
               {/**membersList */}
               <div className="
-              h-[55%]
+              h-full
               w-full
               flex
               flex-col
@@ -329,6 +329,7 @@ function RoomsDisplay({roomId, doc}) {
                 sticky
                 px-3
                 py-2
+                mb-3
                 bg-slate-700
                 border-b-2
                 border-amber-500
@@ -345,7 +346,7 @@ function RoomsDisplay({roomId, doc}) {
                   </h3>
                 </header>
                 <div className="
-                h-[90%]
+                h-full
                 w-full
                 overflow-y-scroll
                 scrollbar-thin
@@ -367,7 +368,7 @@ function RoomsDisplay({roomId, doc}) {
           </div>
           {/**footer */}
           <footer className="
-          h-[10%]
+          h-[60px]
           w-full
           bottom-0
           sticky

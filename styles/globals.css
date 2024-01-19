@@ -518,6 +518,59 @@
   hidden
 }
 
+.idHeaderBtn{
+  @apply
+  lg:grid
+  place-items-center
+  rounded
+  w-[10%]
+  px-3
+  py-2
+  font-path-ex
+  font-semibold
+  border
+  text-lg
+  text-amber-500
+  border-amber-500
+  hover:text-amber-700
+  hover:border-amber-700
+  hover:border-x-4
+  hover:border-y-2
+  focus:outline-none
+  -inset-full
+  hover:-skew-x-6
+  transform
+  transition
+  delay-100
+  ease-in-out
+  hidden
+}
+
+.idHeaderBtnMobile{
+  @apply
+  lg:hidden
+  grid
+  place-items-center
+  rounded-full
+  px-3
+  py-1
+  font-fira-sans
+  font-semibold
+  text-xl
+  text-amber-500
+  border
+  border-amber-500
+  hover:text-amber-700
+  hover:border-amber-700
+  hover:-skew-x-6
+  -inset-full
+  focus:outline-none
+  transform
+  transition
+  delay-100
+  ease-in-out
+}
+
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }

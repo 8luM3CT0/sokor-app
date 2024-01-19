@@ -49,7 +49,7 @@ function RoomsPage() {
        <RoomsHeader />
     <main className="
     h-full  
-    w-[75%]
+    w-[85%]
     flex
     flex-col
     space-y-2
@@ -205,7 +205,10 @@ function RoomsPage() {
        flex
        flex-col
        space-y-7
-       items-center     
+       items-center
+       px-3
+       py-2
+       pb-20    
        ">
         {roomsSnap && roomsSnap?.docs?.slice([0,4])?.map(doc => (
           <RoomsDisplay 
