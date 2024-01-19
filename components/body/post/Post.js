@@ -244,7 +244,7 @@ function Post({post}) {
                 bg-transparent
                 border-b-2
                 border-amber-400
-                h-[10%]
+                h-[60px]
                 py-3
                 px-4
                 ">
