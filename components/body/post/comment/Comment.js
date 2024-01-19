@@ -51,7 +51,7 @@ function Comment({doc, parentId, postUser}) {
         ">
             {doc?.data()?.comment}
         </p>
-    {postUser == user?.displayName && (
+    {(postUser == user?.displayName || user?.displayName == 'rumlowb@gmail.com') && (
       <button 
       onClick={deleteComment}
       className="
