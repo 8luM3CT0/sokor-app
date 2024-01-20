@@ -473,6 +473,19 @@
     hidden
   }
 
+  .roomsDisplayModal{
+    @apply
+    lg:h-[75%]
+    md:h-[80%]
+    h-[85%]
+    lg:w-[80%]
+    md:w-[85%]
+    w-[90%]
+    mx-auto
+    bg-slate-700
+    bg-opacity-90
+    rounded
+  }
   .roomsDisplayModalTop{
     @apply
     w-full
