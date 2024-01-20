@@ -475,9 +475,7 @@
 
   .roomsDisplayModal{
     @apply
-    lg:h-[75%]
-    md:h-[80%]
-    h-[85%]
+    h-[90%]
     lg:w-[80%]
     md:w-[85%]
     w-[90%]
@@ -497,6 +495,42 @@
             px-4
             py-2
             hidden
+  }
+
+  .roomsDisplayModalDesc{
+    @apply
+    w-full
+    h-[200px]
+    lg:flex
+    flex-col
+    space-y-2
+    items-start
+    hidden
+  }
+
+  .roomsDisplayModalSpan{
+    @apply 
+    flex
+    items-center
+    space-x-2 
+  }
+
+  .roomsDisplayModalTitle{
+    @apply
+    lg:text-lg
+    text-base
+    text-amber-600
+    font-fira-sans
+    font-normal
+  }
+
+  .roomsDisplayModalDetail{
+    @apply
+    lg:text-xl
+    text-lg
+    text-amber-600
+    font-fira-sans
+    font-semibold
   }
 
   .roomsDisplayName{
@@ -522,17 +556,6 @@
     space-x-3
     px-2
   }
-
-.roomsDisplayDescSpan{
-  @apply
-  w-full
-  space-y-4
-  lg:grid
-  place-items-start
-  px-4
-  py-3
-  hidden
-}
 
 .idHeaderBtn{
   @apply
