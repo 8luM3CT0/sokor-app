@@ -485,6 +485,8 @@
     bg-slate-700
     bg-opacity-90
     rounded
+    flex
+    flex-col
   }
   .roomsDisplayModalTop{
     @apply
