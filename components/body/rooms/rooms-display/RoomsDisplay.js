@@ -109,8 +109,6 @@ function RoomsDisplay({roomId, doc}) {
           <header className="
           h-[50px]
           top-0
-          z-50
-          sticky
           flex
           items-center
           justify-between
