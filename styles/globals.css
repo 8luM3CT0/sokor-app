@@ -610,6 +610,54 @@
   ease-in-out
 }
 
+.roomsInpBtn{
+  @apply
+  top-0
+  z-50
+  sticky
+  mx-auto
+  lg:w-[60%]
+  md:w-[75%]
+  w-[90%]
+  lg:h-[45px]
+  md:h-[60px]
+  h-[75px]
+  rounded-md
+  border
+  border-amber-500
+  text-lg
+  text-amber-500
+  -inset-full
+  hover:-skew-x-6
+  hover:border-amber-700
+  hover:text-amber-700
+  focus:outline-none
+  transform
+  transition
+  delay-100
+  ease-in-out
+  flex
+  items-center
+  justify-center
+  space-x-3
+}
+
+.roomsInputModal{
+  @apply
+  lg:h-[55%]
+  md:h-[65%]
+  h-[75%]
+  lg:w-[65%]
+  md:w-[85%]
+  w-[95%]
+  bg-slate-700
+  rounded-md
+  border
+  border-amber-500
+  flex
+  flex-col
+}
+
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }

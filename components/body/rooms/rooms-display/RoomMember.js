@@ -3,11 +3,19 @@ import React from 'react'
 import { OptionsIcon } from '../../../'
 //back-end
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useDocument } from 'react-firebase-hooks/firestore'
+import { store } from '../../../../backend/firebase'
 
-function RoomMember({userEmail, doc}) {
-  
+function RoomMember({doc, roomId}) {
+    const [snapshot, loadingSnapshot, error] = useDocument(
+        store.collection('rooms').doc(roomId).collection('members').doc(doc?.id)
+    )
+
     return (
-    <div className='
+    <>
+    <div 
+    key={snapshot?.id}
+    className='
     h-[60px]
     w-[95%]
     mx-auto
@@ -25,6 +33,7 @@ function RoomMember({userEmail, doc}) {
     -inset-full
     transform
     transition
+    duration-100
     delay-100
     ease-in-out
     group
@@ -38,7 +47,7 @@ function RoomMember({userEmail, doc}) {
         group-hover:text-amber-700
         group-hover:font-black
         ">
-            {doc?.memberEmail}
+            {snapshot?.memberEmail}
         </h1>
         <button className="
         rounded-full
@@ -58,6 +67,7 @@ function RoomMember({userEmail, doc}) {
             />
         </button>
     </div>
+    </>
   )
 }
 

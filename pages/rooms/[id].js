@@ -1,7 +1,7 @@
 //front-end
 import React from 'react'
 import Head from 'next/head'
-import { IdHeader } from '../../components'
+import { IdHeader, RoomsInput } from '../../components'
 //back-end
 import { creds, store, storage } from '../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -19,6 +19,13 @@ function RoomsPage() {
   const [snapshot, loadingSnapshot, error] = useDocument(
     store.doc(`rooms/${id}`)
   )
+
+  //to display the room articles
+  //I swear to fucking christ, if you do not display, I'll short your motherboard
+  const [roomArticles] = useCollection(
+    store.collection('rooms').doc(snapshot?.id).collection('roomArticles').orderBy('postedOn', 'asc')
+  )
+  //I'm watching you....
 
   return (
     <div className='
@@ -39,10 +46,14 @@ function RoomsPage() {
       w-[85%]
       mx-auto
       bg-slate-700
+      flex
+      flex-col
+      items-start
       ">
         {/**top of div, contains header image, room name && room creator */}
-        <div className="
-        h-[30%]
+        <div 
+        className="
+        h-[20%]
         bg-headerpic
         bg-cover
         bg-no-repeat
@@ -51,13 +62,7 @@ function RoomsPage() {
         shadow-sm
         shadow-amber-500
         ">
-          <div className="
-          h-full
-          "></div>
           <footer className="
-          bottom-0
-          z-50
-          sticky
           h-[80px]
           rounded-sm
           w-full
@@ -95,7 +100,27 @@ function RoomsPage() {
         flex-col
         px-3
         py-2
-        "></div>
+        ">
+          <RoomsInput 
+          roomId={snapshot?.id}
+          />
+        <div className="
+        h-[90%]
+        w-full
+        flex
+        flex-col
+        space-y-7
+        items-start
+        px-4
+        py-3
+        overflow-y-scroll
+        scrollbar-hide
+        ">
+          {roomArticles && roomArticles?.docs.map(articleData => (
+            <></>
+          ))}
+        </div>
+        </div>
       </main>
     </div>
   )

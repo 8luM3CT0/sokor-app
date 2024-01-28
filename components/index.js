@@ -41,3 +41,4 @@ export {default as RoomsDisplay} from './body/rooms/rooms-display/RoomsDisplay'
 export {default as RoomMember} from './body/rooms/rooms-display/RoomMember'
 //[id].js components
 export {default as IdHeader} from './header/id-header/IdHeader'
+export {default as RoomsInput} from './body/rooms/rooms-input/RoomsInput'

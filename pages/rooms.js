@@ -210,12 +210,14 @@ function RoomsPage() {
        py-2
        pb-20    
        ">
+        {/**Why the fuck don't you work ????? */}
         {roomsSnap && roomsSnap?.docs?.slice([0,4])?.map(doc => (
           <RoomsDisplay 
           roomId={doc?.id}
           doc={doc?.data()}
           />
         ))}
+                {/**Why in the actual the fuck don't you work ????? */}
        </div>
     </main>
      </> 

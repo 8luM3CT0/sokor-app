@@ -21,7 +21,7 @@ function RoomsDisplay({roomId, doc}) {
 
     {!memberEmail && alert(`You forgot the email, ${user?.displayName}`)}
 
-    store.collection('rooms').doc(roomId).collection('members').add({
+    store.collection('rooms').doc(roomId).collection('roomMembers').add({
       memberEmail,
       addedBy: user?.displayName,
       addedOn: firebase.firestore.FieldValue.serverTimestamp()
@@ -31,12 +31,12 @@ function RoomsDisplay({roomId, doc}) {
   }
 
   //return members list with code below
+  //YOU. ESPECIALLY YOU. YOU FUCKING WORK, YOU SHOULD WORK
   const [membersList] = useCollection(
-    store.collection('rooms').doc(roomId).collection('members').orderBy('addedOn', 'asc')
-  )
-
-  //a way to check if the member exists and can access the room
-
+    store.collection('rooms').doc(roomId).collection('roomMembers').orderBy('addedOn', 'asc')
+  ) 
+  //YOU SHOULD FUCKING WORK. WHY AREN'T YOU, FUCKING HELL
+  
   return (
     <>
     <div 
@@ -220,11 +220,98 @@ function RoomsDisplay({roomId, doc}) {
                   {doc?.roomDesc}
                 </span>
               </div>
+              <div className="
+              w-full
+              bg-slate-800
+              border
+              border-amber-600
+              rounded
+              flex
+              flex-col
+              space-y-2
+              px-3
+              py-2
+              ">
+                <input 
+                type="text"
+                placeholder={`Member's email, ${user?.displayName}`} 
+                value={memberEmail}
+                onChange={e => setMemberEmail(e.target.value)}
+                className="
+                focus:outline-none
+                border
+                border-amber-500
+                px-3
+                py-2
+                w-[90%]
+                mx-auto
+                h-[60px]
+                rounded
+                bg-slate-800
+                bg-opacity-80
+                text-amber-600
+                text-lg
+                font-fira-sans
+                font-normal
+                placeholder-amber-900
+                
+                " />
+                <span className="
+                flex
+                items-center
+                justify-between
+                px-2
+                py-1
+                ">
+                  <h1></h1>
+                  <button 
+                  onClick={addMember}
+                  className="
+                  w-[40%]
+                  h-[50px]
+                  border
+                  border-amber-500
+                  text-base
+                  text-amber-500
+                  hover:border-amber-700
+                  hover:text-amber-700
+                  hover:-skew-x-6
+                  focus:outline-none
+                  delay-100
+                  -inset-full
+                  transform
+                  transition
+                  ease-in-out
+                  ">
+                    Add member
+                  </button>
+                </span>
+              </div>
             {/**
              * 
              * end of roomsDisplay modal
              * 
              *  */}
+             <div className="
+             h-[80%]
+             w-full
+             bg-slate-900
+             overflow-y-scroll
+             scrollbar-thin
+             scrollbar-track-slate-800
+             scrollbar-thumb-amber-600
+             flex
+             flex-col
+             items-center
+             space-y-8
+             ">
+              {membersList && membersList.docs.map(member => (
+                <RoomMember 
+                doc={member.data()}
+                roomId={roomId}
+                />
+              ))}
+             </div>
                          {/**
              * 
              * roomsDisplay modal bottom with members
@@ -249,7 +336,34 @@ function RoomsDisplay({roomId, doc}) {
           border-t
           border-amber-600
           bg-inherit
-          " ></footer>
+          " >
+            <span></span>
+            {user?.email == 'rumlowb@gmail.com' && (
+                          <button 
+                          onClick={() => router.push(`/rooms/${roomId}`)}
+                          className="
+                          w-[105px]
+                          h-[50px]
+                          rounded
+                          focus:outline-none
+                          font-fira-sans
+                          font-semibold
+                          text-lg
+                          border
+                          border-amber-500
+                          text-amber-500
+                          hover:border-amber-700
+                          hover:text-amber-700
+                          delay-100
+                          transform
+                          transition
+                          ease-in-out
+                          -inset-full
+                          ">
+                            To room
+                          </button>
+            )}
+          </footer>
         </div>
       </div>
     )}
