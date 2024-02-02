@@ -36,11 +36,20 @@ function RoomsDisplay({roomId, doc}) {
     store.collection('rooms').doc(roomId).collection('roomMembers').orderBy('addedOn', 'asc')
   ) 
   //YOU SHOULD FUCKING WORK. WHY AREN'T YOU, FUCKING HELL
-  
+
+  //function to both test user if existent within the room && to go to said room
+  const [userTest] = useCollection(
+    store.collection('rooms').doc(roomId).collection('roomMembers').where('memberEmail', '==', user?.email)
+  )
+  //please work 
+  //this entire thing hinges in
+  //you working/
+  //please fucking work
+
   return (
     <>
     <div 
-    id={roomId}
+    key={roomId}
     className='
     roomsDisplay
     group
@@ -339,29 +348,29 @@ function RoomsDisplay({roomId, doc}) {
           " >
             <span></span>
             {user?.email == 'rumlowb@gmail.com' && (
-                          <button 
-                          onClick={() => router.push(`/rooms/${roomId}`)}
-                          className="
-                          w-[105px]
-                          h-[50px]
-                          rounded
-                          focus:outline-none
-                          font-fira-sans
-                          font-semibold
-                          text-lg
-                          border
-                          border-amber-500
-                          text-amber-500
-                          hover:border-amber-700
-                          hover:text-amber-700
-                          delay-100
-                          transform
-                          transition
-                          ease-in-out
-                          -inset-full
-                          ">
-                            To room
-                          </button>
+              <button 
+              onClick={() => router.push(`/rooms/${roomId}`)}
+              className="
+              w-[105px]
+              h-[50px]
+              rounded
+              focus:outline-none
+              font-fira-sans
+              font-semibold
+              text-lg
+              border
+              border-amber-500
+              text-amber-500
+              hover:border-amber-700
+              hover:text-amber-700
+              delay-100
+              transform
+              transition
+              ease-in-out
+              -inset-full
+              ">
+                To room
+              </button>
             )}
           </footer>
         </div>

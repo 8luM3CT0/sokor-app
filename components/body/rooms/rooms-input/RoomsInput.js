@@ -124,185 +124,177 @@ function RoomsInput({roomId}) {
   }
     return (
     <>
-      <button className="
-      roomsInpBtn
-      group
+    <button 
+    onClick={() => setRoomsPoster(true)}
+    className="roomsInpBtn
+    group
+    ">
+      <h1 className="
+      text-3xl
+      text-amber-500
+      font-montserr
+      font-semibold
+      group-hover:text-amber-700
+      transform
+      transition
+      duration-300
+      ease-in-out
       ">
-        <p className="
-        text-xl
-        font-fira-sans
-        font-bold
-        text-amber-500
-        group-hover:text-amber-700
-        transform
-        transition
-        duration-200
-        ">+</p>
-        <p className="
-        text-xl
-        font-path-ex
-        font-bold
-        text-amber-500
-        group-hover:text-amber-700
-        transform
-        transition
-        duration-200
-        ">Post</p>  
-      </button>  
-      {roomsPoster && (
+        +
+      </h1>
+      <h1 className="
+      text-xl
+      text-amber-500
+      font-path-ex
+      font-semibold
+      group-hover:text-amber-700
+      transform
+      transition
+      duration-300
+      ease-in-out
+      ">
+        Add post
+      </h1>
+    </button>
+    {roomsPoster && (
+      <div className="
+      h-full
+      w-full
+      bg-slate-800
+      bg-opacity-80
+      fixed
+      inset-0
+      z-50
+      grid
+      place-items-center
+      ">
         <div className="
-        h-full
-        w-full
-        bg-slate-800
-        inset-0
-        z-50
-        fixed
-        grid
-        place-items-center
+        roomsInputModal
         ">
-          <div className="
-          roomsInputModal
+          <header className="
+          flex
+          items-center
+          h-[60px]
+          w-full
+          justify-between
+          px-4
+          py-3
+          border-b
+          border-amber-700
           ">
-            <header className="
-            h-[60px]
+            <h1 className="
+            font-fira-sans
+            font-semibold
+            text-lg
+            text-amber-700
+            ">
+              Add a post
+            </h1>
+            <button 
+            onClick={() => setRoomsPoster(false)}
+            className="
+            rounded-full
+            font-fira-sans
+            font-bold
+            px-3
+            py-1
+            grid
+            place-items-center
+            border
+            border-amber-700
+            text-lg
+            text-amber-700
+            hover:text-amber-900
+            hover:border-amber-900
+            focus:outline-none
+            transform
+            transition
+            duration-300
+            ease-in-out
+            ">
+              X
+            </button>
+          </header>
+          <div className="
+          h-[90%]
+          w-full
+          px-4
+          py-3
+          flex
+          flex-col
+          items-start
+          space-y-7
+          overflow-y-scroll
+          scrollbar-hide
+          ">
+            <span className="roomsModalPostSpan">
+            <h1 className="roomsModalPostTitle
+            ">
+              Image
+            </h1>
+            <button 
+            className="roomsModalPostBtn w-[90%]">
+              Add image
+            </button>
+            </span>
+            <span className="roomsModalPostSpan">
+            <h1 className="roomsModalPostTitle
+            ">
+              Title
+            </h1>
+            <input 
+            placeholder='Title...'
+            className="roomsModalPostInput h-[60px]">
+            </input>
+            <span className="
             w-full
-            border-b
-            border-amber-500
+            justify-between
             flex
             items-center
-            justify-between
-            px-4
-            py-3
             ">
-              <h1 className="
-              text-xl
-              font-fira-sans
-              font-semibold
-              text-amber-500
-              ">
-                Add a post
-              </h1>
-              <button className="
-              rounded-full
-              px-3
-              py-1
-              grid
-              place-items-center
-              text-xl
-              text-amber-500
-              border
-              border-amber-500
-              hover:text-amber-700
-              hover:border-amber-700
-              hover:-skew-x-6
-              -inset-full
-              transform
-              transition
-              delay-100
-              ease-in-out
-              ">
-                X
-              </button>
-            </header>
-            <div className="
-            h-[85%]
+              <h1 className='
+              w-[60%]
+              '></h1>
+              <button 
+            className="roomsModalPostBtn w-[30%]">
+              Add title
+            </button>
+            </span>
+            </span>
+            <span className="roomsModalPostSpan">
+            <h1 className="roomsModalPostTitle
+            ">
+              Description
+            </h1>
+            <textarea
+            placeholder='Description...' 
+            className="
+            roomsModalPostInput 
+            h-[190px] 
+            overflow-y-scroll 
+            scrollbar-hide 
+            ">
+            </textarea>
+            <span className="
             w-full
+            justify-between
             flex
-            flex-col
-            items-start
-            space-y-5
+            items-center
             ">
-              <h1 className="
-              text-lg
-              text-amber-500
-              font-fira-sans
-              font-semibold
-              ">
-                Post title
-              </h1>
-              <input 
-              placeholder={`What do you want to post, ${user?.displayName}`}
-              value={postTitle}
-              onChange={e => setPostTitle(e.target.value)}
-              type="text" 
-              className="
-              w-full
-              h-[55px]
-              rounded-md
-              bg-slate-800
-              shadow-slate-900
-              shadow-lg
-              border-0
-              outline-none
-              font-fira-sans
-              font-normal
-              text-lg
-              text-amber-500
-              placeholder-slate-700
-              px-3
-              py-2
-              " />
-              <h1 className="
-              text-lg
-              text-amber-500
-              font-fira-sans
-              font-semibold
-              ">
-                Post description
-              </h1>
-              <textarea 
-              value={postDesc}
-              onChange={e => setPostDesc(e.target.value)}
-              placeholder='Post description (optional)...'
-              className='
-              h-[80%]
-              w-full
-              rounded-md
-              bg-slate-800
-              shadow-lg
-              shadow-slate-800
-              placeholder-slate-700
-              border-0
-              outline-none
-              text-lg
-              text-amber-500
-              px-3
-              py-2
-              '></textarea>
-              <span className="
-              w-full
-              flex
-              items-center
-              space-x-3
-              ">
-                <span className="
-                w-[50%]
-                "></span>
-                <button 
-                onClick={postArticle}
-                className="
-                w-[50%]
-                h-[50px]
-                text-xl
-                text-amber-500
-                border
-                border-amber-500
-                hover:text-amber-700
-                hover:border-amber-700
-                focus:outline-none
-                hover:-inset-full
-                transform
-                transition
-                delay-100
-                ease-in-out
-                ">
-                  Add
-                </button>
-              </span>
-            </div>
+              <h1 className='
+              w-[60%]
+              '></h1>
+              <button 
+            className="roomsModalPostBtn w-[30%]">
+              Add description
+            </button>
+            </span>
+            </span>
+            
           </div>
         </div>
-      )}
+      </div>
+    )}
     </>
   )
 }

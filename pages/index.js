@@ -174,8 +174,8 @@ export default function Home () {
         h-[60%]
         overflow-y-scroll
         scrollbar-thin
-        scrollbar-track-amber-600
-        scrollbar-thumb-slate-600
+        scrollbar-thumb-amber-600
+        scrollbar-track-slate-600
         bg-slate-800
         w-full
         space-y-12
