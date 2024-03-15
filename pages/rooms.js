@@ -15,7 +15,7 @@ function RoomsPage() {
   
   
   const [roomsSnap] = useCollection(
-    store.collection('rooms').orderBy('createdOn', 'asc')
+    store.collection('blogRooms').orderBy('createdOn', 'asc')
   )
 
   const signIn = () => {
@@ -31,8 +31,6 @@ function RoomsPage() {
       })
     }
   }, [user])
-
-  console.log('Testing log console here >>>', roomsSnap?.docs?.[0]?.data()?.roomName)
 
   return (
     <>
@@ -211,7 +209,7 @@ function RoomsPage() {
        pb-20    
        ">
         {/**Why the fuck don't you work ????? */}
-        {roomsSnap && roomsSnap?.docs?.slice([0,4])?.map(doc => (
+        {roomsSnap && roomsSnap?.docs?.map(doc => (
           <RoomsDisplay 
           roomId={doc?.id}
           doc={doc?.data()}

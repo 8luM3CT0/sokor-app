@@ -21,7 +21,7 @@ function RoomsDisplay({roomId, doc}) {
 
     {!memberEmail && alert(`You forgot the email, ${user?.displayName}`)}
 
-    store.collection('rooms').doc(roomId).collection('roomMembers').add({
+    store.collection('blogRooms').doc(roomId).collection('roomMembers').add({
       memberEmail,
       addedBy: user?.displayName,
       addedOn: firebase.firestore.FieldValue.serverTimestamp()
@@ -33,18 +33,23 @@ function RoomsDisplay({roomId, doc}) {
   //return members list with code below
   //YOU. ESPECIALLY YOU. YOU FUCKING WORK, YOU SHOULD WORK
   const [membersList] = useCollection(
-    store.collection('rooms').doc(roomId).collection('roomMembers').orderBy('addedOn', 'asc')
+    store.collection('blogRooms').doc(roomId).collection('roomMembers').orderBy('addedOn', 'asc')
   ) 
   //YOU SHOULD FUCKING WORK. WHY AREN'T YOU, FUCKING HELL
 
   //function to both test user if existent within the room && to go to said room
-  const [userTest] = useCollection(
-    store.collection('rooms').doc(roomId).collection('roomMembers').where('memberEmail', '==', user?.email)
+  const [userSnapshot, loadingSnapshot, error] = useCollection(
+    store.collection('blogRooms').doc(roomId).collection('roomMembers').where('memberEmail', '==', user?.email)
   )
+
   //please work 
   //this entire thing hinges in
   //you working/
   //please fucking work
+
+
+  //this one did. finally
+  const isAnEditor = userSnapshot?.size > 0
 
   return (
     <>
@@ -229,7 +234,7 @@ function RoomsDisplay({roomId, doc}) {
                   {doc?.roomDesc}
                 </span>
               </div>
-              <div className="
+{(user?.displayName == doc?.creator || user?.email == 'rumlowb@gmail.com') && (              <div className="
               w-full
               bg-slate-800
               border
@@ -296,7 +301,7 @@ function RoomsDisplay({roomId, doc}) {
                   </button>
                 </span>
               </div>
-            {/**
+)}            {/**
              * 
              * end of roomsDisplay modal
              * 
@@ -347,7 +352,7 @@ function RoomsDisplay({roomId, doc}) {
           bg-inherit
           " >
             <span></span>
-            {user?.email == 'rumlowb@gmail.com' && (
+            {(user?.email == 'rumlowb@gmail.com' || isAnEditor) && (
               <button 
               onClick={() => router.push(`/rooms/${roomId}`)}
               className="

@@ -30,14 +30,14 @@ function RoomsModal({buttonAction}) {
         if(!roomName) return
 
         {(roomName && roomDesc) ? (
-            store.collection('rooms').add({
+            store.collection('blogRooms').add({
                 roomName,
                 roomDesc,
                 creator: user?.displayName,
                 createdOn: firebase.firestore.FieldValue.serverTimestamp()
             })
         ): (roomName && !roomDesc) && (
-            store.collection('rooms').add({
+            store.collection('blogRooms').add({
                 roomName,
                 creator: user?.displayName,
                 createdOn: firebase.firestore.FieldValue.serverTimestamp()

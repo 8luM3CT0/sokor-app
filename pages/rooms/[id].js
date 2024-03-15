@@ -1,7 +1,7 @@
 //front-end
 import React from 'react'
 import Head from 'next/head'
-import { IdHeader, RoomsInput } from '../../components'
+import { IdHeader, OptionsIcon, RoomArticle, RoomsInput } from '../../components'
 //back-end
 import { creds, store, storage } from '../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -13,20 +13,21 @@ import {
 import { useRouter } from 'next/router'
 
 function RoomsPage() {
+  const [user] = useAuthState(creds)
   const router = useRouter()
   const {id} = router.query
-  const [user] = useAuthState(creds)
+
+
   const [snapshot, loadingSnapshot, error] = useDocument(
-    store.doc(`rooms/${id}`)
+    store.doc(`blogRooms/${id}`)
   )
 
   //to display the room articles
   //I swear to fucking christ, if you do not display, I'll short your motherboard
   const [roomArticles] = useCollection(
-    store.collection('rooms').doc(snapshot?.id).collection('roomArticles').orderBy('postedOn', 'asc')
+    store.collection('blogRooms').doc(snapshot?.id).collection('roomArticles').orderBy('postedOn', 'asc')
   )
   //I'm watching you....
-
   return (
     <div className='
     h-screen
@@ -53,7 +54,7 @@ function RoomsPage() {
         {/**top of div, contains header image, room name && room creator */}
         <div 
         className="
-        h-[20%]
+        h-[25%]
         bg-headerpic
         bg-cover
         bg-no-repeat
@@ -82,7 +83,12 @@ function RoomsPage() {
             ">
               {snapshot?.data()?.roomName}
             </h1>
-            <h3 className="
+            <span className="
+            flex
+            items-center
+            space-x-3
+            ">
+                          <h3 className="
             font-path-ex
             font-semibold
             text-base
@@ -90,6 +96,27 @@ function RoomsPage() {
             ">
               Created by {snapshot?.data()?.creator}
             </h3>
+            <button className="
+            rounded-full
+            p-3
+            border
+            border-amber-600
+            hover:border-amber-800
+            focus:border-amber-500
+            -inset-full
+            delay-100
+            transform
+            transition
+            ease-in-out
+            ">
+              <OptionsIcon 
+              style={{
+                fonSize: '1.4em',
+                color: 'orange'
+              }}
+              />
+            </button>
+            </span>
           </footer>
         </div>
         {/**posts below */}
@@ -109,7 +136,7 @@ function RoomsPage() {
         w-full
         flex
         flex-col
-        space-y-7
+        space-y-12
         items-start
         px-4
         py-3
@@ -117,7 +144,10 @@ function RoomsPage() {
         scrollbar-hide
         ">
           {roomArticles && roomArticles?.docs.map(articleData => (
-            <></>
+            <RoomArticle 
+            articleId={articleData?.id}
+            roomId={snapshot?.id}
+            />
           ))}
         </div>
         </div>

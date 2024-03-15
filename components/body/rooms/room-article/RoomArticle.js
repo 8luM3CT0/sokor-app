@@ -5,11 +5,12 @@ import { creds, store, storage } from '../../../../backend/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import firebase from 'firebase'
+import { CommentIcon, OptionsIcon, ReadIcon } from '../../..'
 
 function RoomArticle({articleId, roomId}) {
     //use for snapshot/ return of data for the article
     const [snapshot, loadingSnapshot, error] = useDocument(
-        store.doc(`/rooms/${roomId}`).collection('articles').doc(articleId)
+        store.doc(`/blogRooms/${roomId}`).collection('roomArticles').doc(articleId)
     )
     //to be used for updating any details over the article
     const [user] = useAuthState(creds)
@@ -41,7 +42,7 @@ function RoomArticle({articleId, roomId}) {
         if(!updatedTitle){
             alert(`No title there present, ${user?.displayName}`)
         } else if (updatedTitle){
-            store.doc(`/rooms/${roomId}/roomArticles/${articleId}`).set({
+            store.doc(`/blogRooms/${roomId}/roomArticles/${articleId}`).set({
                 postTitle: updatedTitle
             },{merge: true})
         }
@@ -54,7 +55,7 @@ function RoomArticle({articleId, roomId}) {
         if(!updatedDesc){
             alert(`No description there present, ${user?.displayName}`)
         } else if (updatedDesc){
-            store.doc(`/rooms/${roomId}/roomArticles/${articleId}`).set({
+            store.doc(`/blogRooms/${roomId}/roomArticles/${articleId}`).set({
                 postDesc: updatedDesc
             },{merge: true})
         }
@@ -63,7 +64,141 @@ function RoomArticle({articleId, roomId}) {
 
   return (
     <>
-    <div>RoomArticle</div>
+    <div 
+    key={snapshot?.id}
+    className='
+    max-h-[640px]
+    min-h-[600px]
+    my-7
+    w-[95%]
+    mx-auto
+    bg-slate-800
+    border
+    border-amber-500
+    flex
+    flex-col
+    rounded
+    hover:border-amber-700
+    hover:-skew-x-2
+    -inset-full
+    transform
+    transition
+    delay-100
+    ease-in-out
+    cursor-pointer
+    group
+    '
+    >
+                <header className="
+        flex
+        items-center
+        w-full
+        justify-between
+        border-b
+        border-amber-500
+        group-hover:border-amber-700
+        px-3
+        py-2
+        ">
+            <h3 className="
+            font-path-ex
+            font-bold
+            text-lg
+            text-amber-500
+            ">
+                {snapshot?.data()?.postedBy}
+            </h3>
+        </header>
+     {snapshot?.data()?.image ? (
+      <>
+        <body className="
+        h-[80%]
+        w-full
+        flex
+        flex-col
+        space-y-3
+        px-3
+        py-2
+        ">
+        <img 
+        src={snapshot?.data()?.image} 
+        alt="" 
+        className="
+        h-[65%]
+        rounded-md
+        mx-auto
+        my-auto
+        " />
+        </body>
+      </>  
+     ): (
+        <>
+        <body className="
+        h-[80%]
+        w-full
+        flex
+        flex-col
+        space-y-3
+        px-3
+        py-2
+        ">
+            
+        </body>
+        </>
+     )}  
+             <footer className="
+        border-t
+        z-50
+        border-amber-500
+        flex
+        items-center
+        justify-between
+        w-full
+        px-3
+        py-2
+        group-hover:border-amber-700
+        
+        ">
+            <span></span>
+            <span className="
+            w-[35%]
+            flex
+            items-center
+            justify-evenly
+            ">
+                                  <button className="
+roomArticleBtns
+        ">
+            <ReadIcon 
+            style={{
+                fontSize: '1.4em',
+                color: 'orange'
+            }}
+            />
+        </button>
+        <button className="
+roomArticleBtns
+        ">
+            <OptionsIcon 
+            style={{
+                fontSize: '1.4em',
+                color: 'orange'
+            }}
+            />
+        </button>
+        <button className="
+roomArticleBtns
+        ">
+            <CommentIcon 
+            style={{
+                fontSize: '1.4em',
+                color: 'orange'
+            }}
+            />
+        </button>
+            </span>
+        </footer>
+    </div>
     </>
   )
 }

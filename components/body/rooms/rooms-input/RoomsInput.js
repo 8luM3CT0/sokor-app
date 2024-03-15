@@ -37,91 +37,57 @@ function RoomsInput({roomId}) {
 
     if(!postTitle){
       return
-    } else if (postTitle && !postDesc && !mediaRef) {
-      store.collection('rooms').doc(roomId).collection('roomArticles').add({
-        postTitle,
+    }
+
+    if(postTitle && !postDesc && !mediaRef){
+      //something here for adding to database
+      store.collection('blogRooms').doc(roomId).collection('roomArticles').add({
+        title: postTitle,
         postedBy: user?.displayName,
+        posterPhoto: user?.photoURL,
         postedOn: firebase.firestore.FieldValue.serverTimestamp()
       })
       setPostTitle('')
       setRoomsPoster(false)
     } else if (postTitle && postDesc && !mediaRef){
-      store.collection('rooms').doc(roomId).collection('roomArticles').add({
-        postTitle,
-        postDesc,
+      //something here adding to database with description
+      store.collection('blogRooms').doc(roomId).collection('roomArticles').add({
+        title: postTitle,
+        description: postDesc,
         postedBy: user?.displayName,
+        posterPhoto: user?.photoURL,
         postedOn: firebase.firestore.FieldValue.serverTimestamp()
       })
       setPostTitle('')
       setPostDesc('')
       setRoomsPoster(false)
-    } else if (postTitle && !postDesc && mediaRef){
-      store.collection('rooms').doc(roomId).collection('roomArticles').add({
-        postTitle,
+    } else if (postTitle && mediaRef && !postDesc){
+      store.collection('blogRooms').doc(roomId).collection('roomArticles').add({
+        title: postTitle,
+        image: mediaRef,
         postedBy: user?.displayName,
+        posterPhoto: user?.photoURL,
         postedOn: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(doc => {
-        const uploadTask = storage
-        .ref(`rooms/${doc?.id}`)
-        .putString(mediaRef, 'data_url')
-
-        removeMedia()
-
-        uploadTask.on(
-          'state_change',
-          null,
-          error => console.error(error),
-          () => {
-            storage
-            .ref('hokkienWords')
-            .child(doc.id)
-            .getDownloadURL()
-            .then(media => {
-              store.collection('rooms').doc(doc.id).set({
-                media: mediaRef
-              },
-              {merge: true})
-            })
-          }
-        )
       })
-      setPostTitle('')
-      setRoomsPoster(false)
-    } else if (postTitle && postDesc && mediaRef ){
-      store.collection('rooms').doc(roomId).collection('roomArticles').add({
-        postTitle,
-        postedBy: user?.displayName,
-        postedOn: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(doc => {
-        const uploadTask = storage
-        .ref(`rooms/${doc?.id}`)
-        .putString(mediaRef, 'data_url')
-
-        removeMedia()
-
-        uploadTask.on(
-          'state_change',
-          null,
-          error => console.error(error),
-          () => {
-            storage
-            .ref('hokkienWords')
-            .child(doc.id)
-            .getDownloadURL()
-            .then(media => {
-              store.collection('rooms').doc(doc.id).set({
-                media: mediaRef
-              },
-              {merge: true})
-            })
-          }
-        )
-      })
-      setPostTitle('')
       setPostDesc('')
+      setPostTitle('')
+      setMediaRef(null)
       setRoomsPoster(false)
-    }
+    } else if (postTitle && mediaRef && postDesc){
+      store.collection('blogRooms').doc(roomId).collection('roomArticles').add({
+        title: postTitle,
+        description: postDesc,
+        image: mediaRef,
+        postedBy: user?.displayName,
+        posterPhoto: user?.photoURL,
+        postedOn: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      setPostDesc('')
+      setPostTitle('')
+      setMediaRef(null)
+      setRoomsPoster(false)
   }
+}
     return (
     <>
     <button 
@@ -227,22 +193,80 @@ function RoomsInput({roomId}) {
           overflow-y-scroll
           scrollbar-hide
           ">
-            <span className="roomsModalPostSpan">
+            {!mediaRef ? (
+              <span className="roomsModalPostSpan">
+              <h1 className="roomsModalPostTitle
+              ">
+                Image
+              </h1>
+              <button
+              onClick={() => filePickerRef.current.click()} 
+              className="roomsModalPostBtn focus:border-amber-500 focus:outline-0 w-[90%]">
+                Add media
+              </button>
+              <input 
+              type="file"  
+              hidden
+              ref={filePickerRef}
+              onChange={addMedia}
+              />
+              </span>
+            ): (
+              <span className="roomsModalPostSpan">
             <h1 className="roomsModalPostTitle
             ">
               Image
             </h1>
-            <button 
-            className="roomsModalPostBtn w-[90%]">
-              Add image
-            </button>
+            <img 
+            src={mediaRef} 
+            alt=""  
+            className='
+            h-[80%]
+            w-[50%]
+            mx-auto
+            border-0
+            rounded-md
+            hover:border
+            hover:border-amber-600
+            -inset-full
+            transform
+            transition
+            duration-300
+            ease-in-out
+            '/>
+            <span className="
+            w-full
+            flex
+            items-center
+            justify-evenly
+            ">
+                           <button
+              onClick={() => filePickerRef.current.click()} 
+              className="roomsModalMediaBtn focus:border-amber-500 focus:outline-0 w-[45%]">
+                Replace
+              </button> 
+              <input 
+              type="file"  
+              hidden
+              ref={filePickerRef}
+              onChange={addMedia}
+              />
+              <button
+              onClick={removeMedia} 
+              className="roomsModalMediaBtn focus:border-amber-500 focus:outline-0 w-[45%]">
+                Remove
+              </button> 
             </span>
+            </span>
+            )}
             <span className="roomsModalPostSpan">
             <h1 className="roomsModalPostTitle
             ">
               Title
             </h1>
             <input 
+            type='text'
+            onChange={e => setPostTitle(e.target.value)}
             placeholder='Title...'
             className="roomsModalPostInput h-[60px]">
             </input>
@@ -255,10 +279,6 @@ function RoomsInput({roomId}) {
               <h1 className='
               w-[60%]
               '></h1>
-              <button 
-            className="roomsModalPostBtn w-[30%]">
-              Add title
-            </button>
             </span>
             </span>
             <span className="roomsModalPostSpan">
@@ -267,6 +287,8 @@ function RoomsInput({roomId}) {
               Description
             </h1>
             <textarea
+            type='text'
+            onChange={e => setPostDesc(e.target.value)}
             placeholder='Description...' 
             className="
             roomsModalPostInput 
@@ -284,13 +306,30 @@ function RoomsInput({roomId}) {
               <h1 className='
               w-[60%]
               '></h1>
-              <button 
-            className="roomsModalPostBtn w-[30%]">
-              Add description
+            </span>
+            </span>
+            <button 
+            onClick={postArticle}
+            className="
+            w-[60%]
+            h-[65px]
+            mx-auto
+            rounded
+            border
+            text-lg
+            border-amber-500
+            text-amber-500
+            hover:border-amber-700
+            hover:text-amber-700
+            hover:-skew-x-6
+            focus:outline-none
+            -inset-full
+            delay-100
+            duration-100
+            ease-in-out
+            ">
+              Post
             </button>
-            </span>
-            </span>
-            
           </div>
         </div>
       </div>
