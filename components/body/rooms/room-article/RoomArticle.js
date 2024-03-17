@@ -14,11 +14,17 @@ function RoomArticle({articleId, roomId}) {
     )
     //to be used for updating any details over the article
     const [user] = useAuthState(creds)
+    //for reading more info on an article
+    const [readArticle, setReadArticle] = useState(false)
     //to be used also for updating any of the details
+    const [updateArticle, setUpdateArticle] = useState(false)
     const [updatedTitle, setUpdatedTitle] = useState('')
     const [updatedDesc, setUpdatedDesc] = useState('')
     const filePickerRef = useRef(null)
     const [updatedMedia, setUpdatedMedia] = useState(null)
+    //for comment section
+    const [commentOnArticle, setCommentOnArticle] = useState(false)
+    const [comment, setComment] = useState('')
 
     const addUpdatedMedia = e => {
         e.preventDefault()
@@ -62,6 +68,21 @@ function RoomArticle({articleId, roomId}) {
         setUpdatedDesc('')
     }
 
+    const openRead = e => {
+        e.preventDefault()
+        {commentOnArticle == true && (
+            setCommentOnArticle(false)
+        )}
+        setReadArticle(true)
+    }
+
+    const openComments = e => {
+        e.preventDefault()
+        {readArticle == true && (
+            setReadArticle(false)
+        )}
+        setCommentOnArticle(true)
+    }
   return (
     <>
     <div 
@@ -79,7 +100,6 @@ function RoomArticle({articleId, roomId}) {
     flex-col
     rounded
     hover:border-amber-700
-    hover:-skew-x-2
     -inset-full
     transform
     transition
@@ -97,6 +117,9 @@ function RoomArticle({articleId, roomId}) {
         border-b
         border-amber-500
         group-hover:border-amber-700
+        transform
+        transition
+        delay-100
         px-3
         py-2
         ">
@@ -157,7 +180,9 @@ function RoomArticle({articleId, roomId}) {
         px-3
         py-2
         group-hover:border-amber-700
-        
+        transform
+        transition
+        delay-100
         ">
             <span></span>
             <span className="
@@ -166,7 +191,9 @@ function RoomArticle({articleId, roomId}) {
             items-center
             justify-evenly
             ">
-                                  <button className="
+                                  <button 
+                                  onClick={openRead}
+                                  className="
 roomArticleBtns
         ">
             <ReadIcon 
@@ -176,17 +203,22 @@ roomArticleBtns
             }}
             />
         </button>
-        <button className="
-roomArticleBtns
-        ">
-            <OptionsIcon 
-            style={{
-                fontSize: '1.4em',
-                color: 'orange'
-            }}
-            />
-        </button>
-        <button className="
+        {(snapshot?.data()?.postedBy == user?.displayName || 
+        user?.email == 'rumlowb@gmail.com') && (
+            <button className="
+            roomArticleBtns
+                    ">
+                        <OptionsIcon 
+                        style={{
+                            fontSize: '1.4em',
+                            color: 'orange'
+                        }}
+                        />
+                    </button>
+        )}
+        <button
+        onClick={openComments}
+        className="
 roomArticleBtns
         ">
             <CommentIcon 
@@ -199,6 +231,37 @@ roomArticleBtns
             </span>
         </footer>
     </div>
+    {readArticle && (
+        <div className="
+        h-full
+        w-full
+        bg-slate-800
+        bg-opacity-80
+        grid
+        place-items-center
+        fixed
+        inset-0
+        z-50
+        ">
+            <div className="roomArticleRead"></div>
+        </div>
+    )}
+    {commentOnArticle && (
+        <div className="
+        h-full
+        w-full
+        bg-slate-800
+        bg-opacity-80
+        grid
+        place-items-center
+        fixed
+        inset-0
+        z-50
+        ">
+            <div className="roomArticleComment"></div>
+        </div>
+    )}
+    
     </>
   )
 }
