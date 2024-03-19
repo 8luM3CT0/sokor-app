@@ -268,7 +268,7 @@ function RoomsInput({roomId}) {
             type='text'
             onChange={e => setPostTitle(e.target.value)}
             placeholder='Title...'
-            className="roomsModalPostInput h-[60px]">
+            className="roomsModalPostInput h-[60px] font-black text-xl">
             </input>
             <span className="
             w-full
@@ -291,10 +291,12 @@ function RoomsInput({roomId}) {
             onChange={e => setPostDesc(e.target.value)}
             placeholder='Description...' 
             className="
-            roomsModalPostInput 
+            roomsModalPostInput
+            font-semibold 
             h-[190px] 
             overflow-y-scroll 
             scrollbar-hide 
+            text-base
             ">
             </textarea>
             <span className="

@@ -25,7 +25,7 @@ function RoomsPage() {
   //to display the room articles
   //I swear to fucking christ, if you do not display, I'll short your motherboard
   const [roomArticles] = useCollection(
-    store.collection('blogRooms').doc(snapshot?.id).collection('roomArticles').orderBy('postedOn', 'asc')
+    store.collection('blogRooms').doc(snapshot?.id).collection('roomArticles').orderBy('postedOn', 'desc')
   )
   //I'm watching you....
   return (
@@ -133,6 +133,8 @@ function RoomsPage() {
           />
         <div className="
         h-[90%]
+        bg-slate-900
+        rounded-lg
         w-full
         flex
         flex-col

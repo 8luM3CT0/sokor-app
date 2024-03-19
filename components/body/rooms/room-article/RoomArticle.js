@@ -184,7 +184,19 @@ function RoomArticle({articleId, roomId}) {
         transition
         delay-100
         ">
-            <span></span>
+            <h1 className="
+            font-fira-sans
+            font-bold
+            text-lg
+            text-amber-500
+            group-hover:text-amber-700
+            transform
+            transition
+            durtion-300
+            ease-in-out
+            ">
+                {snapshot?.data()?.title}
+            </h1>
             <span className="
             w-[35%]
             flex

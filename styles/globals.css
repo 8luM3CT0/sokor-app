@@ -616,8 +616,6 @@
   z-50
   sticky
   mx-auto
-  lg:w-[60%]
-  md:w-[75%]
   w-[90%]
   lg:h-[45px]
   md:h-[60px]
@@ -738,7 +736,6 @@
   w-[90%]
   mx-auto
   font-montserr
-  font-bold
   bg-slate-800
   px-4
   py-3
