@@ -13,8 +13,9 @@ function RoomsDisplay({roomId, doc}) {
   const router = useRouter()
   const [user] = useAuthState(creds)
   const [roomModal, setRoomModal] = useState(false)
-  //for adding members
+  //for adding members & role assignment
   const [memberEmail, setMemberEmail] = useState('')
+  const [memberRole, setMemberRole] = useState('')
 
   const addMember= e => {
     e.preventDefault()
@@ -23,11 +24,13 @@ function RoomsDisplay({roomId, doc}) {
 
     store.collection('blogRooms').doc(roomId).collection('roomMembers').add({
       memberEmail,
+      memberRole,
       addedBy: user?.displayName,
       addedOn: firebase.firestore.FieldValue.serverTimestamp()
     })
 
     setMemberEmail('')
+    setMemberRole('')
   }
 
   //return members list with code below
@@ -234,7 +237,8 @@ function RoomsDisplay({roomId, doc}) {
                   {doc?.roomDesc}
                 </span>
               </div>
-{(user?.displayName == doc?.creator || user?.email == 'rumlowb@gmail.com') && (              <div className="
+{(user?.displayName == doc?.creator || user?.email == 'rumlowb@gmail.com') && (              
+<div className="
               w-full
               bg-slate-800
               border
@@ -246,7 +250,14 @@ function RoomsDisplay({roomId, doc}) {
               px-3
               py-2
               ">
-                <input 
+             <span className="
+             w-full
+             flex
+             items-center
+             px-2
+             py-1
+             ">
+                 <input 
                 type="text"
                 placeholder={`Member's email, ${user?.displayName}`} 
                 value={memberEmail}
@@ -257,7 +268,30 @@ function RoomsDisplay({roomId, doc}) {
                 border-amber-500
                 px-3
                 py-2
-                w-[90%]
+                w-[40%]
+                mx-auto
+                h-[60px]
+                rounded
+                bg-slate-800
+                bg-opacity-80
+                text-amber-600
+                text-lg
+                font-fira-sans
+                font-normal
+                placeholder-amber-900
+                " />
+                   <input 
+                type="text"
+                placeholder={`Role`} 
+                value={memberRole}
+                onChange={e => setMemberRole(e.target.value)}
+                className="
+                focus:outline-none
+                border
+                border-amber-500
+                px-3
+                py-2
+                w-[40%]
                 mx-auto
                 h-[60px]
                 rounded
@@ -270,6 +304,7 @@ function RoomsDisplay({roomId, doc}) {
                 placeholder-amber-900
                 
                 " />
+             </span>
                 <span className="
                 flex
                 items-center
@@ -321,7 +356,7 @@ function RoomsDisplay({roomId, doc}) {
              ">
               {membersList && membersList.docs.map(member => (
                 <RoomMember 
-                doc={member.data()}
+                docData={member?.id}
                 roomId={roomId}
                 />
               ))}

@@ -184,154 +184,138 @@ function RoomsInput({roomId}) {
           <div className="
           h-[90%]
           w-full
-          px-4
-          py-3
           flex
           flex-col
           items-start
-          space-y-7
-          overflow-y-scroll
-          scrollbar-hide
+          ">
+          <div className="
+          h-full
+          w-full
+          flex
+          items-center
+          px-3
+          py-2
           ">
             {!mediaRef ? (
-              <span className="roomsModalPostSpan">
-              <h1 className="roomsModalPostTitle
+              <>
+             <span className="
+            w-[50%]
+            flex
+            flex-col
+            items-start
+            px-3
+            py-2
+            space-y-3
+            ">
+              <h1 className="
+              font-fira-sans
+              font-normal
+              text-lg
+              text-amber-600
               ">
-                Image
+                Image: 
               </h1>
-              <button
-              onClick={() => filePickerRef.current.click()} 
-              className="roomsModalPostBtn focus:border-amber-500 focus:outline-0 w-[90%]">
-                Add media
+              <button 
+              onClick={() => filePickerRef.current.click()}
+              className="
+              w-full
+              h-[45px]
+              rounded
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Add image
               </button>
               <input 
-              type="file"  
-              hidden
-              ref={filePickerRef}
+              type="file" 
+              hidden 
+              ref={mediaRef} 
               onChange={addMedia}
               />
-              </span>
+            </span>
+              </>
             ): (
-              <span className="roomsModalPostSpan">
-            <h1 className="roomsModalPostTitle
-            ">
-              Image
-            </h1>
-            <img 
-            src={mediaRef} 
-            alt=""  
-            className='
-            h-[80%]
+              <>
+              <span className="
             w-[50%]
-            mx-auto
-            border-0
-            rounded-md
-            hover:border
-            hover:border-amber-600
-            -inset-full
-            transform
-            transition
-            duration-300
-            ease-in-out
-            '/>
-            <span className="
-            w-full
+           h-full
             flex
+            flex-col
             items-center
-            justify-evenly
             ">
-                           <button
-              onClick={() => filePickerRef.current.click()} 
-              className="roomsModalMediaBtn focus:border-amber-500 focus:outline-0 w-[45%]">
-                Replace
-              </button> 
+              
+              <img 
+              src={mediaRef} 
+              alt="" 
+              className="
+              w-[90%]
+              h-full
+              rounded
+              border
+              border-amber-600
+              " />
+              <span className="
+              w-full
+              flex
+              items-center
+              ">
+                              <button 
+              onClick={() => filePickerRef.current.click()}
+              className="
+              w-full
+              h-[45px]
+              rounded
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Change
+              </button>
+              <button 
+              onClick={removeMedia}
+              className="
+              w-full
+              h-[45px]
+              rounded
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Remove
+              </button>
+              </span>
               <input 
-              type="file"  
-              hidden
-              ref={filePickerRef}
+              type="file" 
+              hidden 
+              ref={mediaRef} 
               onChange={addMedia}
               />
-              <button
-              onClick={removeMedia} 
-              className="roomsModalMediaBtn focus:border-amber-500 focus:outline-0 w-[45%]">
-                Remove
-              </button> 
             </span>
-            </span>
+              </>
             )}
-            <span className="roomsModalPostSpan">
-            <h1 className="roomsModalPostTitle
-            ">
-              Title
-            </h1>
-            <input 
-            type='text'
-            onChange={e => setPostTitle(e.target.value)}
-            placeholder='Title...'
-            className="roomsModalPostInput h-[60px] font-black text-xl">
-            </input>
-            <span className="
-            w-full
-            justify-between
-            flex
-            items-center
-            ">
-              <h1 className='
-              w-[60%]
-              '></h1>
-            </span>
-            </span>
-            <span className="roomsModalPostSpan">
-            <h1 className="roomsModalPostTitle
-            ">
-              Description
-            </h1>
-            <textarea
-            type='text'
-            onChange={e => setPostDesc(e.target.value)}
-            placeholder='Description...' 
-            className="
-            roomsModalPostInput
-            font-semibold 
-            h-[190px] 
-            overflow-y-scroll 
-            scrollbar-hide 
-            text-base
-            ">
-            </textarea>
-            <span className="
-            w-full
-            justify-between
-            flex
-            items-center
-            ">
-              <h1 className='
-              w-[60%]
-              '></h1>
-            </span>
-            </span>
-            <button 
-            onClick={postArticle}
-            className="
-            w-[60%]
-            h-[65px]
-            mx-auto
-            rounded
-            border
-            text-lg
-            border-amber-500
-            text-amber-500
-            hover:border-amber-700
-            hover:text-amber-700
-            hover:-skew-x-6
-            focus:outline-none
-            -inset-full
-            delay-100
-            duration-100
-            ease-in-out
-            ">
-              Post
-            </button>
+          </div>
           </div>
         </div>
       </div>

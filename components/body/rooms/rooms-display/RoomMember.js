@@ -6,15 +6,34 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import { creds, store } from '../../../../backend/firebase'
 
-function RoomMember({doc, roomId}) {
+function RoomMember({docData, roomId}) {
     const [user] = useAuthState(creds)
     
     const [snapshot, loadingSnapshot, error] = useDocument(
-        store.collection('rooms').doc(roomId).collection('members').doc(doc?.id)
+        store.doc(`blogRooms/${roomId}/roomMembers/${docData}`)
     )
+
+    console.log('roomMember data return >>>>', docData)
     //for member options
     const [optionsModal, setOptionsModal] = useState(false)
-    
+    //for updating member permissions
+    const [uMemberRole, setUMemberRole] = useState('')
+    const updateRole = e => {
+        e.preventDefault()
+
+        store.collection('blogRooms').doc(roomId).collection('roomMembers').doc(snapshot?.id).set({
+            memberRole: uMemberRole
+        }, {
+            merge: true
+        })
+        setUMemberRole('')
+    }
+    //for deleting member
+    const deleteMember = () => {
+        store.collection('blogRooms').doc(roomId).collection('roomMembers').doc(snapshot?.id).delete()
+
+        setOptionsModal(false)
+    }
     return (
     <>
     <div 
@@ -51,9 +70,9 @@ function RoomMember({doc, roomId}) {
         group-hover:text-amber-700
         group-hover:font-black
         ">
-            {doc?.memberEmail}
+            {snapshot?.data()?.memberEmail}
         </h1>
-        {(user?.email== 'rumlowb@gmail.com' || user?.displayName == doc?.addedBy && user) && (
+        {(user?.email== 'rumlowb@gmail.com' || user?.displayName == docData?.addedBy && user) && (
                     <button 
                     onClick={() => setOptionsModal(true)}
                     className="
@@ -90,13 +109,12 @@ function RoomMember({doc, roomId}) {
         ">
             <div className="
             h-[75%]
+            lg:w-[50%]
             w-[80%]
-            bg-slate-900
+            bg-slate-700
             border
             border-amber-500
             rounded-md
-            flex
-            flx-col
             ">
                 <header className="
                 flex
@@ -111,7 +129,7 @@ function RoomMember({doc, roomId}) {
                 py-3
                 ">
                     <h1 className="
-                    font-path-ex
+                    font-fira-sans
                     font-semibold
                     text-amber-500
                     text-lg
@@ -141,6 +159,125 @@ function RoomMember({doc, roomId}) {
                         X
                     </button>
                 </header>
+                <div className="
+                h-full 
+                w-full 
+                flex 
+                flex-col 
+                items-center 
+                overflow-hidden
+                px-3
+                py-2
+                ">
+                    <div className="
+                    h-[50%]
+                    w-full
+                    flex
+                    flex-col
+                    space-y-5
+                    ">
+                        <h2 className="
+                        font-fira-sans
+                        font-normal
+                        text-amber-500
+                        text-base
+                        ">
+                            {snapshot?.data()?.memberEmail}'s current role: {snapshot?.data()?.memberRole}
+                        </h2>
+                        <input 
+                        type="text" 
+                        value={uMemberRole}
+                        placeholder='Updated role for member'
+                        onChange={e => setUMemberRole(e.target.value)}
+                        className="
+                        h-[60px]
+                        w-[90%]
+                        mx-auto
+                        bg-slate-800
+                        rounded
+                        border
+                        border-amber-600
+                        text-lg
+                        text-amber-600
+                        focus:border-2
+                        focus:border-amber-800
+                        outline-none
+                        transition
+                        duration-300
+                        ease-in-out
+                        px-3
+                        py-2
+                        font-fira-sans
+                        placeholder-amber-500
+                        " />
+                        <span className="
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+                        ">
+                            <h1></h1>
+                            <button 
+                            onClick={updateRole}
+                            className="
+                            w-[45%]
+                            h-[50px]
+                            rounded-md
+                            border
+                            border-amber-600
+                            font-fira-sans
+                            text-lg
+                            text-amber-600
+                            hover:border-amber-700
+                            hover:text-amber-700
+                            transform
+                            transition
+                            duration-300
+                            ease-in-out
+                            ">
+                                Update role
+                            </button>
+                        </span>
+                    </div>
+                    <div className="
+                    h-[50%]
+                    w-full
+                    flex
+                    flex-col
+                    items-start
+                    space-y-5
+                    ">
+                             <h2 className="
+                        font-fira-sans
+                        font-normal
+                        text-amber-500
+                        text-base
+                        ">
+                        Or delete member from room
+                        </h2>
+                        <button 
+                            onClick={deleteMember}
+                            className="
+                            w-[60%]
+                            mx-auto
+                            h-[50px]
+                            rounded-md
+                            border
+                            border-red-500
+                            font-fira-sans
+                            text-lg
+                            text-red-500
+                            hover:border-red-600
+                            hover:text-red-600
+                            transform
+                            transition
+                            duration-300
+                            ease-in-out
+                            ">
+                                Delete
+                            </button>
+                    </div>
+                </div>
             </div>
         </div>
     )}
