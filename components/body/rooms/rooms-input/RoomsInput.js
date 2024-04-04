@@ -181,12 +181,9 @@ function RoomsInput({roomId}) {
               X
             </button>
           </header>
+           {/**medium to above sized screen form */}
           <div className="
-          h-[90%]
-          w-full
-          flex
-          flex-col
-          items-start
+          roomsInputModalMainDiv
           ">
           <div className="
           h-full
@@ -449,6 +446,267 @@ function RoomsInput({roomId}) {
             {/**end of second form */}
           </div>
           </div>
+            {/**end of form for larger than mobile devices */}
+            {/*form for mobile devices*/}
+            <div className="
+            roomsInputModalMainMobile
+            ">
+              {/**form for top of mobile UI */}
+              <div className="
+              h-[35%]
+              w-full
+              flex
+              flex-col
+              px-3
+              py-2
+              ">
+                                <h1 className="
+                font-fira-sans
+                font-semibold
+                text-lg
+                text-amber-600
+                ">
+                  Title
+                </h1>
+                <input 
+                type="text"
+                value={postTitle}
+                placeholder='Title'
+                onChange={e => setPostTitle(e.target.value)} 
+                className="
+                h-[60px]
+                w-[90%]
+                mx-auto
+                bg-inherit
+                rounded
+                outline-none
+                border
+                border-amber-600
+                text-lg
+                text-amber-600
+                focus:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                px-3
+                " />
+              </div>
+              {/**end of top mobile UI */}
+              {/**form for image at mobile */}
+              <div className="
+              w-full
+              h-[55%]
+              px-3
+              flex
+              flex-col
+              items-start
+              space-y-2
+              ">
+                                <h1 className="
+                font-fira-sans
+                font-semibold
+                text-base
+                text-amber-600
+                ">
+                  Description 
+                </h1>
+                <textarea 
+                type="text"
+                value={postDesc}
+                placeholder='Desc'
+                onChange={e => setPostDesc(e.target.value)} 
+                className="
+                h-[90%]
+                w-[90%]
+                mx-auto
+                bg-inherit
+                rounded
+                outline-none
+                border
+                border-amber-600
+                text-lg
+                text-amber-600
+                focus:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                px-4
+                py-3
+                " />
+              </div>
+              <span className="
+              h-full
+              w-full
+              flex
+              flex-col
+              space-y-1
+              px-2
+              py-1
+              ">
+                {!mediaRef ? (
+              <>
+             <span className="
+            w-full
+            h-full
+            flex
+            flex-col
+            items-start
+            px-3
+            py-2
+            space-y-3
+            ">
+              <h1 className="
+              font-fira-sans
+              font-semibold
+              text-lg
+              text-amber-600
+              ">
+                Image: 
+              </h1>
+              <button 
+              onClick={() => filePickerRef.current.click()}
+              className="
+              w-full
+              h-full
+              rounded-md
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              font-fira-sans
+              font-bold
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Add image
+              </button>
+              <input 
+              type="file" 
+              hidden 
+              ref={mediaRef} 
+              onChange={addMedia}
+              />
+            </span>
+              </>
+            ): (
+              <>
+              <span className="
+            w-full
+            px-3
+           h-full
+            flex
+            flex-col
+            items-center
+            ">
+              
+              <img 
+              src={mediaRef} 
+              alt="" 
+              className="
+              w-[70%]
+              h-[90%]
+              rounded
+              border
+              border-amber-600
+              " />
+              <span className="
+              w-full
+              flex
+              items-center
+              ">
+                              <button 
+              onClick={() => filePickerRef.current.click()}
+              className="
+              w-full
+              h-[45px]
+              rounded
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Change
+              </button>
+              <button 
+              onClick={removeMedia}
+              className="
+              w-full
+              h-[45px]
+              rounded
+              border
+              border-amber-600
+              text-lg
+              text-amber-600
+              hover:border-amber-800
+              hover:text-amber-800
+              transform
+              transition
+              duration-300
+              ease-in-out
+              ">
+                Remove
+              </button>
+              </span>
+              <input 
+              type="file" 
+              hidden 
+              ref={mediaRef} 
+              onChange={addMedia}
+              />
+            </span>
+              </>
+            )}
+              </span>
+                            <span className="
+              h-[10%]
+              w-full
+              flex
+              items-center
+              justify-between
+              px-3
+              ">
+                <h1 className="
+                w-[40%]
+                "></h1>
+                <button 
+                onClick={postArticle}
+                className="
+                w-[40%]
+                h-[95%]
+                rounded
+                px-3
+                py-2
+                font-fira-sans
+                font-semibold
+                outline-none
+                text-xl
+                text-amber-600
+                border
+                border-amber-600
+                hover:text-amber-700
+                hover:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                ">
+                  Add post
+                </button>
+              </span>
+            </div>
+            {/*end of form for mobile devices*/}
         </div>
       </div>
     )}

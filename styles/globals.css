@@ -656,6 +656,26 @@
   flex-col
 }
 
+.roomsInputModalMainDiv{
+  @apply
+  h-[90%]
+  w-full
+  md:flex
+  flex-col
+  items-start
+  hidden
+}
+.roomsInputModalMainMobile{
+  @apply
+  h-[90%]
+  w-full
+  flex
+  flex-col
+  items-start
+  py-3
+  md:hidden
+}
+
 .roomArticle{
   @apply
   rounded
