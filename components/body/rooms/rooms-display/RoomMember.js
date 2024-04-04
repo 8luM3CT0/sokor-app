@@ -96,8 +96,8 @@ function RoomMember({docData, roomId}) {
     </div>
     {optionsModal && (
         <div className="
-        h-[100vh]
-        w-[100vw]
+        h-full
+        w-full
         bg-slate-800
         bg-opacity-80
         fixed
@@ -109,8 +109,8 @@ function RoomMember({docData, roomId}) {
         ">
             <div className="
             h-[75%]
-            lg:w-[50%]
-            w-[80%]
+            lg:w-[40%]
+            w-[90%]
             bg-slate-700
             border
             border-amber-500
@@ -164,6 +164,7 @@ function RoomMember({docData, roomId}) {
                 w-full 
                 flex 
                 flex-col 
+                justify-center
                 items-center 
                 overflow-hidden
                 px-3
