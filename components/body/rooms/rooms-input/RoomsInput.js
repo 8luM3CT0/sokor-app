@@ -200,6 +200,7 @@ function RoomsInput({roomId}) {
               <>
              <span className="
             w-[50%]
+            h-full
             flex
             flex-col
             items-start
@@ -209,7 +210,7 @@ function RoomsInput({roomId}) {
             ">
               <h1 className="
               font-fira-sans
-              font-normal
+              font-semibold
               text-lg
               text-amber-600
               ">
@@ -219,12 +220,14 @@ function RoomsInput({roomId}) {
               onClick={() => filePickerRef.current.click()}
               className="
               w-full
-              h-[45px]
-              rounded
+              h-full
+              rounded-md
               border
               border-amber-600
               text-lg
               text-amber-600
+              font-fira-sans
+              font-bold
               hover:border-amber-800
               hover:text-amber-800
               transform
@@ -256,8 +259,8 @@ function RoomsInput({roomId}) {
               src={mediaRef} 
               alt="" 
               className="
-              w-[90%]
-              h-full
+              w-[70%]
+              h-[90%]
               rounded
               border
               border-amber-600
@@ -315,6 +318,135 @@ function RoomsInput({roomId}) {
             </span>
               </>
             )}
+            {/**form with post title && description */}
+            <div className="
+            h-full
+            w-[50%]
+            flex
+            flex-col
+            items-start
+            px-2
+            py-1
+            ">
+              <span className="
+              h-[15%]
+              w-full
+              flex
+              flex-col
+              items-start
+              justify-items-center
+              space-y-2
+              ">
+                <h1 className="
+                font-fira-sans
+                font-semibold
+                text-lg
+                text-amber-600
+                ">
+                  Title
+                </h1>
+                <input 
+                type="text"
+                value={postTitle}
+                placeholder='Title'
+                onChange={e => setPostTitle(e.target.value)} 
+                className="
+                h-[60px]
+                w-[95%]
+                mx-auto
+                bg-inherit
+                rounded
+                outline-none
+                border
+                border-amber-600
+                text-lg
+                text-amber-600
+                focus:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                px-3
+                " />
+              </span>
+              <span className="
+              w-full
+              h-[75%]
+              flex
+              flex-col
+              items-start
+              space-y-2
+              ">
+                                <h1 className="
+                font-fira-sans
+                font-semibold
+                text-base
+                text-amber-600
+                ">
+                  Description 
+                </h1>
+                <textarea 
+                type="text"
+                value={postDesc}
+                placeholder='Desc'
+                onChange={e => setPostDesc(e.target.value)} 
+                className="
+                h-[90%]
+                w-full
+                bg-inherit
+                rounded
+                outline-none
+                border
+                border-amber-600
+                text-lg
+                text-amber-600
+                focus:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                px-4
+                py-3
+                " />
+              </span>
+              <span className="
+              h-[10%]
+              w-full
+              flex
+              items-center
+              justify-between
+              px-3
+              ">
+                <h1 className="
+                w-[40%]
+                "></h1>
+                <button 
+                onClick={postArticle}
+                className="
+                w-[40%]
+                h-[95%]
+                rounded
+                px-3
+                py-2
+                font-fira-sans
+                font-semibold
+                outline-none
+                text-xl
+                text-amber-600
+                border
+                border-amber-600
+                hover:text-amber-700
+                hover:border-amber-700
+                transform
+                transition
+                duration-300
+                ease-in-out
+                ">
+                  Add post
+                </button>
+              </span>
+            </div>
+            {/**end of second form */}
           </div>
           </div>
         </div>

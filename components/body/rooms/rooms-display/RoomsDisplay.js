@@ -268,7 +268,7 @@ function RoomsDisplay({roomId, doc}) {
                 border-amber-500
                 px-3
                 py-2
-                w-[40%]
+                w-[45%]
                 mx-auto
                 h-[60px]
                 rounded
@@ -291,7 +291,7 @@ function RoomsDisplay({roomId, doc}) {
                 border-amber-500
                 px-3
                 py-2
-                w-[40%]
+                w-[45%]
                 mx-auto
                 h-[60px]
                 rounded
@@ -309,14 +309,15 @@ function RoomsDisplay({roomId, doc}) {
                 flex
                 items-center
                 justify-between
+                w-[90%]
+                mx-auto
                 px-2
                 py-1
                 ">
-                  <h1></h1>
                   <button 
                   onClick={addMember}
                   className="
-                  w-[40%]
+                  w-[45%]
                   h-[50px]
                   border
                   border-amber-500
@@ -334,6 +335,28 @@ function RoomsDisplay({roomId, doc}) {
                   ">
                     Add member
                   </button>
+                  {(user?.email == 'rumlowb@gmail.com' || user?.email == doc?.creator) && (
+                                      <button 
+                                      className="
+                                      w-[45%]
+                                      h-[50px]
+                                      border
+                                      border-amber-500
+                                      text-base
+                                      text-amber-500
+                                      hover:border-amber-700
+                                      hover:text-amber-700
+                                      hover:-skew-x-6
+                                      focus:outline-none
+                                      delay-100
+                                      -inset-full
+                                      transform
+                                      transition
+                                      ease-in-out
+                                      ">
+                                        Add member from list
+                                      </button>
+                  )}
                 </span>
               </div>
 )}            {/**
