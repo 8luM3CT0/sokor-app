@@ -88,25 +88,8 @@ function RoomArticle({articleId, roomId}) {
     <div 
     key={snapshot?.id}
     className='
-    max-h-[640px]
-    min-h-[600px]
-    my-7
-    w-[95%]
-    mx-auto
-    bg-slate-800
-    border
-    border-amber-500
-    flex
-    flex-col
-    rounded
-    hover:border-amber-700
-    -inset-full
-    transform
-    transition
-    delay-100
-    ease-in-out
-    cursor-pointer
-    group
+    roomArticleMainDiv
+       group
     '
     >
                 <header className="
@@ -126,10 +109,10 @@ function RoomArticle({articleId, roomId}) {
             <h3 className="
             font-path-ex
             font-bold
-            text-lg
+            text-xl
             text-amber-500
             ">
-                {snapshot?.data()?.postedBy}
+                {snapshot?.data()?.title}
             </h3>
         </header>
      {snapshot?.data()?.image ? (
@@ -164,6 +147,10 @@ function RoomArticle({articleId, roomId}) {
         space-y-3
         px-3
         py-2
+        overflow-y-scroll
+        scrollbar-thin
+        scrollbar-track-slate-800
+        scrollbar-thumb-amber-600
         ">
         <h2 className="
         font-fira-sans
@@ -202,7 +189,7 @@ function RoomArticle({articleId, roomId}) {
             durtion-300
             ease-in-out
             ">
-                {snapshot?.data()?.title}
+                  {snapshot?.data()?.postedBy}
             </h1>
             <span className="
             w-[35%]
