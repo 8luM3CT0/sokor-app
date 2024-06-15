@@ -770,6 +770,68 @@
   rounded
 }
 
+.roomArticleDiv{
+  @apply
+  lg:h-[88%]
+  h-[85%]
+  w-full
+  px-3
+  py-2
+}
+
+.roomArticleFooter{
+  @apply
+  h-[50px]
+  w-full
+  justify-between
+  border-t
+  px-3
+  py-1
+  border-amber-600
+  lg:flex
+  items-center
+  hidden
+  bottom-0
+}
+
+.roomArticleFooterMobile{
+  @apply
+  h-[50px]
+  w-full
+  justify-between
+  border-t
+  px-3
+  py-1
+  border-amber-600
+  flex
+  items-center
+  lg:hidden
+  bottom-0
+}
+
+.roomArticleFooterBtn{
+  @apply
+  px-3
+  py-1
+  font-fira-sans
+  font-semibold
+  rounded-md
+  border
+  border-amber-500
+  text-lg
+  text-amber-500
+  hover:border-amber-700
+  hover:text-amber-700
+  hover:italic
+  hover:-skew-x-6
+  transform
+  transition
+  duration-300
+  delay-75
+  -inset-full
+  ease-in-out
+}
+
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }

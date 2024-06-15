@@ -165,7 +165,14 @@ function RoomArticle({articleId, roomId}) {
         px-3
         py-2
         ">
-            
+        <h2 className="
+        font-fira-sans
+        font-normal
+        text-amber-500
+        text-lg
+        ">
+            {snapshot?.data()?.description}
+        </h2>
         </body>
         </>
      )}  
@@ -255,7 +262,90 @@ roomArticleBtns
         inset-0
         z-50
         ">
-            <div className="roomArticleRead"></div>
+            <div className="roomArticleRead">
+                <header className="
+                top-0
+                w-full
+                border
+                border-amber-600
+                justify-between
+                flex
+                items-center
+                px-3
+                py-1
+                h-[50px]
+                ">
+                    <h1 className="
+                    font-fira-sans
+                    font-semibold
+                    text-amber-500
+                    text-lg
+                    ">
+                        By: {snapshot?.data()?.postedBy}
+                    </h1>
+                    <button 
+                    onClick={() => setReadArticle(false)}
+                    className="
+                    px-3
+                    py-1
+                    outline-none
+                    font-fira-sans
+                    font-semibold
+                    text-lg
+                    text-amber-500
+                    border
+                    border-amber-500
+                    rounded-full
+                    hover:text-amber-700
+                    hover:border-amber-700
+                    hover:font-bold
+                    hover:border-2
+                    transform
+                    transition
+                    duration-300
+                    ease-in-out
+                    ">
+                        X
+                    </button>
+                </header>
+                <div className="
+                roomArticleDiv
+                "></div>
+                <footer className="roomArticleFooter">
+                    <span></span>
+                    <span className="
+                    flex
+                    items-center
+                    space-x-4
+                    ">
+                        <button className="roomArticleFooterBtn">
+                        Comment
+                    </button>
+                    {(user?.displayName == snapshot?.data()?.postedBy) && (
+                        <button className="roomArticleFooterBtn">
+                        Edit
+                    </button>
+                    )}
+                    </span>
+                </footer>
+                <footer className="roomArticleFooterMobile">
+                <span></span>
+                    <span className="
+                    flex
+                    items-center
+                    space-x-4
+                    ">
+                        <button className="roomArticleFooterBtn">
+                        Comment
+                    </button>
+                    {(user?.displayName == snapshot?.data()?.postedBy) && (
+                        <button className="roomArticleFooterBtn">
+                        Edit
+                    </button>
+                    )}
+                    </span>
+                </footer>
+            </div>
         </div>
     )}
     {commentOnArticle && (

@@ -396,7 +396,7 @@ function RoomsDisplay({roomId, doc}) {
              *  */}
           </main>
           <footer className="
-          h-[50px]
+          h-[60px]
           bottom-0
           z-50
           sticky

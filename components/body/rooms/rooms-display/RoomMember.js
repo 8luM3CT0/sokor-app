@@ -72,6 +72,16 @@ function RoomMember({docData, roomId}) {
         ">
             {snapshot?.data()?.memberEmail}
         </h1>
+        <h1 className="
+        font-fira-sans
+        font-normal
+        text-base
+        text-amber-500
+        group-hover:text-amber-700
+        group-hover:font-black
+        ">
+            {snapshot?.data()?.memberRole}
+        </h1>
         {(user?.email== 'rumlowb@gmail.com' || user?.displayName == docData?.addedBy && user) && (
                     <button 
                     onClick={() => setOptionsModal(true)}
