@@ -43,8 +43,9 @@ function RoomsPage() {
       />
       <main className="
       h-full
-      lg:w-[75%]
-      w-[85%]
+      lg:w-[85%]
+      pb-20
+      w-[95%]
       mx-auto
       bg-slate-700
       flex
@@ -142,6 +143,7 @@ function RoomsPage() {
         items-start
         px-4
         py-3
+        pb-12
         overflow-y-scroll
         scrollbar-hide
         ">
