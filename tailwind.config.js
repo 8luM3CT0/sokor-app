@@ -24,7 +24,8 @@ module.exports = {
         'path-ex': ['Pathway Extreme', 'sans-serif'],
         'fira-sans': ['Fira Sans', 'sans-serif'],
         'montserr': ['Montserrat', 'sans-serif'],
-        'mont-sub': ['Montserrat Subrayada', 'sans-serif']
+        'mont-sub': ['Montserrat Subrayada', 'sans-serif'],
+        'fredoka': ['Fredoka', 'sans-serif']
       },
       backgroundImage: theme => ({
         'headerpic':

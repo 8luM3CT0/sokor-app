@@ -48,9 +48,6 @@ export default function Home () {
 
   }
 
-  const [neutralPosts] = useCollection(
-    store.collection('neutral_posts').orderBy('addedOn', 'asc')
-  )
 
   const [userPosts] = useCollection(
     store.collection('user_posts').orderBy('addedOn', 'asc')
@@ -62,130 +59,81 @@ export default function Home () {
       className='
     h-screen 
     overflow-hidden
-    bg-slate-900
+    bg-purple-700
+    bg-opacity-5
     bg-no-repeat 
     bg-cover
     '
     >
       <Head>
-        <title>A blog for random thoughts</title>
+        <title>Mobilizing Action with Key Information</title>
       </Head>
       <Header />
       <main className="
       w-[90%]
       mx-auto
-      border-x-2
-      border-amber-400
+      bg-opacity-5
       h-full
       overflow-hidden
       flex
       flex-col
       place-items-center
       space-y-4
-      py-4
       ">
         <div className="
-        w-[90%]
-        h-[30%]
-        bg-slate-800
-        mx-auto
-        shadow-lg
-        rounded-lg
-        flex
-        flex-col
-        py-2
-        place-items-stretch
-        space-y-2
-        ">
-          <input 
-          type="text" 
-          placeholder={`What's the title for this, friend ?`}
-          value={postTitle}
-          onChange={e => setPostTitle(e.target.value)}
-          className="
-          h-[40px]
-          rounded-lg
-          w-[95%]
-          mx-auto
-          border-0
-          bg-slate-600
-          px-4
-          py-2
-          font-montserr
-          font-semibold
-          text-xl
-          text-amber-200
-          outline-none
-          " />
-          <textarea 
-          type="text"
-          value={postText}
-          onChange={e => setPostText(e.target.value)}
-          placeholder={`What's on your mind, stranger ?`}
-          className="
-          h-[70%]
-          w-[95%]
-          text-lg
-          font-montserr
-          font-normal
-          px-4
-          py-3
-          text-amber-300
-          mx-auto
-          overflow-y-scroll
-          scrollbar-thin
-          scrollbar-track-slate-700
-          scrollbar-thumb-amber-400
-          rounded-md
-          bg-slate-600
-          outline-none
-          "></textarea>
-          <button
-          onClick={addPostToDb}
-          className='
-          w-[60%]
-          mx-auto
-          h-[35px]
-          rounded-lg
-          bg-amber-700
-          font-fira-sans
-          font-semibold
-          text-slate-50
-          hover:shadow-xl
-          hover:shadow-slate-800
-          hover:-skew-x-12
-          hover:border-slate-300
-          hover:border-x-2
-          hover:border-b-2
-          active:border-x-4
-          active:border-b-4
-          active:shadow-amber-500
-          active:shadow-md
-          transform
-          transition-all
-          duration-300
-          ease-in-out
-          '
-          >
-            Post
-          </button>
-        </div>
-        <div className="
-        h-[60%]
-        overflow-y-scroll
-        scrollbar-thin
-        scrollbar-thumb-amber-600
-        scrollbar-track-slate-600
-        bg-slate-800
         w-full
-        space-y-12
-         ">
-          {neutralPosts !== null && neutralPosts?.docs.map(post => (
-            <Post post={post} />
-          ))}
-          {(user && userPosts !== null) && userPosts?.docs.map(post => (
-            <UserPost post={post} />
-          ))}
+        mx-auto
+        min-h-[360px]
+        max-h-[420px]
+        bg-cover
+        bg-no-repeat
+        bg-placeholder
+        flex
+        items-center
+        rounded-b-md
+        ">
+          <div className="
+          w-[50%]
+          bg-purple-50
+          bg-opacity-25
+          h-full
+          flex
+          flex-col
+          items-start
+          ">
+            <span className="
+            h-[50%]
+            w-full
+            items-center
+            ">
+              <h1 className="
+              font-fredoka
+              font-semibold
+              text-xl
+              text-purple-300
+              ">
+                Homepage
+              </h1>
+            </span>
+                        <span className="
+            h-[50%]
+            w-full
+            items-center
+            ">
+              <h4 className="
+              font-fira-sans
+              font-normal
+              text-base
+              text-purple-50
+              ">
+                Dummy text to highlight something
+              </h4>
+            </span>
+          </div>
+          <div className="
+          w-[50%]
+          h-full
+          "></div>
         </div>
       </main>
           </div>
