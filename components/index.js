@@ -20,7 +20,7 @@ export {FaConnectdevelop, FaReadme as ReadIcon, FaCommentAlt as CommentIcon} fro
 export {SiBmcsoftware} from 'react-icons/si'
 export {AiOutlineHome, AiOutlineClose, AiOutlineEdit} from 'react-icons/ai'
 export {GiCancel} from 'react-icons/gi'
-export {CiMoneyBill as MoneyIcon} from 'react-icons/ci'
+export {CiMoneyBill as MoneyIcon, CiMenuBurger as MenuIcon} from 'react-icons/ci'
 export {MdMeetingRoom as RoomIcon, MdRoomPreferences as AltRoomIcon, MdOutlineMeetingRoom as MeetingIcon} from 'react-icons/md'
 export {IoMdOptions as OptionsIcon} from 'react-icons/io'
 export {FiTrash as TrashIcon} from 'react-icons/fi'

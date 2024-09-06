@@ -106,28 +106,6 @@ export default function Home () {
             w-full
             items-center
             ">
-              <h1 className="
-              font-fredoka
-              font-semibold
-              text-xl
-              text-purple-300
-              ">
-                Homepage
-              </h1>
-            </span>
-                        <span className="
-            h-[50%]
-            w-full
-            items-center
-            ">
-              <h4 className="
-              font-fira-sans
-              font-normal
-              text-base
-              text-purple-50
-              ">
-                Dummy text to highlight something
-              </h4>
             </span>
           </div>
           <div className="
