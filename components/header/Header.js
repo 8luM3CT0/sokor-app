@@ -248,7 +248,8 @@ function Header() {
                 className="
                 text-slate-100
                 hover:text-purple-50
-                w-full
+                w-[85%]
+                mx-auto
                 px-5
                 py-4
                 text-base
