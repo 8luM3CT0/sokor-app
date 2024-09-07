@@ -163,7 +163,8 @@ function Header() {
             className="
             text-slate-100
             hover:text-purple-50
-            w-full
+            w-[60%]
+            mx-auto
             h-[80%]
             text-base
             rounded-lg
@@ -248,7 +249,8 @@ function Header() {
                 text-slate-100
                 hover:text-purple-50
                 w-full
-                h-[80%]
+                px-5
+                py-4
                 text-base
                 rounded-lg
                 font-montserr
