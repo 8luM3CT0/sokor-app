@@ -15,7 +15,7 @@ import {useAuthState} from 'react-firebase-hooks/auth'
 import {useCollection} from 'react-firebase-hooks/firestore'
 import firebase from 'firebase'
 
-export default function Home () {
+export default function Home ({testNews}) {
 
   const [postText, setPostText] = useState('')
   const [postTitle, setPostTitle] = useState('')
@@ -58,6 +58,8 @@ export default function Home () {
     store.collection('maki_posts').orderBy('addedOn', 'asc')
   )
 
+ 
+  console.log('Test news api >>>>>>>>>>>>>>>>>>>>>>>>>>', testNews?.articles?.results)
 
   return (
     <>
@@ -141,13 +143,28 @@ export default function Home () {
           flex
           flex-col
           items-center
-          space-y-8
           overflow-hidden
           ">
+            <span className="
+            font-fredoka
+            font-semibold
+            text-purple-100
+            text-lg
+            px-3
+            bg-purple-800
+            bg-opacity-80
+            w-full
+            rounded-t-md
+            h-[40px]
+            flex
+            items-center
+            ">
+              News
+            </span>
             <div className="
              bg-purple-600
             bg-opacity-40
-            h-[58%]
+            h-[50%]
             pb-12
             w-full
             rounded
@@ -159,8 +176,42 @@ export default function Home () {
             flex
             flex-col
             items-center
-           
-            "></div>
+            ">
+              {testNews && testNews?.articles?.results.map(news => (
+                <span 
+                className="
+                flex
+                flex-col
+                w-[85%]
+                space-y-4
+                py-3
+                bg-purple-800
+                rounded-md
+                border
+                border-purple-50
+                ">
+                  <header className="
+                  flex
+                  items-center
+                  w-full
+                  justify-between
+                  px-3
+                  py-2
+                  border-b
+                  border-purple-50
+                  "></header>
+                  <h2 className="
+                  font-fredoka
+                  font-semibold
+                  text-lg
+                  text-purple-50
+                  px-2
+                  ">
+                    {news?.title}
+                  </h2>
+                </span>
+              ))}
+            </div>
           </div>
           {/**news headlines */}
           {/**input field && inputs by members */}
@@ -505,4 +556,18 @@ export default function Home () {
           )}
           </>
   )
+}
+
+
+export async function getServerSideProps(){
+  //code 
+  const testNews = await fetch(
+    'https://newsapi.ai/api/v1/article/getArticles?query=%7B%22%24query%22%3A%7B%22conceptUri%22%3A%22http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FCanoga_Park%2C_Los_Angeles%22%7D%2C%22%24filter%22%3A%7B%22forceMaxDataTimeWindow%22%3A%2231%22%7D%7D&resultType=articles&articlesSortBy=date&apiKey=c579d06b-559e-4166-9a13-e770f3eec391'
+  ).then(res => res.json())
+
+  return{
+    props: {
+      testNews
+    }
+  }
 }
