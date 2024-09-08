@@ -25,14 +25,12 @@ export default function Home ({testNews}) {
   const [postModal, setPostModal] = useState(false)
   const date = new Date().toLocaleDateString()
 
-  const checkUserIfEditor = () => {
-    if(user){
-      const [editorSnapshot] = useCollection(
-        store.collection('maki_users').where('email', '==', user?.email)
-      )
-      const userIsAnEditor = editorSnapshot?.size > 0
-    }
-  }
+  
+  const [userSnap] = useCollection(
+    store.collection('maki_users').where('email', '==', user?.email)
+  )
+
+  const isAnEditor = userSnap?.size > 0
 
   const addPostToDb = e => {
     e.preventDefault()
@@ -249,7 +247,7 @@ export default function Home ({testNews}) {
           items-center
           overflow-hidden
           ">
-            {(user?.email == 'rumlowb@gmail.com' || checkUserIfEditor) ? (
+            {(user?.email == 'rumlowb@gmail.com' || isAnEditor) ? (
                           <span 
                           onClick={() => setPostModal(true)}
                           className="
@@ -283,40 +281,6 @@ export default function Home ({testNews}) {
                               Post
                             </h2>
                           </span>
-            ): (user && !checkUserIfEditor) ? (
-              <>
-              <span className="
-                          grid
-                          place-items-center
-                          w-full
-                          bg-purple-400
-                          hover:bg-purple-600
-                          border
-                          border-purple-100
-                          rounded-md
-                          px-3
-                          py-2
-                          group
-                          transform
-                          transition
-                          duration-300
-                          ease-in-out
-                          ">
-                            <h2 className="
-                            font-fira-sans
-                            font-semibold
-                            text-lg
-                            text-purple-50
-                            group-hover:text-purple-200
-                            transform
-                          transition
-                          duration-300
-                          ease-in-out
-                            ">
-                              Ask permission to add
-                            </h2>
-                          </span>
-              </>
             ): (
               <>
                               <span className="
