@@ -7,6 +7,7 @@ import {
   Post,
   UserPost
 } from '../components/'
+import {BookOpenIcon} from '@heroicons/react/solid'
 //back-end
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -199,7 +200,29 @@ export default function Home ({testNews}) {
                   py-2
                   border-b
                   border-purple-50
-                  "></header>
+                  ">
+                    <span></span>
+                    <button className="
+                    rounded-full
+                    p-2
+                    text-purple-400
+                    border
+                    border-purple-400
+                    hover:text-purple-500
+                    hover:border-purple-500
+                    focus:outline-none
+                    transform
+                    transition
+                    duration-300
+                    ease-in-out
+                    ">
+                      <BookOpenIcon 
+                        className='
+                        h-[15px]
+                        '
+                      />
+                    </button>
+                  </header>
                   <h2 className="
                   font-fredoka
                   font-semibold
