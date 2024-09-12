@@ -14,7 +14,6 @@ import { useRouter } from 'next/router'
 import { creds, store } from '../backend/firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {useCollection} from 'react-firebase-hooks/firestore'
-import firebase from 'firebase'
 
 export default function Home ({testNews}) {
 
@@ -25,12 +24,30 @@ export default function Home ({testNews}) {
   const [postModal, setPostModal] = useState(false)
   const date = new Date().toLocaleDateString()
 
-  
-  const [userSnap] = useCollection(
-    store.collection('maki_users').where('email', '==', user?.email)
-  )
 
-  const isAnEditor = userSnap?.size > 0
+  const [isUserAnEditor, setIsUserAnEditor] = useState(false);
+
+  // Function to check if the user is an editor
+  const checkUserIsEditor = async () => {
+    if (user) {
+      try {
+        const querySnapshot = await firestore
+          .collection('maki_users')
+          .where('email', '==', user.email)
+          .get();
+        
+        // Check if the user is found in the editors collection
+        const isEditor = querySnapshot.size > 0;
+        setIsUserAnEditor(isEditor);
+      } catch (error) {
+        console.error('Error checking editor status: ', error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkUserIsEditor();
+  }, [user]); // Run the check when the user state changes
 
   const addPostToDb = e => {
     e.preventDefault()
@@ -58,7 +75,6 @@ export default function Home ({testNews}) {
   )
 
  
-  console.log('Test news api >>>>>>>>>>>>>>>>>>>>>>>>>>', testNews?.articles?.results)
 
   return (
     <>
@@ -247,7 +263,9 @@ export default function Home ({testNews}) {
           items-center
           overflow-hidden
           ">
-            {(user?.email == 'rumlowb@gmail.com' || isAnEditor) ? (
+            {(user?.email == 'rumlowb@gmail.com' || 
+            user?.email == 'reaperiff697@gmail.com' || 
+            (user && isUserAnEditor) ) ? (
                           <span 
                           onClick={() => setPostModal(true)}
                           className="
