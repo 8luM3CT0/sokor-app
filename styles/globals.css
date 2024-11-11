@@ -10,7 +10,7 @@
     lg:hidden
     inline-flex
   }
- 
+  
   .forDesktop{
     @apply
     lg:flex
@@ -889,6 +889,81 @@ all css below for M.A.K.I
   ease-in-out
 }
 
+
+/*
+all CSS below for BrightPath
+*/
+.desktopMainDiv{
+  @apply
+  w-[90%]
+  mx-auto
+  bg-opacity-5
+  h-full
+  overflow-hidden
+  lg:flex
+  flex-col
+  items-center
+  hidden
+}
+
+.mobileMainDiv{
+  @apply
+  lg:hidden
+  w-[90%]
+  mx-auto
+  bg-opacity-5
+  h-full
+  overflow-hidden
+  flex
+  flex-col
+  items-center
+}
+
+.displayBtn{
+  @apply
+  w-[85%]
+            h-[60px]
+            rounded-md
+            bg-yellow-600
+            hover:bg-yellow-700
+            font-montserr
+            font-semibold
+            text-2xl
+            text-slate-800
+            hover:text-slate-600
+            transform
+            transition
+            duration-300
+            ease-in-out
+            flex
+            items-center
+            justify-between
+            px-4
+            space-x-5
+}
+
+.displayBtnActive{
+  @apply
+  w-[85%]
+            h-[60px]
+            rounded-md
+            bg-amber-400
+            font-montserr
+            font-semibold
+            border
+            border-yellow-200
+            text-2xl
+            text-slate-600
+            transform
+            transition
+            duration-300
+            ease-in-out
+            flex
+            items-center
+            justify-between
+            px-4
+            space-x-5
+}
 @keyframes fade {
   0% { background-color: rgb(72, 40, 40); }
   25% { background-color: rgb(57, 9, 57); }

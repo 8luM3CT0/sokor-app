@@ -5,9 +5,15 @@ import {
   Icon,
   Header,
   Post,
-  UserPost
+  UserPost,
+  MoodIcon,
+  CommChatIcon,
+  ResIcon,
+  CrisisIcon,
+  RightIcon,
+  LeftIcon
 } from '../components/'
-import {BookOpenIcon} from '@heroicons/react/solid'
+import {BookOpenIcon, BriefcaseIcon, PhoneIcon, PresentationChartLineIcon, SearchIcon, SpeakerphoneIcon, UsersIcon} from '@heroicons/react/solid'
 //back-end
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -17,11 +23,12 @@ import {useCollection} from 'react-firebase-hooks/firestore'
 
 export default function Home ({testNews}) {
 
-  const [postText, setPostText] = useState('')
-  const [postTitle, setPostTitle] = useState('')
   const [user] = useAuthState(creds)
-  //for posts
-  const [postModal, setPostModal] = useState(false)
+  //for display buttons
+  const [moTrDis, setMotrDis] = useState(true)
+  const [commChatDis, setCommChatDis] = useState(false)
+  const [resSec, setResSec] = useState(false)
+  const [criSupp, setCriSupp] = useState(false)
   const date = new Date().toLocaleDateString()
 
 
@@ -32,7 +39,7 @@ export default function Home ({testNews}) {
     if (user) {
       try {
         const querySnapshot = await firestore
-          .collection('maki_users')
+          .collection('diagnosed_users')
           .where('email', '==', user.email)
           .get();
         
@@ -49,516 +56,377 @@ export default function Home ({testNews}) {
     checkUserIsEditor();
   }, [user]); // Run the check when the user state changes
 
-  const addPostToDb = e => {
-    e.preventDefault()
 
-    if(!postText || !postTitle){
-      alert(`Lacking in one of the fields!! Please recheck`)
-    } else {
-      store.collection('maki_posts').add({
-        postText,
-        postTitle,
-        addedBy: user?.email,
-        adderName: user?.displayName,
-        adderUrl: user?.photoURL,
-        addedOn: date
-      })
-      setPostText('')
-      setPostTitle('')
-    }
-
+  const openMoodTracker = () => {
+    {(commChatDis && setCommChatDis(false)) || (resSec && setResSec(false)) || (criSupp && setCriSupp(false))}
+    setMotrDis(true)
   }
 
+  const openCommChat = () => {
+    {(moTrDis && setMotrDis(false)) || (resSec && setResSec(false)) || (criSupp && setCriSupp(false))}
+    setCommChatDis(true)
+  }
 
-  const [makiPosts] = useCollection(
-    store.collection('maki_posts').orderBy('addedOn', 'asc')
-  )
+  const openResSec = () => {
+    {(commChatDis && setCommChatDis(false)) || (moTrDis && setMotrDis(false)) || (criSupp && setCriSupp(false))}
+    setResSec(true)
+  }
 
+  const openCriSupp = () => {
+    {(commChatDis && setCommChatDis(false)) || (resSec && setResSec(false)) || (commChatDis && setCommChatDis(false))}
+    setCriSupp(true)
+  }
  
 
   return (
     <>
     <div
       className='
-    h-screen 
+          h-screen 
     overflow-hidden
-    bg-purple-700
-    bg-opacity-5
+    bg-[#979f65]
+    bg-opacity-60
     bg-no-repeat 
     bg-cover
     '
     >
       <Head>
-        <title>Mobilizing Action with Key Information</title>
+        <title>BrightPath</title>
       </Head>
       <Header />
-      <main className="
-      w-[90%]
-      mx-auto
-      bg-opacity-5
-      h-full
-      overflow-hidden
-      flex
-      flex-col
-      items-center
+      <>
+      <main className="desktopMainDiv
       ">
         <div className="
-        w-full
+        h-[30%]
+        w-[90%]
         mx-auto
-        min-h-[360px]
-        max-h-[420px]
-        bg-cover
-        bg-no-repeat
-        bg-placeholder
         flex
         items-center
-        rounded-b-md
         ">
-          {/**banner */}
-          <div className="
+          <img 
+          src={user?.photoURL} 
+          className="
+          lg:h-[240px]
+          lg:w-[240px]
+          md:h-[120px]
+          md:w-[120px]
+          mx-auto
+          rounded-full
+          border
+          border-yellow-500
+          hover:border-yellow-600
+          transform
+          transition
+          duration-300
+          ease-in-out
+          bg-yellow-300
+          " />
+          <span className="
+          h-[90%]
           w-[50%]
-          bg-purple-50
-          bg-opacity-25
-          h-full
+          mx-auto
           flex
           flex-col
-          items-start
+          space-y-2
           ">
             <span className="
-            h-[50%]
-            w-full
-            items-center
-            ">
-            </span>
-          </div>
-
-          <div className="
-          w-[50%]
-          h-full
-          "></div>
-        </div>
-        {/**banner */}
-        {/**div with news headlines, input field && inputs by members*/}
-        <div className="
-        h-[90%]
-        w-full
-        lg:flex
-        items-center
-        space-x-2
-        px-3
-        py-2
-        ">
-          {/**news headlines */}
-          <div className="
-          h-[80%]
-          lg:w-[40%]
-          md:w-[50%]
-          w-[90%]
-          rounded-md
-          flex
-          flex-col
-          items-center
-          overflow-hidden
-          ">
-            <span className="
-            font-fredoka
+            h-[60%]
+            w-[50%]
+            mx-auto
+            "></span>
+            <button className="
+            w-[50%]
+            h-[30%]
+            mx-auto
+            rounded-full
+            bg-yellow-600
+            hover:bg-yellow-400
+            font-montserr
             font-semibold
-            text-purple-100
-            text-lg
-            px-3
-            bg-purple-800
-            bg-opacity-80
-            w-full
-            rounded-t-md
-            h-[40px]
-            flex
-            items-center
+            text-slate-800
+            hover:text-slate-600
+            transform
+            transition
+            duration-300
+            ease-in-out
+            text-3xl
             ">
-              News
-            </span>
-            <div className="
-             bg-purple-600
-            bg-opacity-40
-            h-[50%]
-            pb-12
-            w-full
-            rounded
-            overflow-y-scroll
-            scrollbar-thin
-            scrollbar-track-purple-900
-            scrollbar-thumb-violet-100
-            space-y-8
-            flex
-            flex-col
-            items-center
-            ">
-              {testNews && testNews?.articles?.results.map(news => (
-                <span 
-                className="
-                flex
-                flex-col
-                w-[85%]
-                space-y-4
-                py-3
-                bg-purple-800
-                rounded-md
-                border
-                border-purple-50
-                ">
-                  <header className="
-                  flex
-                  items-center
-                  w-full
-                  justify-between
-                  px-3
-                  py-2
-                  border-b
-                  border-purple-50
-                  ">
-                    <span></span>
-                    <button className="
-                    rounded-full
-                    p-2
-                    text-purple-400
-                    border
-                    border-purple-400
-                    hover:text-purple-500
-                    hover:border-purple-500
-                    focus:outline-none
-                    transform
-                    transition
-                    duration-300
-                    ease-in-out
-                    ">
-                      <BookOpenIcon 
-                        className='
-                        h-[15px]
-                        '
-                      />
-                    </button>
-                  </header>
-                  <h2 className="
-                  font-fredoka
-                  font-semibold
-                  text-lg
-                  text-purple-50
-                  px-2
-                  ">
-                    {news?.title}
-                  </h2>
-                </span>
-              ))}
-            </div>
-          </div>
-          {/**news headlines */}
-          {/**input field && inputs by members */}
-          <div className="
-          h-[80%]
-          lg:w-[60%]
-          md:w-[50%]
-          w-[90%]
-          rounded-md
-          flex
-          flex-col
-          items-center
-          overflow-hidden
-          ">
-            {(user?.email == 'rumlowb@gmail.com' || 
-            user?.email == 'reaperiff697@gmail.com' || 
-            (user && isUserAnEditor) ) ? (
-                          <span 
-                          onClick={() => setPostModal(true)}
-                          className="
-                          grid
-                          place-items-center
-                          w-full
-                          bg-purple-400
-                          hover:bg-purple-600
-                          border
-                          border-purple-100
-                          rounded-md
-                          px-3
-                          py-2
-                          group
-                          transform
-                          transition
-                          duration-300
-                          ease-in-out
-                          ">
-                            <h2 className="
-                            font-fira-sans
-                            font-semibold
-                            text-lg
-                            text-purple-50
-                            group-hover:text-purple-200
-                            transform
-                          transition
-                          duration-300
-                          ease-in-out
-                            ">
-                              Post
-                            </h2>
-                          </span>
-            ): (
-              <>
-                              <span className="
-                          grid
-                          place-items-center
-                          w-full
-                          bg-purple-400
-                          hover:bg-purple-600
-                          border
-                          border-purple-100
-                          rounded-md
-                          px-3
-                          py-2
-                          group
-                          transform
-                          transition
-                          duration-300
-                          ease-in-out
-                          ">
-                            <h2 className="
-                            font-fira-sans
-                            font-semibold
-                            text-lg
-                            text-purple-50
-                            group-hover:text-purple-200
-                            transform
-                          transition
-                          duration-300
-                          ease-in-out
-                            ">
-                              Log in
-                            </h2>
-                          </span>
-              </>
-            )}
-            {/**end of span for posting */}
-            <div className="
-            bg-purple-600
-            bg-opacity-40
-            h-[50%]
-            pb-12
-            w-full
-            rounded
-            overflow-y-scroll
-            scrollbar-hide
-            space-y-8
-            flex
-            flex-col
-            items-center
-            ">
-              {makiPosts && makiPosts?.docs.map(post => (
-                <span className="
-                max-h-[210px]
-                min-h-[180px]
-                w-[80%]
-                bg-purple-50
-                border
-                border-purple-800
-                rounded-md
-                ">
-                  <header className="
-                  flex
-                  items-center
-                  justify-between
-                  px-3
-                  py-2
-                  border-b
-                  border-purple-800
-                  ">
-                    <h2 className="
-                    font-fredoka
-                    font-bold
-                    text-purple-900
-                    text-xl
-                    ">
-                      {post?.data()?.postTitle}
-                    </h2>
-                  </header>
-                  <div className="
-                  h-[70%]
-                  w-full
-                  px-3
-                  py-2
-                  text-base
-                  text-purple-800
-                  font-montserr
-                  font-normal
-                  overflow-y-scroll
-                  scrollbar-thin
-                  scrollbar-track-purple-800
-                  scrollbar-thumb-violet-200
-                  ">
-                    {post?.data()?.postText}
-                  </div>
-                </span>
-              ))}
-            </div>
-          </div>
+              User settings
+            </button>
+          </span>
+        <div className="
+        w-[30%]
+        h-[90%]
+        bg-yellow-700
+        bg-opacity-20
+        "></div>
         </div>
-      </main>
-          </div>
-          {postModal && (
-            <div className="
-            h-full
-            w-full
-            fixed
-            z-50
-            inset-0
-            flex
-            items-center
-            bg-purple-800
-            bg-opacity-70
-            overflow-hidden
-            ">
-              <div 
-              onClick={() => setPostModal(false)}
-              className="
-              w-[25%]
-              h-full
-              "></div>
-              <div className="
-              w-[50%]
-              h-full
-              flex
-              flex-col
+        {/**main div */}
+        <div className="
+        h-[40%]
+        w-[90%]
+        bg-yellow-700
+        bg-opacity-20
+        rounded
+        flex
+        items-center
+        ">
+          {/**
+           * display buttons
+           */}
+           <div className="
+           w-[40%]
+           h-full
+           flex
+           flex-col
+           items-center
+           justify-center
+           space-y-4
+           bg-yellow-100
+           bg-opacity-30
+           py-4
+           ">
+            {moTrDis ? (
+              <button className="
+              displayBtnActive
               ">
-                <div 
-                onClick={() => setPostModal(false)}
-                className="
-                h-[15%]
-                w-full
-                "></div>
-                <div className="
-                bg-purple-900
-                rounded-md
-                h-[70%]
-                w-full
-                border
-                border-slate-50
+                <span className="
+                flex
+                items-center
+                space-x-2
                 ">
-                  <header className="
-                  flex
-                  items-center
-                  justify-between
-                  h-[60px]
-                  border-b
-                  border-slate-50
-                  px-3
-                  py-2
-                  ">
-                    <h2 className="
-                    font-montserr
-                    font-semibold
-                    text-lg
-                    text-purple-50
-                    ">
-                      Post something, {user?.displayName}
-                    </h2>
-                  </header>
-                  <div className="
-                  h-full
-                  w-full
-                  px-3
-                  py-2
-                  flex
-                  flex-col
-                  items-center
-                  space-y-2
-                  ">
-                    <input 
-                    placeholder={`Title...`}
-                    value={postTitle}
-                    onChange={e => setPostTitle(e.target.value)}
-                    type="text" 
-                    className="
-                    w-[90%]
-                    bg-purple-700
-                    rounded-md
-                    text-purple-200
-                    text-lg
-                    font-fredoka
-                    font-semibold
-                    outline-none
-                    border-0
-                    focus:outline-none
-                    px-3
-                    py-2
-                    " />
-                    <textarea 
-                    placeholder='Text...'
-                    value={postText}
-                    onChange={e => setPostText(e.target.value)}
-                    className="
-                    h-[70%]
-                    w-[90%]
-                    mx-auto
-                    bg-purple-700
-                    rounded-md
-                    text-purple-200
-                    text-lg
-                    font-montserr
-                    font-normal
-                    outline-none
-                    border-0
-                    focus:outline-none
-                    px-3
-                    py-2
-                    overflow-y-scroll
-                    scrollbar-hide
-                    "></textarea>
-                    <span className="
-                    w-full
-                    flex
-                    items-center
-                    justify-between
-                    px-3
-                    py-2
-                    ">
-                      <span className='
-                      w-[45%]
-                      '></span>
-                      <button 
-                      disabled={!postTitle || !postText}
-                      onClick={addPostToDb}
-                      className="
-                      focus:outline-none
-                      bg-violet-600
-                      rounded-md
-                      text-purple-50
-                      font-montserr
-                      font-semibold
-                      hover:bg-violet-800
-                      hover:text-purple-100
-                      transform
-                      transition
-                      duration-300
-                      ease-in-out
-                      w-[45%]
-                      ">
-                        Post
-                      </button>
-                    </span>
-                  </div>
-                </div>
-                <div 
-                onClick={() => setPostModal(false)}
-                className="
-                h-[15%]
-                w-full
-                "></div>
-              </div>
-                            <div 
-              onClick={() => setPostModal(false)}
+                  <MoodIcon 
+                style={{
+                  fontSize: '1.8em',
+                  color: 'yellow'
+                }}
+                />
+              <h3>
+                Mood Tracker
+              </h3>
+                </span>
+                <LeftIcon 
+                style={{
+                  fontSize: '1.5em'
+                }}
+                />
+              </button>
+            ): (
+              <button 
+              onClick={openMoodTracker}
               className="
-              w-[25%]
-              h-full
-              "></div>
-
-            </div>
-          )}
+            displayBtn
+            ">
+              <span className="
+              flex
+              items-center
+              space-x-2
+              ">
+                <MoodIcon 
+              style={{
+                fontSize: '1.8em',
+                color: 'yellow'
+              }}
+              />
+            <h3>
+              Mood Tracker
+            </h3>
+              </span>
+              <RightIcon 
+              style={{
+                fontSize: '1.5em'
+              }}
+              />
+            </button>
+            )}
+            {commChatDis ? (
+                          <button className="
+                          displayBtnActive
+                          ">
+                                          <span className="
+                            flex
+                            items-center
+                            space-x-2
+                            ">
+                           <CommChatIcon 
+                            style={{
+                              fontSize: '1.8em',
+                              color: 'yellow'
+                            }}
+                            />
+                          <h3>
+                            Community Chat
+                          </h3>
+                            </span>
+                            <LeftIcon 
+                            style={{
+                              fontSize: '1.5em'
+                            }}
+                            />
+                          </button>
+            ): (
+              <button 
+              onClick={openCommChat}
+              className="
+              displayBtn
+              ">
+                              <span className="
+                flex
+                items-center
+                space-x-2
+                ">
+               <CommChatIcon 
+                style={{
+                  fontSize: '1.8em',
+                  color: 'yellow'
+                }}
+                />
+              <h3>
+                Community Chat
+              </h3>
+                </span>
+                <RightIcon 
+                style={{
+                  fontSize: '1.5em'
+                }}
+                />
+              </button>
+            )}
+           {resSec ? (
+             <button className="
+             displayBtnActive
+             ">
+                             <span className="
+               flex
+               items-center
+               space-x-2
+               ">
+                 <ResIcon 
+               style={{
+                 fontSize: '1.8em',
+                 color: 'yellow'
+               }}
+               />
+             <h3>
+               Resoures Section
+             </h3>
+               </span>
+               <LeftIcon 
+               style={{
+                 fontSize: '1.5em'
+               }}
+               />
+             </button>
+           ): (
+            <button 
+            onClick={openResSec}
+            className="
+            displayBtn
+            ">
+                            <span className="
+              flex
+              items-center
+              space-x-2
+              ">
+                <ResIcon 
+              style={{
+                fontSize: '1.8em',
+                color: 'yellow'
+              }}
+              />
+            <h3>
+              Resoures Section
+            </h3>
+              </span>
+              <RightIcon 
+              style={{
+                fontSize: '1.5em'
+              }}
+              />
+            </button>
+           )}
+            {criSupp ? (
+              <button className="
+              displayBtnActive
+              ">
+                              <span className="
+                flex
+                items-center
+                space-x-2
+                ">
+                  <CrisisIcon 
+                style={{
+                  fontSize: '1.8em',
+                  color: 'yellow'
+                }}
+                />
+              <h3>
+                Crisis Support
+              </h3>
+                </span>
+                <LeftIcon 
+                style={{
+                  fontSize: '1.5em'
+                }}
+                />
+              </button>
+            ): (
+              <button 
+              onClick={openCriSupp}
+              className="
+            displayBtn
+            ">
+                            <span className="
+              flex
+              items-center
+              space-x-2
+              ">
+                <CrisisIcon 
+              style={{
+                fontSize: '1.8em',
+                color: 'yellow'
+              }}
+              />
+            <h3>
+              Crisis Support
+            </h3>
+              </span>
+              <RightIcon 
+              style={{
+                fontSize: '1.5em'
+              }}
+              />
+            </button>
+            )}
+           </div>
+           {/**end of display buttons */}
+          {/**display content */}
+          <div className="
+          w-[60%]
+           h-full
+           bg-yellow-700
+           bg-opacity-5
+           py-4
+          "></div>
+          {/**
+           * 
+           * end of display content
+           */}
+        </div>
+        <div className="
+        w-[90%]
+        h-[25%]
+        bg-yellow-300
+        bg-opacity-20
+        rounded-md
+        "></div>
+        {/**end of main div */}
+      </main>
+      <main className="mobileMainDiv"></main>
+      </>
+          </div>
+            <div className="mobileHomeDiv"></div>
           </>
   )
 }

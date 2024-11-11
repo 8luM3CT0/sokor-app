@@ -33,7 +33,7 @@ module.exports = {
         'study': 
         'url(https://i.pinimg.com/564x/d9/98/e3/d998e389cec1951f4d6a5d7f4f556f90.jpg)',
         'placeholder':
-        'url(https://i.pinimg.com/564x/c7/88/8b/c7888b5308bc5c5c8e120c5b895e5982.jpg)',
+        'url(https://i.pinimg.com/564x/dc/6b/fa/dc6bfae0cb8b3cc41df33b27aa9eb44f.jpg)',
         'techie':
         'url(https://i.pinimg.com/564x/15/68/8d/15688d5c314545f0e800665139f14d34.jpg)' 
       }),
